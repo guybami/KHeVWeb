@@ -1,0 +1,358 @@
+﻿/* Main CSS3 file 
+    Author: G. Watcho
+*/
+
+body 
+{
+	
+	padding-bottom: 1px; 
+	margin: 0px 1px 1px 1px;  
+	padding-top:0;
+	height: 100%;
+	vertical-align:middle;
+	font-style:normal;
+   	font-family: Verdana;
+   	font-size:13px;
+   	color:#000000;
+}
+
+.sectionTitleDiv
+{
+    background-image: url('../Images/Buttons/sectionTitleHeader.bmp');
+	background-repeat: repeat-x;
+    border-bottom: 1px solid #B5BCC7;
+    height:40px;
+    width: 100%;
+    font-size:21px;
+    letter-spacing: -1px;
+    vertical-align:middle;
+    padding-left:3px;
+}
+
+/* widths */
+
+.width10
+{
+    width:10%;
+}
+.width20
+{
+    width:20%;
+}
+
+.width30
+{
+    width:30%;
+}
+
+.width40
+{
+    width:40%;
+}
+
+.width60
+{
+    width:60%;
+}
+
+.width70
+{
+    width:70%;
+}
+
+.width80
+{
+    width:80%;
+}
+
+
+
+/* cellpadding */
+
+table.cellpadding5, 
+table.cellpadding5,
+th.cellpadding5, 
+td.cellpadding5 
+{ 
+    padding: 5px; 
+}
+
+
+th.cellpadding4, 
+td.cellpadding4 
+{ 
+    padding: 4px; 
+}
+
+
+th.cellpadding3, 
+td.cellpadding3 
+{ 
+    padding: 3px; 
+}
+
+
+td.zeroPadding,
+td.cellpadding0,
+td.zeroPadding
+{ 
+    padding: 0px; 
+}
+
+
+th.cellpadding4, 
+td.cellpadding4
+{ 
+    padding: 4px; 
+}
+
+th.cellpadding2, 
+td.cellpadding2
+{ 
+    padding: 2px; 
+}
+
+
+th.cellpadding3, 
+td.cellpadding3
+{ 
+    padding: 3px; 
+}
+
+th.cellpadding10, 
+td.cellpadding10
+{ 
+    padding: 10px; 
+}
+
+/*cellspacing */ 
+table.cellspacing5,
+table.cellspacing5  
+{ 
+    border-collapse: separate; 
+    border-spacing: 5px; 
+} 
+
+table.cellspacing4 
+{ 
+    border-collapse: separate; 
+    border-spacing: 4px; 
+}  
+
+table.cellspacing3 
+{ 
+    border-collapse: separate; 
+    border-spacing: 3px; 
+}  
+
+
+table.cellspacing0, 
+table.zeroSpacing 
+{ 
+    border-collapse: collapse; 
+    border-spacing: 0; 
+}    
+
+table.cellspacing10 
+{ 
+    border-collapse: separate; 
+    border-spacing: 10px; 
+}
+
+table.fullWidth,
+td.fullWidth
+{ 
+    width:100%;
+}
+
+/*valign*/ 
+th.toTop, td.toTop { 
+    vertical-align: top; 
+}
+
+/*align (center)*/  
+table.toCenter,
+td.toCenter table,
+td.toCenter div,
+td.toCenter div table
+{ 
+    margin: 0 auto; 
+}
+
+/* starts td */
+
+
+
+td.toCenter, th.toCenter
+{
+	text-align:center;
+}
+
+td.toRight, th.toRight
+{
+	text-align:right;
+}
+
+td.toLeft, th.toLeft
+{
+	text-align:left;
+}
+
+td.toLeftTable table
+{
+	text-align:left;
+}
+
+
+td.toRight table 
+{ 
+    text-align:right;
+    float:right;
+}
+
+
+td.leftBorder 
+{
+    border-bottom:0px solid #B4C6D2;
+	border-left:1px solid #B4C6D2;
+	border-right:0px solid #B4C6D2;
+	border-top:0px solid #B4C6D2;
+}
+
+
+td.rightBorder 
+{
+    border-bottom:0px solid #B4C6D2;
+	border-left:0px solid #B4C6D2;
+	border-right:1px solid #B4C6D2;
+	border-top:0px solid #B4C6D2;
+	
+}
+
+td.leftRightBorder
+{
+	border-left:1px solid #B4C6D2;
+	border-right:1px solid #B4C6D2;
+	border-bottom:0px solid #B4C6D2;
+	border-top:0px solid #B4C6D2;
+}
+
+td.topBottomBorder
+{
+	border-top:1px solid #B4C6D2;
+	border-bottom:1px solid #B4C6D2;
+}
+
+td.topBottomLeftBorder
+{
+	border-left:1px solid #B4C6D2;
+	border-right:0px solid #B4C6D2;
+	border-bottom:1px solid #B4C6D2;
+	border-top:1px solid #B4C6D2;
+}
+
+td.topBottomRightBorder
+{
+	border-left:0px solid #B4C6D2;
+	border-right:1px solid #B4C6D2;
+	border-bottom:1px solid #B4C6D2;
+	border-top:1px solid #B4C6D2;
+}
+
+
+td.topLeftRightBorder
+{
+	border-left:1px solid #B4C6D2;
+	border-right:1px solid #B4C6D2;
+	border-bottom:0px solid #B4C6D2;
+	border-top:1px solid #B4C6D2;
+}
+
+
+td.topBorder 
+{
+    border-bottom:0px solid #B4C6D2;
+	border-left:0px solid #B4C6D2;
+	border-right:0px solid #B4C6D2;
+	border-top:1px solid #B4C6D2;
+}
+
+td.bottomBorder 
+{
+    border-bottom:1px solid #B4C6D2;
+	border-left:0px solid #B4C6D2;
+	border-right:0px solid #B4C6D2;
+	border-top:0px solid #B4C6D2;
+	
+}
+
+td.bottomBorderWizardStep
+{
+	border-bottom:1px solid #B4C6D2;
+	border-left:0px solid #B4C6D2;
+	border-right:0px solid #B4C6D2;
+	border-top:0px solid #B4C6D2;
+}
+
+td.smallBorder, 
+table.smallBorder, 
+.smallBorder
+{
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    border-radius: 6px;
+    border: 1px solid #B4C6D2;
+}
+
+td.normalBorder, 
+table.normalBorder,
+.smallBorder
+{
+    border: 1px solid #B4C6D2;
+}
+
+td.topRoundedBorder, 
+table.topRoundedBorder, 
+tr.topRoundedBorder
+{
+    -moz-border-radius: 0px 0px 6px 6px;
+    -webkit-border-radius: 0px 0px 6px 6px;
+    border-radius: 0px 0px 6px 6px;
+    border: 1px solid #B4C6D2;
+}
+
+td.rigthMargin
+{
+	margin-right: 8px;
+}
+
+td.leftImgMargin
+{
+	margin: 15px;
+}
+
+td.textMargin
+{
+	margin: 8px;
+}
+
+/* end td */
+
+
+.roundedBorder {
+    border: 1px solid #B4C6D2;
+    border-radius: 8px 8px 8px 8px;
+}
+
+
+.badge {
+    background-color: #000099;
+    background-color: #70C679;
+    border: 2px solid #ffffff;
+    color: #fff;
+    font-weight: bold;
+    margin: 2px;
+    padding: 2px 5px;
+    border-radius: 5px;
+
+}

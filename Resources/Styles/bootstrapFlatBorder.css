@@ -1,0 +1,9 @@
+
+/*!
+ * Bootstrap flat border
+ * Author Guy Bami W.
+ * Last changes: 12.09.17
+ */
+* {
+    border-radius: 0;
+}

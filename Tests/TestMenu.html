@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Test menu</title>
+    <style>
+
+        /* css dropdown menu*/
+        /* css dropdown menu*/
+        /* start user-settings menu popUp */
+
+        /* start first top menu items */
+        .dropdownMenu 
+        {
+            text-align:center; 
+            background:transparent; 
+            height:40px;  /* li height*/
+            display: inline-table; /* on one line */
+            overflow-wrap:unset;
+        }
+
+
+        .dropdownMenu ul 
+        {
+            list-style:none;
+            overflow:hidden;
+            padding:0; 
+            margin:0; 
+            list-style-type: none;
+            /*put all item on one line */
+            display:inline;
+        }
+
+
+        .dropdownMenu ul li 
+        {
+            float:left; 
+            position:relative;
+            padding: 0 25px 0 0px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align:left;
+            border-bottom:1px solid #43a286;
+            display:inline-block;
+            background-color: #399077;  
+        }
+
+
+
+        .dropdownMenu ul li.lastItem
+        , .dropdownMenu ul li ul li.lastItem
+        {
+            border-bottom:0px solid #A2BECF;
+        }
+
+        .dropdownMenu ul li.firstItem
+        , .dropdownMenu ul li ul li.firstItem
+        {
+            border-top:0px solid #A2BECF;
+        }
+
+
+        .dropdownMenu ul li.menuItem
+        {
+            border-left:0px solid #A2BECF;
+            border-right:1px solid #A2BECF;
+            border-bottom:0px solid #A2BECF;
+            border-top: 0px;
+        }
+
+
+        .dropdownMenu ul li.lastMenuItem
+        {
+            border-left:0px solid #A2BECF;
+            border-right:0px solid #A2BECF;
+            border-bottom:0px solid #A2BECF;
+            border-top: 0px;
+        }
+
+
+        .dropdownMenu ul li.firstMenuItem
+        {
+            border-left:0px solid #A2BECF;
+            border-right:1px solid #A2BECF;
+            border-bottom:0px solid #A2BECF;
+            border-top: 0px;
+        } 
+
+
+        .dropdownMenu ul li:hover  
+        {
+            background-color: #399077;  
+        }
+
+ 
+ 
+        .dropdownMenu ul li a
+        , .dropdownMenu ul li a:visited 
+        {
+	        display:block; 
+	        text-decoration:none; 
+	        width:auto; 
+	        height:40px; 
+            color:#fffff0; 
+	        padding-left:25px; 
+	        line-height:40px;
+            font-size: 100%;
+        }
+
+        /* fist line style for IE7 and non-IE browsers and the second line for IE5.5 and IE6 */
+        .dropdownMenu ul li:hover a,
+        .dropdownMenu ul li a:hover 
+        {
+	        text-decoration:none; 
+	        border:0;
+        }
+
+ 
+        .dropdownMenu ul li .currentActiveMenu span,
+        .dropdownMenu ul li a .currentActiveMenu span,
+        .dropdownMenu ul li .activeMenuItem span,
+        .dropdownMenu ul li a .activeMenuItem span,
+        a.activeMenuItem span,
+        a.currentActiveMenu span
+        {
+            color:#FFFFFF;
+            background-color: #43a286;
+        }
+
+        .dropdownMenu ul li.activeMenuItem {
+            color:#FFFFFF;
+            background-color: #96AEA1;
+        }
+
+        /* end first top menu items */
+
+        /* start sub menu items - second level */
+
+        .dropdownMenu ul li ul 
+        {
+            visibility:hidden; 
+            position:absolute; 
+            top:0; 
+            left:0; 
+            height:0; 
+            overflow:hidden;
+        }
+ 
+
+
+        .dropdownMenu ul li:hover ul,
+        .dropdownMenu ul li a:hover ul
+        {
+	        visibility:visible; 
+	        height:auto; 
+	        position:absolute;
+	        top:40px;    /*to be always visible*/
+	        left:-1px; 
+            background-color: #96AEB1; 
+	        border-bottom:1px solid #A2BECF;
+	        border-left:1px solid #A2BECF;
+	        border-right:1px solid #A2BECF;
+	        border-top:1px solid #A2BECF;
+	        overflow:visible;
+            z-index:1000; /*to be always visible*/
+        }
+
+
+
+        .dropdownMenu ul li ul li
+        {
+            border-bottom:1px solid #A2BECF;
+            margin-right:0px;
+            position:relative;
+            padding: 0 0px 0 0px;
+            text-align:left;
+            border-bottom:1px solid #43a286;
+            display:inline-block;
+            background-color: #399077;  
+            width:100%;
+        }
+
+
+        .dropdownMenu ul li:hover ul li,
+        .dropdownMenu ul li a:hover ul li 
+        {
+	        line-height:1.5em;  /* very important for second level li item*/
+            width:100%;
+        }
+
+
+        .dropdownMenu ul li:hover ul li:hover a,
+        .dropdownMenu ul li a:hover ul li:hover a 
+        {
+	        text-decoration:none; 
+            background-color:antiquewhite;
+        }
+        /* end sub menu items - second level */
+
+
+        .dropdownMenu ul li ul.leftContent 
+        {
+            margin-left:-100px; /* add more space to left content item*/
+    
+
+        }
+
+
+        .dropdownMenu ul li ul.rightContent 
+        {
+            margin-right:-100px; /* add more space to right content item*/
+        }
+
+
+   
+
+ 
+    </style>
+</head>
+<body>
+    <h1>Test main menu with 1-level sub menu</h1>
+    
+    <table class="fullWidth">
+        <tr>
+            <td align="center">
+                <nav class="dropdownMenu">
+                    <ul>
+                        <li class="menuItem" id="">
+                            <a class="" href="#">
+                                <span id="">Administrator</span>
+                                <img class="dropImg" src="./Resources/Images/Buttons/drop.png" />
+                            </a>
+                            <ul class="leftContent">
+                                <li>
+                                    <a class="" href="#">
+                                        <span id="">Sub Main menu 1a ama amama</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" href="#"><span id="">Sub Main menu 1a</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menuItem" id="">
+                            <a class="" href="#">
+                                <span id="">Main menu 2</span>
+                            </a>
+                            <ul class="rightContent">
+                                <li>
+                                    <a class="" href="#">
+                                        <span id="">Sub Main menu 2a</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="" href="#"><span id="">Sub Main menu 2b</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menuItem" id="">
+                            <a class="" href="#">
+                                <span id="">Main menu 3</span>
+                            </a>
+                        </li>
+                        <li class="menuItem" id="">
+                            <a class="" href="#">
+                                <span id="">Main menu 4</span>
+                            </a>
+                        </li>
+                        <li class="menuItem" id="">
+                            <a class="" href="#">
+                                <span id="">Main menu 5</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+/*  page style for the main menu
+* reviewed on 29.09.2016 by Guy Bami 
+hier main colors are: 
+    - #3A60F7 for the entire menu
+    - #5583EF for active menu and sub menus (second and third level)
+*/
+
+ 
+.menuContainer
+{   
+	text-align:center; 
+    background:none repeat scroll 0 0 #3A60F7;
+	width:100%;
+	border-bottom:1px solid #A2BECF;
+	border-left:0px solid #A2BECF;
+	border-right:0px solid #A2BECF;
+	border-top:0px solid #A2BECF;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
+    z-index:10000; /*to be always visible*/
+}
+
+/* start first top menu items */
+.menuDiv 
+{
+    text-align:center; 
+    background:transparent; 
+    height:40px;  /* li height*/
+    display: inline-table; /* on one line */
+}
+
+.menuDiv ul 
+{
+    list-style:none;
+    display:inline;
+}
+ 
+
+.clear
+{
+   clear:both
+}
+
+.menuDiv ul 
+{
+    padding:0; 
+    margin:0; 
+    list-style-type: none;
+    /*put all item on one line */
+    display:inline;
+}
+
+
+.menuDiv ul li 
+{
+    float:left; 
+    position:relative;
+    padding: 0 25px 0 0px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:left;
+    border-bottom:1px solid #A2BECF;
+}
+
+
+.menuDiv ul li:hover  
+{
+    background-color: #5583EF;  
+}
+
+
+.menuDiv ul li.lastItem
+, .menuDiv ul li ul li.lastItem
+{
+    border-bottom:0px solid #A2BECF;
+}
+
+.menuDiv ul li.firstItem
+, .menuDiv ul li ul li.firstItem
+{
+    border-top:0px solid #A2BECF;
+}
+
+
+ 
+ 
+.menuDiv ul li.menuItem
+{
+    border-left:0px solid #A2BECF;
+    border-right:1px solid #A2BECF;
+    border-bottom:0px solid #A2BECF;
+    border-top: 0px;
+}
+
+
+.menuDiv ul li.lastMenuItem
+{
+    border-left:0px solid #A2BECF;
+    border-right:0px solid #A2BECF;
+    border-bottom:0px solid #A2BECF;
+    border-top: 0px;
+}
+
+
+.menuDiv ul li.firstMenuItem
+{
+    border-left:0px solid #A2BECF;
+    border-right:1px solid #A2BECF;
+    border-bottom:0px solid #A2BECF;
+    border-top: 0px;
+} 
+
+ 
+ 
+.menuDiv ul li a
+, .menuDiv ul li a:visited 
+{
+	display:block; 
+	text-decoration:none; 
+	width:auto; 
+	height:40px; 
+    color:#fffff0; 
+	padding-left:25px; 
+	line-height:40px;
+    font-size: 100%;
+}
+
+/* fist line style for IE7 and non-IE browsers and the second line for IE5.5 and IE6 */
+.menuDiv ul li:hover a,
+.menuDiv ul li a:hover 
+{
+	text-decoration:none; 
+	border:0;
+}
+
+ 
+.menuDiv ul li .currentActiveMenu span,
+.menuDiv ul li a .currentActiveMenu span,
+.menuDiv ul li .activeMenuItem span,
+.menuDiv ul li a .activeMenuItem span,
+a.activeMenuItem span,
+a.currentActiveMenu span
+{
+    color:#FFFFFF;
+    background-color: #628CEF;
+}
+
+.menuDiv ul li.activeMenuItem {
+    color:#FFFFFF;
+    background-color: #628CEF;
+}
+
+/* end first top menu items */
+
+/* start sub menu items - second level */
+
+.menuDiv ul li ul 
+{
+    visibility:hidden; 
+    position:absolute; 
+    top:0; 
+    left:0; 
+    height:0; 
+    overflow:hidden;
+}
+
+.menuDiv ul li:hover ul,
+.menuDiv ul li a:hover ul
+{
+	visibility:visible; 
+	width:255px;   /* items width */
+	height:auto; 
+	position:absolute;
+	top:40px; 
+	left:-1px; 
+    background: #628CEF; 
+	border-bottom:1px solid #A2BECF;
+	border-left:1px solid #A2BECF;
+	border-right:1px solid #A2BECF;
+	border-top:1px solid #A2BECF;
+	overflow:visible;
+}
+
+
+.menuDiv ul li ul li
+{
+    border-bottom:1px solid #A2BECF;
+}
+
+
+.menuDiv ul li:hover ul li a,
+.menuDiv ul li a:hover ul li a 
+{
+	text-decoration:none; 
+	height:auto; 
+	line-height:1.5em;  /* very import for second level li item*/
+	padding: 5px 10px 5px 25px; 
+	width:195px;
+}
+
+/* end sub menu items - second level */
+
+
+/* start sub sub menu item - third level */
+
+.menuDiv ul li:hover ul li ul,
+.menuDiv ul li a:hover ul li a ul 
+{
+    visibility:hidden; 
+    position:absolute; 
+    top:0; 
+    left:0; 
+    height:0; 
+    overflow:hidden;
+}
+
+
+.menuDiv ul li:hover ul li:hover ul,
+.menuDiv ul li a:hover ul li a:hover ul 
+{
+    visibility:visible; 
+    position:absolute; 
+    top:-1px; 
+    left:255px; 
+    height:auto; 
+    border-bottom:1px solid #A2BECF;
+	border-left:1px solid #A2BECF;
+	border-right:1px solid #A2BECF;
+	border-top:1px solid #A2BECF;
+    width:195px;
+    background: #628CEF; 
+}
+
+
+.menuDiv ul li:hover ul li:hover ul li,
+.menuDiv ul li a:hover ul li a:hover ul li 
+{
+    padding:0px;
+    border-bottom:1px solid #A2BECF;
+}
+
+
+.menuDiv ul li:hover ul li:hover ul li a,
+.menuDiv ul li a:hover ul li a:hover ul li a
+{
+    text-decoration:none; 
+    height:auto; 
+	line-height:1.5em;  /* very import for second level li item*/
+}
+
+
+.menuDiv ul li:hover ul li:hover ul li a:hover,
+.menuDiv1 ul li:hover ul li ul li a:hover,
+.menuDiv ul li a:hover ul li a:hover ul li a:hover
+{
+    text-decoration:none; 
+}
+
+ 
+.menuDiv ul li:hover ul li:hover ul li.menuItem
+{
+    border-bottom:1px solid #A2BECF;
+	border-left:0px solid #A2BECF;
+	border-right:1px solid #A2BECF;
+	border-top:0px solid #A2BECF;
+}
+
+
+.menuDiv ul li:hover ul li:hover ul li.lastMenuItem
+{
+    border-bottom:0px solid #A2BECF;
+	border-left:0px solid #A2BECF;
+	border-right:1px solid #A2BECF;
+	border-top:0px solid #A2BECF;
+}
+
+.menuDiv ul li:hover ul li:hover ul.largerSubMenu,
+.menuDiv ul li a:hover ul li a:hover ul.largerSubMenu
+{
+    visibility:visible; 
+    position:absolute; 
+    top:-1px; 
+    color:#fffff0; 
+    left:255px; 
+    height:auto; 
+    border:1px solid #A2BECF;
+    width:190px;
+}
+ 
+/* end sub sub menu item - third level */
+
+
+ 
+  
+ 
