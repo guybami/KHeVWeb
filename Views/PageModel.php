@@ -5,7 +5,7 @@
  * Class used to generate dynamic html pages
  *
  * @author     Guy Bami
- * Last update: 23.09.16
+ * Last update: 23.09.24
 */
 class PageModel {
 
@@ -22,24 +22,26 @@ class PageModel {
     private $menuLevel = ".";
     private $homeLevel = "../..";
     private $activeMenuCssArray = array();
-    private $dojoLibPath = "/Lib/dojo-release-1.11.2"; //"/Lib/dojo-release-1.10.4";
+    private $dojoLibPath = "";  
     private $theme = "claro";
     //Variable contenant la strucure du template
     public $dataForTemplate = "";
     // admin menu
     private $adminMenuCss = "display:none;";
+    private static $defaultDojoLibPath = "/Lib/dojo-release-1.11.2";
+     private static $defaultDojoTheme = "claro";
 
     /**
-     * Constructor of the
+     * Constructor of the PageModel class
      */
-    function PageModel() {
+     function __construct() {
         $this->setUserCurrentLanguage();
         // default language
         $this->directoryLevel = "..";
         $this->menuLevel = ".";
         $this->homeLevel = "../..";
-        $this->dojoLibPath = "/Lib/dojo-release-1.11.2";
-        $this->theme = "claro";
+        $this->dojoLibPath = PageModel::$defaultDojoLibPath;
+        $this->theme = PageModel::$defaultDojoTheme;
     }
 
     // class setters and getters functions
@@ -254,6 +256,7 @@ class PageModel {
                                         <li><a><i class="fa fa-users"></i>MEMBRES<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="'.$this->directoryLevel.'/Views/Members/ViewAllMembers.php">Nos Membres</a></li>
+                                                <li><a href="' . $this->directoryLevel . '/Views/Members/MemberRegistration.php">Devenir Membre</a></li>
                                             </ul>
                                         </li>
                                         <li><a><i class="fa fa-credit-card"></i>FINANCES<span class="fa fa-chevron-down"></span></a>
@@ -434,7 +437,7 @@ class PageModel {
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="">
+                        <li class="hideContent" style="display:none;">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <img src="' . $this->directoryLevel . '/Resources/Images/defaultUser.png" alt="">
                                 <span>'.$this->getCurrentUserName().'</span>
@@ -462,11 +465,11 @@ class PageModel {
                                     <a>
                                         <span class="image"><img src="' . $this->directoryLevel . '/Resources/Images/img.jpg" alt="Profile Image"></span>
                                         <span>
-                                            <span>John Smith</span>
+                                            <span>'.$this->getCurrentUserName().'</span>
                                         <span class="time">3 mins ago</span>
                                         </span>
                                         <span class="message">
-                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                               Test alert message...
                                         </span>
                                     </a>
                                 </li>
@@ -519,17 +522,17 @@ class PageModel {
                                 </tr>
                                 <tr>
                                     <td class="fullWidth toLeft">
-                                        <span class="">Vorstand: </span><label class="toBold">Guy Bami Watcho; Thierry Manock; Paul Vermon Donmeza;  Christelle Dipah; Dorette Ngando </label>  
+                                        <span class="">Vorstand: </span><label class="toBold">Guy Bami Watcho; Busta Alex Nkongo Essobo; Claude Mouko Bidias;  Hermann Tuognou Kadji; Yannick Tsakou Manfouo </label>  
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="fullWidth toLeft">
-                                        <span class="">Adresse: </span><label class="toBold">c/o Guy Bami W., Sebastian-Bach-Weg 16, 74172 Neckarsulm</label>  
+                                        <span class="">Adresse: </span><label class="toBold">c/o Guy Bami Watcho, Sebastian-Bach-Weg 16, 74172 Neckarsulm</label>  
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="fullWidth toLeft">
-                                        <span class="">Kontakt: </span><label class="toBold">vermonpaul@yahoo.fr oder guybami@yahoo.fr Tel: 0176 2687 1055</label>  
+                                        <span class="">Kontakt: </span><label class="toBold">guybami@yahoo.fr Tel: 0176 2786 1055</label>  
                                     </td>
                                 </tr>
                             </table>

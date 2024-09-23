@@ -1,14 +1,14 @@
 <?php
 
     require_once "./Includes/Common.php";
-    require_once "./DataAccessLayer/DaoCommon.php";
-    require_once "./BusinessLogicLayer/EntityCommon.php";
-    require "./PresentationLayer/PageModel.php";
+    require_once "./DataAccessObject/DaoCommon.php";
+    require_once "./Models/EntityCommon.php";
+    require "./Views/PageModel.php";
 
     // get user language
     $userLang = $_SESSION['userLang'];
     $mainPage = new PageModel();
-    $title = 'Smart Fret Line - Contact Us';
+    $title = 'Kameruner Heilbronn eV - Contact Us';
     // custon page script, if needed
     $script = '';
     //set the language
@@ -16,7 +16,7 @@
 
     $content = ' 
         <br /> 
-        <table class="fullWidth" id="contactTable" cellspacing="0" cellpadding="0">
+    <table class="fullWidth" id="contactTable" cellspacing="0" cellpadding="0">
       <tr>
         <td class="fullWidth" align="center">
             <table class="biggerWidth formContent" cellspacing="0" cellpadding="0">

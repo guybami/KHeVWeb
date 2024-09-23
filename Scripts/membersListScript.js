@@ -67,9 +67,6 @@ $(document).ready(function () {
 });
 
 function filterData() {
-
-
-
 }
 
 function filterMembers() {

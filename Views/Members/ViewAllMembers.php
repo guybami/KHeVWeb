@@ -9,12 +9,12 @@
     $mainPage = new PageModel();
     // get user language
     $userLang = $_SESSION['userLang'];
-    $title = "Kameruner Heilbronn eV - Members List";
+    $title = "Kameruner Heilbronn eV - Liste Des Members";
     // load UI resource 
     Utils::loadUIResources("../../UIResources/members.fr.res.php", "../../UIResources/members.en.res.php");
 
 
-    // custon page script, if needed
+    // custon page script
    $script = '
         <!--language texts for page -->
         <script  type="text/javascript">
@@ -68,7 +68,7 @@
         <script defer src="../../Scripts/membersListScript.js"  type="text/javascript"> </script> 
 
         ';
-    /// page content
+    // page content
     $content = ' 
         <div id="sitePathDiv"></div>
          
@@ -196,9 +196,7 @@
                                         </tr>
                                     </table>
                                 </div>
-                                 
                                 <br />
-
                           </div> 
                           <!-- end x_content -->       
                     </div>
@@ -212,7 +210,7 @@
     ';
 
     $mainPage->setUseDojoScripts(true);
-    $mainPage->setActiveMenu("administration");
+    $mainPage->setActiveMenu("members");
     $mainPage->setDirectoryLevel(2);
     $mainPage->setUserLanguage($userLang);
     $mainPage->setShouldDisplayLanguageSelection(false);

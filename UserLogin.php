@@ -125,7 +125,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div id="userRegistrationDialogContent"></div>
-                                            </div> <!-- end modal body -->
+                                            </div>  
                                             <div class="modal-footer">
                                                 <table class="fullWidth">
                                                     <tr>
