@@ -11,7 +11,7 @@ class Utils {
     public static function checkUserSession() {
 
         //$_SERVER['userName'] = 123;
-        self::checkAndStartSession();
+        Utils::checkAndStartSession();
 
         $rootUrl = "";
         /*
@@ -148,7 +148,7 @@ class Utils {
         self::checkAndStartSession();
 
         if (!isset($_SESSION) || !isset($_SESSION['userLang'])) {
-            // default language ist english
+            // default language is english
             if (file_exists($enResourceFileName)) {
                 include_once $enResourceFileName;
             }
@@ -180,7 +180,7 @@ class Utils {
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
         // receivers mails
         //$to = 'heilbronnconnectiongroup@yahoo.fr';
-        $to = 'forum@smartfretline.com';
+        $to = 'forum@kameruner-heilbronn.de';
         // Additional headers
 
         $subject = $senderFullName . " a commente une photo ";
@@ -204,15 +204,15 @@ class Utils {
         // To send HTML mail, the Content-type header must be set
         $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        $headers .= 'From: Smart Fret Line <administrator@smartfretline.com>';
-        //$headers .=  'To: Smart Fret Line - Forum <forum@smartfretline.com>';
+        $headers .= 'From: Adminisrator KHeV <administrator@kameruner-heilbronn.de>';
+        //$headers .=  'To: Smart Fret Line - Forum <forum@kameruner-heilbronn.de>';
         // receivers mails
         $to = 'guybami@yahoo.fr';
-        //$to = 'forum@smartfretline.com';
+        //$to = 'forum@kameruner-heilbronn.de';
 
-        $to = 'Smart Fret Line - Forum <forum@smartfretline.com>';
-        if ($type == "email")
-            $to = 'Smart Fret Line - Mail <forum@smartfretline.com>';
+        //$to = 'Smart Fret Line - Forum <forum@kameruner-heilbronn.de>';
+        //if ($type == "email")
+          //  $to = 'Smart Fret Line - Mail <forum@kameruner-heilbronn.de>';
 
         // Additional headers
         switch ($type) {
@@ -331,7 +331,7 @@ class Utils {
             </body>
         </html>';
         $sentDate = date('d.m.Y H:i:s');
-        $userPhotoPath = "http://smartfretline.com/Resources/images/userPhotos/" . $userPhoto;
+        $userPhotoPath = "http://kameruner-heilbronn.de/Resources/images/userProfiles/" . $userPhoto;
 
         //echo 'userPhotoPath: '  . $userPhotoPath;
 
@@ -351,7 +351,7 @@ class Utils {
 										<td class="toLeft  commentTextCol">
 											<span class="userDisplayName">' . $senderFullName . '</span>
 											<span class="commentText">
-												' . $message . '
+												' . $message . '(' . $fullMessage .  ')' . '
 											</span><br>
 											<span class="toLeft  commentTextCol">
 												<span class="commentDate">' . $sentDate . '</span>
@@ -368,7 +368,7 @@ class Utils {
 
         $htmlMessage = $head . $content . $footer;
 
-        $webURL = self::getWebsiteRootURL();
+        $webURL = Utils::getWebsiteRootURL();
         $pos = strpos($webURL, "localhost");
         //echo " url-pos: " . $pos;
         if ($pos > 0)
@@ -381,6 +381,10 @@ class Utils {
             return;
         if (mail($to, $subject, $htmlMessage, $headers)) {
             // mail has been successfully sent
+            echo "<br /><br />
+                        <span class=''>Mail has been sent with success!!</span>
+                       <br />
+              ";
             return true;
         } else {
             echo "<br /><br />
@@ -397,8 +401,8 @@ class Utils {
         $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
         //$headers .=  $senderEmail;
-        $headers .= 'From: Smart Fret Line <administrator@smartfretline.com>';
-        $to = 'Smart Fret Line - Forum <forum@smartfretline.com>';
+        $headers .= 'From: Smart Fret Line <administrator@kameruner-heilbronn.de>';
+        $to = 'Smart Fret Line - Forum <forum@kameruner-heilbronn.de>';
         // receivers mails
         $to = "guybami@yahoo.fr";
         // Additional headers
@@ -543,9 +547,7 @@ class Utils {
                 }
             }
             $i++;
-            // if ($i != count($arrayObject) - 1) {
-            //   $usersList .= $itemSperator;
-            //}
+            
         }
         // close the list
         $jsonResult .= "}]";

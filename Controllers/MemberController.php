@@ -251,7 +251,7 @@ class MemberController extends BaseController {
                     $postbackData = Utils::convertArrayToJson($resultObject[0]);
                 }
                 break;
-            case "addNewItem":
+            case "addNewItemTest":
                 //insert new entity
                 $resultObject = Array('0' => Array(
                         gender => ''

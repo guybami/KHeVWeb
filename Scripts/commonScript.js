@@ -3,7 +3,7 @@
  * Version 2.1
  * Script used for utils methods
  * Author: Guy Bami
- * Last changed: 09.02.2017
+ * Last changed: 25.09.2024
  */
 
 var shouldLogToConsole = true;
@@ -1576,4 +1576,16 @@ function getFrenchMonthName(monthValue) {
         }
     }
     return monthsFrList[0];    
+}
+
+function setCbFormFieldValue(fieldId, value) {
+    if ($("#" + fieldId) != null) {
+        if (value == true)
+            $("#" + fieldId).attr("checked");
+        else 
+            $("#" + fieldId).removeAttr("checked");
+    }
+    else {
+        console.error("Error: field '" + fieldId + "' not found!");
+    }
 }

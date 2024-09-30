@@ -1423,6 +1423,71 @@ class DaoSelect extends DaoBase {
         return $result;
     }
 
+    //region MemberRegistration Methods
+    /**
+     *********************************************************
+     * MemberRegistration Methods
+     **********************************************************
+     */
+    /**
+     * Select all MemberRegistration items
+     * @return  mixed associative array object having all MemberRegistration items
+     *    or NULL if error occured
+     */
+    public function selectAllMemberRegistrations()
+    {
+        $result = NULL;
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL selectAllMemberRegistrations()";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                if ($statement->execute()) {
+                    // return the associative array
+                    $result = $statement->fetchAll();
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return $result;
+    }
+    /**
+     * Selects MemberRegistration  item  details
+     * @param $registrationId int The table primary key
+     * @return  mixed associative array object having the MemberRegistration item
+     *   found or NULL if error occured
+     */
+    public function selectMemberRegistrationDetails($registrationId)
+    {
+        $result = NULL;
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL selectMemberRegistrationDetails(:registrationId);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    // return the associative array
+                    $result = $statement->fetchAll();
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return $result;
+    }
+
+
+
+    //endregion
+
+    //region Custom added methods
+
     /**
      * Custom added methods
      */
@@ -1450,12 +1515,13 @@ class DaoSelect extends DaoBase {
                     return false;
                 }
             } else {
-                return $pdo;
+                return false;
             }
         } catch (PDOException $e) {
-            return $this->logSqlException($e);
+            $this->logSqlException($e);
+            return false;
         }
-        return FALSE;
+        return false;
     }
 
     public function selectAllEntitiesRecordsCount() {
@@ -1499,5 +1565,6 @@ class DaoSelect extends DaoBase {
         return $result;
     }
 
+    //endregion
 
 }

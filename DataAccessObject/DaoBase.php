@@ -824,9 +824,5 @@ class DaoBase {
         echo "<b />logMsSQLQueryToFile::The query was successfuly written to file File and overriden....</b>";
         return TRUE;
     }
-
-
-
-
-
+     
 }

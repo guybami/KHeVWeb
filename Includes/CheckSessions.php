@@ -39,8 +39,8 @@
         
         $loginUrl = $rootUrl . "UserLogin.php";
         //echo  "<br />1.LOGIN PAGE: " . $loginUrl;
-        header("Location: " . $loginUrl);
-        exit();
+        //header("Location: " . $loginUrl);
+        //exit();
         
         
     }

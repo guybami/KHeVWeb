@@ -28,6 +28,7 @@ include_once "RoleAccessRight.php";
 include_once "User.php";
 include_once "UserProfile.php";
 include_once "Veteran.php";
+include_once "MemberRegistration.php";
 
 
 

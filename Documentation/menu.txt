@@ -1,0 +1,50 @@
+
+
+Menus:
+ 1- Buro
+	- Organisation du buro
+	- Status de la structure et textes
+ 2- Etudes
+	a. Tutoriels
+	b. Alte Klausuren
+	c. Remises de diplomes (photos et videos), par annees et filieres )
+ 3- Activites 
+	a. Activites culturelle et sociales
+		aa. Kulturwoche
+		bb. Kulturtage
+		cc. Erste semester party
+		dd. Gala Abend
+		ee. Grill party
+		bb. Communaute des refugies
+	b. Activites sportives
+		aa. Football (Sante 2-0)
+		bb. Handball Filles
+		cc. Nos Challenges
+		cc. Tournois sportifs annuels (Manheim, Karslruhe, ...)
+		cc. Veterans
+			aa. Matchs amicaux
+			bb. Membres
+			cc. Organisation
+	c.Activites academiques
+		aa. Nos Projets (domaine technique)
+		bb. Expositions
+ 4- Jobs
+		aa. Hiwi & Ferien Jobs 
+		bb. Pratikum
+ 5- Annonces
+		aa. Deuils et veillees
+		bb. Concerts
+		cc. Chambres et Maison  a louer
+		dd .info et liens utiles,
+ 5- Divers
+		cc. Forum ( discussions, Demande d'aide)
+		dd. Liens Utiles
+		
+		   
+pendant la publication  d une information, le user choisira si ce
+mail sera diffuse a tous les membres comme email 
+les user auront la possibilite de filter les info qu'ils recoivent	
+			
+			
+			
+	

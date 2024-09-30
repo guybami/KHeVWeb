@@ -1025,4 +1025,52 @@ class DaoInsert extends DaoBase {
         }
     }
 
+    //region MemberRegistration Methods
+
+    /**
+     *********************************************************
+     *MemberRegistration Methods
+     **********************************************************
+     */
+    /**
+     * Inserts new MemberRegistration  item
+     *  @param $memberId int The entity  memberId field
+     *  @param $code string The entity  code field
+     *  @param $sentDate string The entity  sentDate field
+     *  @param $confirmationDate string The entity  confirmationDate field
+     * @return int|mixed The last inserted record ID if successfull, otherwise FALSE
+     */
+    public function insertNewMemberRegistration($memberId, $code, $sentDate, $confirmationDate)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL insertNewMemberRegistration(:memberId, :code, :sentDate, :confirmationDate);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':memberId', $memberId, PDO::PARAM_STR);
+                $statement->bindParam(':code', $code, PDO::PARAM_STR);
+                $statement->bindParam(':sentDate', $sentDate, PDO::PARAM_STR);
+                $statement->bindParam(':confirmationDate', $confirmationDate, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    $result = $statement->fetchAll();
+                    if (is_array($result[0])) {
+                        return intval($result[0]["LAST_INSERT_ID()"]);
+                    } else {
+                        return FALSE;
+                    }
+                } else {
+                    $this->logSqlError($query, $statement);
+                    return FALSE;
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            $this->logSqlException($e);
+            return FALSE;
+        }
+    }
+
+    //endregion
+
 }

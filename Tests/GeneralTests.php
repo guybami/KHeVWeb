@@ -4,19 +4,26 @@
 function testDates(){
 
     $m = "EventPhoto";
-echo date('d.m.y H:i:s');
-echo "Result: " . strtolower(substr($m, 0, 1)) . substr($m, 1, strlen($m) - 1);
+    echo date('d.m.y H:i:s');
+    echo "Result: " . strtolower(substr($m, 0, 1)) . substr($m, 1, strlen($m) - 1);
 
 
-if (strpos($m, 'tP') !== false) {
-    echo ' <br /> Token found';
-}
-else{
-    echo ' <br /> Token NOT found';
-}
+    if (strpos($m, 'tP') !== false) {
+        echo ' <br /> Token found';
+    }
+    else{
+        echo ' <br /> Token NOT found';
+    }
+    echo  ' <br /> Date now: ' . date_format(date_create(), 'Y-m-d H:i:s');
 
+    echo ' <br /> dirname(__FILE__): '. dirname(__FILE__);
 
-echo ' <br /> dirname(__FILE__): '. dirname(__FILE__);
+    $timezone = date_default_timezone_get();
+    echo "<br />  The current server timezone is: " . $timezone;
+
+    $date = new DateTime('',  new DateTimeZone('Europe/Berlin'));
+    echo ' <br /> now date Berlin: ' . $date->format('Y-m-d H:i:s') . "\n";
+  
 
 
 }
@@ -67,8 +74,21 @@ include_once "../Includes/Utils.php";
     var_dump($arrayData[0]);
 }
 
+
+function testMail(){
+    $type = "email";
+    $senderFullName = "Guy Watcho";
+    $userPhoto = "president.jpg";
+    $message = "Confirmer cet enregistrement";
+    Utils::sendMailToGroup($type, $senderFullName, $userPhoto, $message);
+}
+
  //testJson2();
- testUploadJson();
+ // testUploadJson();
+// testJson();
+
+//testDates();
+
 
 
 

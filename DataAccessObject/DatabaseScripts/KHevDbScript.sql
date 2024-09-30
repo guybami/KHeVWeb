@@ -369,6 +369,19 @@ CREATE TABLE IF NOT EXISTS khev_Tutorial (
   FOREIGN KEY (memberId) REFERENCES khev_Member(memberId) ON UPDATE CASCADE ON DELETE NO ACTION
 ) ENGINE=InnoDB;
 
+--
+-- Table structure for table khev_MemberRegistration used to handle Memeber registration
+--
+
+CREATE TABLE IF NOT EXISTS khev_MemberRegistration (
+  registrationId INT NOT NULL AUTO_INCREMENT,
+  memberId INT NOT NULL,
+  code VARCHAR(125)  NULL,
+  sentDate DATETIME NOT NULL,
+  confirmationDate DATETIME NULL,
+  PRIMARY KEY (registrationId),
+  FOREIGN KEY (memberId) REFERENCES khev_Member(memberId) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB;
 
 
 

@@ -5042,4 +5042,232 @@ class DaoUpdate extends DaoBase {
         return FALSE;
     }
 
+    //region MemberRegistration Methods
+
+    /**
+     *********************************************************
+     * MemberRegistration Methods
+     **********************************************************
+     */
+    /**
+     * Updates MemberRegistration item
+     *  @param $registrationId int The entity  registrationId field
+     *  @param $memberId int The entity  memberId field
+     *  @param $code string The entity  code field
+     *  @param $sentDate string The entity  sentDate field
+     *  @param $confirmationDate string The entity  confirmationDate field
+     * @return mixed TRUE if update occured successfully, otherwise FALSE
+     */
+    public function updateMemberRegistration($registrationId, $memberId, $code, $sentDate, $confirmationDate)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistration(:registrationId, :memberId, :code, :sentDate, :confirmationDate);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':memberId', $memberId, PDO::PARAM_STR);
+                $statement->bindParam(':code', $code, PDO::PARAM_STR);
+                $statement->bindParam(':sentDate', $sentDate, PDO::PARAM_STR);
+                $statement->bindParam(':confirmationDate', $confirmationDate, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+    /**
+     * Updates MemberRegistration item
+     *  @param $registrationId int The entity  registrationId field
+     *  @param $memberId int The entity  memberId field
+     *  @param $code string The entity  code field
+     *  @param $sentDate string The entity  sentDate field
+     *  @param $confirmationDate string The entity  confirmationDate field
+     * @return mixed TRUE if update occured successfully, otherwise FALSE
+     */
+    public function updateMemberRegistrationDetails($registrationId, $memberId, $code, $sentDate, $confirmationDate)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistration(:registrationId, :memberId, :code, :sentDate, :confirmationDate);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':memberId', $memberId, PDO::PARAM_STR);
+                $statement->bindParam(':code', $code, PDO::PARAM_STR);
+                $statement->bindParam(':sentDate', $sentDate, PDO::PARAM_STR);
+                $statement->bindParam(':confirmationDate', $confirmationDate, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+    /**
+     * Updates MemberRegistration item  field
+     *  @param $registrationId int The entity  registrationId field
+     *  @param $memberId int The entity  memberId field
+     * @return  mixed TRUE if update occured successfully, otherwise FALSE
+     */
+    public function updateMemberRegistrationMemberId($registrationId, $memberId)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistrationMemberId(:registrationId, :memberId);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':memberId', $memberId, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+    /**
+     * Updates MemberRegistration item  field
+     *  @param $registrationId int The entity  registrationId field
+     *  @param $code string The entity  code field
+     * @return  mixed TRUE if update occured successfully, otherwise FALSE
+     */
+    public function updateMemberRegistrationCode($registrationId, $code)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistrationCode(:registrationId, :code);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':code', $code, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+    /**
+     * Updates MemberRegistration item  field
+     *  @param $registrationId int The entity  registrationId field
+     *  @param $sentDate string The entity  sentDate field
+     * @return  mixed TRUE if update occured successfully, otherwise FALSE
+     */
+    public function updateMemberRegistrationSentDate($registrationId, $sentDate)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistrationSentDate(:registrationId, :sentDate);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':sentDate', $sentDate, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+
+    /**
+     * Updates MemberRegistration item  field
+     *  @param $registrationId int The entity  registrationId field
+     *  @param $confirmationDate string The entity  confirmationDate field
+     * @return  mixed TRUE if update occured successfully, otherwise FALSE
+     */
+    public function updateMemberRegistrationConfirmationDate($registrationId, $confirmationDate) {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistrationConfirmationDate(:registrationId, :confirmationDate);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':confirmationDate', $confirmationDate, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+
+    //endregion
+
+    //region Custom added methods
+    /**
+     * 
+     * Updates confirmation date from User mail
+     * @param mixed $registrationId 
+     * @param mixed $confirmationDate 
+     * @param mixed $code 
+     * @return bool|PDO|string
+     */
+    public function updateMemberRegistrationConfirmationDateFromMail($registrationId, $confirmationDate, $code)
+    {
+        try {
+            $pdo = $this->getDbConnection();
+            $query = "CALL updateMemberRegistrationConfirmationDateFromMail(:registrationId, :confirmationDate, :code);";
+            if (is_object($pdo) && get_class($pdo) == "PDO") {
+                $statement = $pdo->prepare($query);
+                $statement->bindParam(':registrationId', $registrationId, PDO::PARAM_INT);
+                $statement->bindParam(':confirmationDate', $confirmationDate, PDO::PARAM_STR);
+                $statement->bindParam(':code', $code, PDO::PARAM_STR);
+                if ($statement->execute()) {
+                    return TRUE;
+                } else {
+                    $this->logSqlError($query, $statement);
+                }
+            } else {
+                return $pdo;
+            }
+        } catch (PDOException $e) {
+            return $this->logSqlException($e);
+        }
+        return FALSE;
+    }
+
+    //endregion
+
+     
+
+
 }

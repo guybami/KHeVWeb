@@ -28,8 +28,8 @@
             // for live server
             $url = "http://" . $_SERVER['HTTP_HOST'] . "/";
         }
-        header("Location: " . $url . "UserLogin.php");
-        exit();
+        //header("Location: " . $url . "UserLogin.php");
+        //exit();
     }
     
 

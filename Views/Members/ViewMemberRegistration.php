@@ -36,21 +36,22 @@
           manySelectedItemsLabel : " ' . MemberRegistrationUIResource::manySelectedItemsLabelText() . '",
           sectionViewTitleLabel : "' . MemberRegistrationUIResource::sectionViewTitleLabelText() . '",
 
+          confirmationCreationLabel :  "Merci de votre Enregistrement &agrave; la KH. e.V. Confirmez s\'il vous plait votre Enregistrement via e-mail qui vous a &eacute;t&eacute; envoy&eacute;.",
+          confirmationUpdateLabel : "' . MemberRegistrationUIResource::confirmationUpdateLabelText() . '",
+          confirmationDeletionLabel : "' . MemberRegistrationUIResource::confirmationDeletionLabelText() . '",
+
           viewAllItemsLabel : "' . MemberRegistrationUIResource::viewAllItemsLabelText() . '",
           loadingMessageLabel : "' . MemberRegistrationUIResource::loadingMessageLabelText() . '",
           noDataMessageLabel : "' . MemberRegistrationUIResource::noDataMessageLabelText() . '",  
           errorMessageLabel : "' . MemberRegistrationUIResource::errorMessageLabelText() . '",
           filterItemsNameLabel : "' . MemberRegistrationUIResource::filterItemsNameLabelText() . '",
-          backBtnLabel : "' . MemberRegistrationUIResource::backBtnLabelText() . '",
+          acceptGCALabel : " Vous devez acceptet les Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V ",
 
           createNewItemTitleLabel : "' . MemberRegistrationUIResource::createNewItemTitleLabelText() . '",
           viewItemDetailsTitleLabel : "' . MemberRegistrationUIResource::viewItemDetailsTitleLabelText() . '",
           updateItemDetailsTitleLabel : "' . MemberRegistrationUIResource::updateItemDetailsTitleLabelText() . '",
-
           titleColLabel : "' . MemberRegistrationUIResource::viewAllItemsBtnLabelText() . '",
-          
           noItemSelectedLabel : "' . MemberRegistrationUIResource::noItemSelectedLabelText() . '",
-
           editItemDetailsTitleLabel : "' . MemberRegistrationUIResource::editItemDetailsTitleLabelText() . '",
           menuItemSectionTitleLabel : "' . MemberRegistrationUIResource::menuItemViewSectionTitleLabelText() . '",
           subMenuItemSectionTitleLabel : "' . MemberRegistrationUIResource::subMenuItemViewSectionTitleLabelText() . '"
@@ -60,80 +61,74 @@
         <script defer src="../../Scripts/memberRegistrationScript.js"  type="text/javascript"> </script> 
         ';
 
+   
+
     $formContent = ' 
                 <!-- success and error overlay content -->
                 <div id="successOverlayDiv"></div>
                 <div id="errorContentDiv"></div>
-                <div   id="memeberRegistrationFormContentDiv" class="hideContent">
+                <div   id="memberRegistrationFormContentDiv" class="hideContent">
                     <div class="container">
-                        <form id="memberRegistrationForm" class="form-horizontal" data-dojo-id="memberRegistrationForm" encType="multipart/form-data">
+                        <form id="memberRegistrationForm" class="form-horizontal needs-validation" data-dojo-id="memberRegistrationForm" encType="multipart/form-data">
                             <div class="form-group">
                                 <label class="control-label col-md-4" for="gender">'.MemberRegistrationUIResource::genderColLabelText() . '</label>
                                 <div class="col-md-8 toLeft">
                                     <select style="width:15em;"  id="gender" name="gender" class="selectpicker">  
-                                        <option value="Male">Homme</option><option value="Female">Femme</option>
+                                        <option value="Male">Mr.</option><option value="Female">Mme</option>
                                     </select>
                                 </div>
                             </div>
-                
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="lastName">' . MemberRegistrationUIResource::lastNameColLabelText() . '</label>
+                                <label class="control-label col-md-4" for="lastName">'.MemberRegistrationUIResource::lastNameColLabelText().'*</label>
                                 <div class="col-md-8">
-                                    <input type="text"  id="lastName" name="lastName" class="form-control" />  
+                                    <input type="text"  id="lastName" name="lastName" class="form-control" required/>  
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label class="control-label col-md-4" for="name">' . MemberRegistrationUIResource::nameColLabelText() . '*</label>
                                 <div class="col-md-8">
-                                    <input type="text"  id="name" name="name" class="form-control" />  
+                                    <input type="text"  id="name" name="name" class="form-control" required/>  
                                 </div>
                             </div>
-                
                             <div class="form-group">
                                 <label class="control-label col-md-4" for="email">' . MemberRegistrationUIResource::emailColLabelText() . '*</label>
                                 <div class="col-md-8">
-                                    <input type="text"  id="email" name="email" class="form-control" />  
+                                    <input type="text"  id="email" name="email" class="form-control  " required/>  
                                 </div>
                             </div>
-                
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="phoneNumber">' . MemberRegistrationUIResource::phoneNumberColLabelText() . '</label>
+                            <div class="form-group ">
+                                <label class="control-label col-md-4" for="phoneNumber">'.MemberRegistrationUIResource::phoneNumberColLabelText() . '</label>
                                 <div class="col-md-8">
-                                    <input type="text"  id="phoneNumber" name="phoneNumber" class="form-control" />  
+                                    <input type="text"  id="phoneNumber" name="phoneNumber" class=" form-control " />  
                                 </div>
                             </div>
-                
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="zipCode">' . MemberRegistrationUIResource::zipCodeColLabelText() . '</label>
+                                <label class="control-label col-md-4" for="address">'.MemberRegistrationUIResource::addressColLabelText() . '</label>
+                                <div class="col-md-8">
+                                    <input type="text"  id="address" name="address" class="form-control" />  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4" for="zipCode">'.MemberRegistrationUIResource::zipCodeColLabelText() . '</label>
                                 <div class="col-md-8">
                                     <input type="text"  id="zipCode" name="zipCode" class="form-control" />  
                                 </div>
                             </div>
-                
                             <div class="form-group">
                                 <label class="control-label col-md-4" for="city">' . MemberRegistrationUIResource::cityColLabelText() . '</label>
                                 <div class="col-md-8">
                                     <input type="text"  id="city" name="city" class="form-control" />  
                                 </div>
                             </div>
-                
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="address">' . MemberRegistrationUIResource::addressColLabelText() . '</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="address" name="address" class="form-control" />  
-                                </div>
-                            </div>
-                
+                            
                             <div class="form-group hideContent">
-                                <label class="control-label col-md-4" for="position">' . MemberRegistrationUIResource::positionColLabelText() . '</label>
+                                <label class="control-label col-md-4" for="position">'.MemberRegistrationUIResource::positionColLabelText() . '</label>
                                 <div class="col-md-8">
                                     <input type="text"  id="position" name="position" class="form-control" />  
                                 </div>
                             </div>
-
-                            <div class="form-group" toLeft>
-                                <label class="control-label col-md-4" for="agbCheckbox">
+                            <div class="form-group toLeft" id="agbDiv">
+                                <label class="control-label col-md-4" for="agbCheckbox" id="agbLabel">
                                     J\'accepte les <a href="../Association/ViewStatus.php" class="link-primary"> Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V
                                 </label>
                                 <div class="col-md-8 form-check toLeft">
@@ -151,12 +146,12 @@
                                 <table align="right">
                                     <tr>
                                         <td class="toRight">
-                                            <button type="button" class="btn btn-primary" id="registerMemberBtn" >
+                                            <button type="button" class="btn btn-primary" id="registerMemberBtn" name="registerMemberBtn">
                                                 Inscription
                                             </button>
                                         </td>
                                         <td class="toRight">
-                                            <button type="button" class="btn btn-default">Annuler</button>
+                                            <button type="button" class="btn btn-default" id="resetFieldsBtn" name="resetFieldsBtn">Annuler</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -213,10 +208,30 @@ $content = '
             <!-- end div container -->
         </div>     
         <!-- end div row -->
+
+        <div id="confirmDivContent" class="hideContent">
+            <div class="toLeft"> 
+                <div class="panel panel-primary">
+                  <div class="panel-heading">Confirmation Enregirstrement</div>
+                  <div class="panel-body">
+      		            <span id="confirmTextSpan">Confirm message</span>
+      		            <div class="row ">
+                          <div  class=" toRight">
+                              <button type="button" class="btn btn-primary" onClick="javascript:goToHome();" id="confirmPanelOkBtn" name="confirmPanelOkBtn">
+                                  OK
+                              </button> 
+                          </div>
+      	              </div>
+                     
+                  </div>
+                </div>
+            </div>
+        </div>  
+        <div id="acceptGCALabelDiv" class="hideContent">Vous devez acceptet les Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V  </div>
     ';
 
     $mainPage = new PageModel();
-    $mainPage->setUseDojoScripts(false);
+    $mainPage->setUseDojoScripts(true);
     $mainPage->setActiveMenu("members");
     $mainPage->setDirectoryLevel(2);
     $mainPage->setUserLanguage($userLang);

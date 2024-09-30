@@ -256,7 +256,7 @@ class PageModel {
                                         <li><a><i class="fa fa-users"></i>MEMBRES<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="'.$this->directoryLevel.'/Views/Members/ViewAllMembers.php">Nos Membres</a></li>
-                                                <li><a href="' . $this->directoryLevel . '/Views/Members/MemberRegistration.php">Devenir Membre</a></li>
+                                                <li><a href="' . $this->directoryLevel . '/Views/Members/ViewMemberRegistration.php">Devenir Membre</a></li>
                                             </ul>
                                         </li>
                                         <li><a><i class="fa fa-credit-card"></i>FINANCES<span class="fa fa-chevron-down"></span></a>

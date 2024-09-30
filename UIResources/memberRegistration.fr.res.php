@@ -187,7 +187,7 @@ class MemberRegistrationUIResource {
     }
 
     public static function lastNameColLabelText() {
-        return "Prenom";
+        return "Pr&eacute;nom";
     }
 
     public static function emailColLabelText() {
@@ -195,7 +195,7 @@ class MemberRegistrationUIResource {
     }
 
     public static function phoneNumberColLabelText() {
-        return "Telephone";
+        return "T&eacute;l&eacute;phone";
     }
 
     public static function zipCodeColLabelText() {
@@ -207,7 +207,7 @@ class MemberRegistrationUIResource {
     }
 
     public static function addressColLabelText() {
-        return "Adresse";
+        return "Rue";
     }
 
     public static function positionColLabelText() {

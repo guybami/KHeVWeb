@@ -19,8 +19,8 @@ function showSuccessOverlay_old(message) {
 }
 
 function showSuccessOverlay(divHolderId, message, successImg) {
-    var fadeoutDelay = 2000; // 2seconds
-    var fadeinDelay = 1000; // 1.5 seconds
+    var fadeoutDelay = 3000; // 2seconds
+    var fadeinDelay = 2000; // 1.5 seconds
     //var divId = 'overlayDiv';
     successImg = successImg || "../../Images/Buttons/success_icon.png";
 

@@ -145,15 +145,9 @@
                                         <p>Ce trounois a &eacute;t&eacute; remporte par l equipe de Stuttgart.</p>
                                     </div>
                                 </article>
-                                
-                                 
                             </div>
                         </div>
                     </div>
-
-                     
-
-                     
                 </div>
              
         <!-- /page content -->

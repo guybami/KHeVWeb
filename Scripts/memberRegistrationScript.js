@@ -1,5 +1,13 @@
-// Author: Guy Bami 
+// Author: Guy Bami
 // member registration script
+var viewAllItemsCmd = "viewAllMemberRegistrations";
+var editItemDetailsCmd = "editDetails";
+var viewItemDetailsCmd = "viewDetails";
+var addNewItemCmd = "addNewItem";
+var insertNewItemCmd = "insertNewItem";
+var cancelChangesCmd = "cancelChanges";
+var saveChangesCmd = "saveChanges";
+
 var errorContentDivId = "errorContentDiv";
 var sitePathDivId = "sitePathDiv";
 var resultsDivId = "resultsDiv";
@@ -8,67 +16,99 @@ var successOverlayDivId = "successOverlayDiv";
 var menuItemSectionTitleLabel = pageLangTexts.menuItemSectionTitleLabel == null ? "Membres" : pageLangTexts.menuItemSectionTitleLabel;
 var subMenuItemSectionTitleLabel = pageLangTexts.subMenuItemSectionTitleLabel == null ? "Devenir Membre" : pageLangTexts.subMenuItemSectionTitleLabel;
 
-var memeberRegistrationFormContentDivId = "memeberRegistrationFormContentDiv";
+var memberRegistrationFormContentDivId = "memberRegistrationFormContentDiv";
 var memberRegistrationFormId = "memberRegistrationForm";
 var jsonErrorMsg = "An error occured with json returned data";
 var successImg = "../../Resources/Images/Buttons/success_icon.png";
-var controllerUrl = "../../Controllers/MemberController.php";
-var postDataFormat = "text";
+var controllerUrl = "../../Controllers/MemberRegistrationController.php";
+var postDataFormat = "json";
 var postMethod = "POST";
 
 
 $(function () {
     // display sitemap path
-
     displayCurrentPath(sitePathDivId, 2, [menuItemSectionTitleLabel, subMenuItemSectionTitleLabel], $(location).attr("href"));
-    
-    $("#memeberRegistrationFormContentDiv").removeClass("hideContent");
-     
-
+    $("#" + memberRegistrationFormContentDivId).removeClass("hideContent");
     //register button click events
-
     $("#registerMemberBtn").on("click", function () {
-
         var memberRegistrationFormObject = $("#" + memberRegistrationFormId).serializeObject();
-
-        alert('memberRegistrationFormObject: ' + JSON.stringify(memberRegistrationFormObject));
-
+        console.log('memberRegistrationFormObject: ' + JSON.stringify(memberRegistrationFormObject));
+        
+        validateBeforeAddNewMemberRegistration();
     });
 
     $("#resetFieldsBtn").on("click", function () {
-        //$("#filterAllBtn").button("toggle");
+        setFormFieldValue("lastName", "");
+        setFormFieldValue("name", "");
+        setFormFieldValue("email", "");
+        setFormFieldValue("phoneNumber", "");
+        setFormFieldValue("zipCode", "");
+        setFormFieldValue("city", "");
+        setFormFieldValue("address", "");
+        $("#agbCheckbox").removeAttr("checked");
+        //setCbFormFieldValue("agbCheckbox", false);
     });
- 
 
+    $("#confirmPanelOkBtn").on("click", function () {
+        // open home page
+        location.href = webSiteRootURL;
+    });
 });
+
+
+function goToHome() {
+    location.href = webSiteRootURL;
+}
  
  
- 
-function validateBeforeAddNewMember() {
+function validateBeforeAddNewMemberRegistration() {
 
     var isFormInputsValid = $("#" + memberRegistrationFormId).valid();
+    var isChecked = $("#agbCheckbox").is(':checked');
+    $("#agbDiv").removeClass("has-error");
+    if (isChecked == false) {
+        $("#agbDiv").addClass("has-error");
+        $("#agbCheckbox").parent().addClass("has-error");
+        console.log("AGB not checked");
+        //alert(pageLangTexts.acceptGCALabel);
+        alert($("#acceptGCALabelDiv").html());
+        return;
+    }
+
+    // list all input in form
+    $('#' + memberRegistrationFormId + ' :input').each(
+        function (index) {
+            var input = $(this);
+            if (input != null) {
+                console.log('Type: ' + input.attr('type') + ', Name: ' + input.attr('name') + ', Value: ' + input.val());
+            }
+        }
+    );
+
     if (isFormInputsValid) {
-         
-        // add callback
-        addNewMember();
+        addNewMemberRegistration();
+    } else {
+        console.log("Error:form input fields not valid");
     }
 }
 
+ 
 
-function addNewMember() {
+function addNewMemberRegistration() {
 
-    var memberDetailsFormObject = $("#" + memeberRegistrationFormContentDivId).serializeObject();
+    var memberDetailsFormObject = $("#" + memberRegistrationFormId).serializeObject();
     // convert form to json object
     var itemToAdd = memberDetailsFormObject;
     itemToAdd = memberDetailsFormObject;
+    console.log('json: ' + JSON.stringify(memberDetailsFormObject));
     var postParameters = {
-        "formValues[]": dojo.toJson(memberDetailsFormObject, true),
+        "formValues[]": JSON.stringify(memberDetailsFormObject),
         "userAction": insertNewItemCmd
     };
     var xhrArgs = {
         url: controllerUrl,
         postData: postParameters,
-        handleAs: postDataFormat,
+        handleAs: postMethod,
         method: postMethod,
         error: function (errorMsg) {
             logError({
@@ -78,33 +118,82 @@ function addNewMember() {
     };
 
     //get postback result
-    function addNewMemberCompleted(data) {
+    function addNewMemberRegistrationCompleted(data) {
 
-        debugMessageToConsole("addNewMemberCompleted data : " + data, highLevel);
+        debugMessageToConsole("addNewMemberRegistrationCompleted data : " + data, highLevel);
         // get json result
-        var jsonData = data;
+        var jsonData = null;
+        jsonData = JSON.parse(data);
         // clear error message
         $("#" + errorContentDivId).html("");
         if (jsonData == null) {
-            displayErrorContent(errorContentDivId, "addNewMemberCompleted: " + jsonErrorMsg);
+            displayErrorContent(errorContentDivId, "addNewMemberRegistrationCompleted: " + jsonErrorMsg);
             return;
         } else if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent(errorContentDivId, jsonData[0].jsonErrorMessage);
             return;
         }
-        // display overlay message
-        showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationCreationLabel, successImg);
 
-        if (membersStore != null && jsonData[0].insertedItemKey != null) {
-             
-            alert(' new: ' + jsonData[0].insertedItemKey);
-             
+        if (jsonData[0].insertedItemKey != null) {
+            // add code
+            var memberRegistrationObj = {
+                memberId: jsonData[0].insertedItemKey,
+                code: generateRandomCode(50),
+                sentDate: dateToUSStr(new Date()),
+                confirmationDate: null
+            };
+            postParameters = {
+                "formValues[]": JSON.stringify(memberRegistrationObj),
+                "userAction": insertNewItemCmd
+            };
+            xhrArgs.postData = postParameters;
+            sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
+                xhrArgs.error, addMemberRegistrationCodeCompleted);
+            // display overlay message
+            //showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationCreationLabel, successImg);
+            console.log(' new member added: ' + jsonData[0].insertedItemKey);
+            $('#confirmTextSpan').html(pageLangTexts.confirmationCreationLabel);
+            var confirmDivContentHtml = $('#confirmDivContent').html();
+            $("#" + memberRegistrationFormContentDivId).html(confirmDivContentHtml);
+        }
+    }
+
+    function addMemberRegistrationCodeCompleted(data) {
+
+        debugMessageToConsole("addMemberRegistrationCodeCompleted data : " + data, highLevel);
+        // get json result
+        var jsonData = JSON.parse(data);
+        // clear error message
+        $("#" + errorContentDivId).html("");
+        if (jsonData == null) {
+            displayErrorContent(errorContentDivId, "addMemberRegistrationCodeCompleted: " + jsonErrorMsg);
+            return;
+        } else if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
+            displayErrorContent(errorContentDivId, jsonData[0].jsonErrorMessage);
+            return;
+        }
+
+        if (jsonData[0].insertedItemKey != null) {
+            console.log(' new registration added: ' + jsonData[0].insertedItemKey);
         }
     }
 
     // send async xhr request to server
-    sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
-        xhrArgs.error, addNewMemberCompleted);
+    var memberControllerUrl = "../../Controllers/MemberController.php";
+    sendAsyncRequest(memberControllerUrl, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
+        xhrArgs.error, addNewMemberRegistrationCompleted);
+
+    function generateRandomCode(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        var counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
 
 }
 

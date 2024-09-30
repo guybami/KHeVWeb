@@ -1,3 +1,11 @@
+<?php
+    // just to disable session check
+    include_once("Includes/Utils.php");
+    $url = Utils::getWebsiteRootURL();
+    header("Location: " . $url);
+    exit();
+?>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
