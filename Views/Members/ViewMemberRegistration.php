@@ -36,7 +36,9 @@
           manySelectedItemsLabel : " ' . MemberRegistrationUIResource::manySelectedItemsLabelText() . '",
           sectionViewTitleLabel : "' . MemberRegistrationUIResource::sectionViewTitleLabelText() . '",
 
-          confirmationCreationLabel :  "Merci de votre Enregistrement &agrave; la KH. e.V. Confirmez s\'il vous plait votre Enregistrement via e-mail qui vous a &eacute;t&eacute; envoy&eacute;.",
+          confirmationCreationLabel :  "Merci de votre Enregistrement &agrave; la KHe.V. Confirmez s\'il vous plait votre Enregistrement via e-mail qui vous a &eacute;t&eacute; envoy&eacute;.",
+          confirmRegistrationFromMailLabel :  "Merci de la Confirmation de votre Enregistrement &agrave; la KHe.V.",
+          
           confirmationUpdateLabel : "' . MemberRegistrationUIResource::confirmationUpdateLabelText() . '",
           confirmationDeletionLabel : "' . MemberRegistrationUIResource::confirmationDeletionLabelText() . '",
 
@@ -45,7 +47,7 @@
           noDataMessageLabel : "' . MemberRegistrationUIResource::noDataMessageLabelText() . '",  
           errorMessageLabel : "' . MemberRegistrationUIResource::errorMessageLabelText() . '",
           filterItemsNameLabel : "' . MemberRegistrationUIResource::filterItemsNameLabelText() . '",
-          acceptGCALabel : " Vous devez acceptet les Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V ",
+          acceptGCALabel : " Vous devez acceptet les Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association KHe.V ",
 
           createNewItemTitleLabel : "' . MemberRegistrationUIResource::createNewItemTitleLabelText() . '",
           viewItemDetailsTitleLabel : "' . MemberRegistrationUIResource::viewItemDetailsTitleLabelText() . '",
@@ -93,7 +95,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4" for="email">' . MemberRegistrationUIResource::emailColLabelText() . '*</label>
                                 <div class="col-md-8">
-                                    <input type="text"  id="email" name="email" class="form-control  " required/>  
+                                    <input type="text"  id="email" name="email" class="form-control" required/>  
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -170,7 +172,7 @@ $content = '
                     <div class="col-md-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>' . MemberRegistrationUIResource::subMenuItemSectionTitleLabelText() . '</h2>
+                                <h2>Enregistrement Membre KHe.V - 2024/2025</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -212,7 +214,7 @@ $content = '
         <div id="confirmDivContent" class="hideContent">
             <div class="toLeft"> 
                 <div class="panel panel-primary">
-                  <div class="panel-heading">Confirmation Enregirstrement</div>
+                  <div class="panel-heading">Confirmation Enregirstrement KHeV - 2024/2025</div>
                   <div class="panel-body">
       		            <span id="confirmTextSpan">Confirm message</span>
       		            <div class="row ">
@@ -227,7 +229,7 @@ $content = '
                 </div>
             </div>
         </div>  
-        <div id="acceptGCALabelDiv" class="hideContent">Vous devez acceptet les Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V  </div>
+        <div id="acceptGCALabelDiv" class="hideContent">Vous devez accepter les Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V  </div>
     ';
 
     $mainPage = new PageModel();

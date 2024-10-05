@@ -193,7 +193,7 @@ class Utils {
             // mail has been successfully sent
         } else {
             echo "<br /><br />
-                    <span class='errorMsg'>Error when sending your email to Administrator</span>
+                    <span class='errorMsg'>Error2: Error when sending your email to Administrator</span>
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             ";
         }
@@ -204,7 +204,7 @@ class Utils {
         // To send HTML mail, the Content-type header must be set
         $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-        $headers .= 'From: Adminisrator KHeV <administrator@kameruner-heilbronn.de>';
+        $headers .= 'From: Administrator KHeV <administrator@kameruner-heilbronn.de>';
         //$headers .=  'To: Smart Fret Line - Forum <forum@kameruner-heilbronn.de>';
         // receivers mails
         $to = 'guybami@yahoo.fr';
@@ -347,7 +347,7 @@ class Utils {
 							<td valign="top" class="toLeft fullWidth commentTextCol">
 								<table cellpadding="0" class="fullWidth">
 									<tbody>
-                  <tr>
+                                        <tr>
 										<td class="toLeft  commentTextCol">
 											<span class="userDisplayName">' . $senderFullName . '</span>
 											<span class="commentText">
@@ -357,9 +357,9 @@ class Utils {
 												<span class="commentDate">' . $sentDate . '</span>
 											</span>
 										</td>
-									</tr>
-								</tbody>
-               </table>
+									    </tr>
+								    </tbody>
+                                </table>
 							</td>
 						</tr>
 					</tbody>
@@ -377,9 +377,28 @@ class Utils {
             $sendMail = true;
         // send email
 
-        if (!$sendMail)
+        if (!$sendMail){
+            echo "<br /><br />
+                        <span class=''>Can not send mail on localhost!!</span>
+                       <br />
+              ";
             return;
-        if (mail($to, $subject, $htmlMessage, $headers)) {
+        }
+
+        // The message
+        $message = "Line 1\r\nLine 2\r\nLine 3";
+
+        // In case any of our lines are larger than 70 characters, we should use wordwrap()
+        $message = wordwrap($message, 70, "\r\n");
+        $sendStatus = false;
+        try {
+           $sendStatus = mail($to, $subject, $htmlMessage, $headers);
+            // Send
+            //$sendStatus = mail($to, 'My Subject', $message);
+        } catch (Exception $e) {
+            echo "" . $e->getMessage() . "";
+        }
+        if ($sendStatus) {
             // mail has been successfully sent
             echo "<br /><br />
                         <span class=''>Mail has been sent with success!!</span>
@@ -388,7 +407,7 @@ class Utils {
             return true;
         } else {
             echo "<br /><br />
-                        <span class='errorMsg'>Error when sending your email to Administrator</span>
+                        <span class='errorMsg'>Error1: Error when sending your email to Administrator</span>
                        <br />
               ";
             return false;
@@ -673,5 +692,177 @@ class Utils {
         return $ipAddress;
     }
 
-    
+    public static function sendConfirmRegistrationMail($receiverMail, $pageLink) {
+        $subject  = "Confirmation Enregirstrement Membre KHeV 2024/2025";
+        // To send HTML mail, the Content-type header must be set
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $headers .= 'From: Administrator KHeV <administrator@kameruner-heilbronn.de>';
+         
+        // receivers mails
+        $to =   $receiverMail; // 'guybami@yahoo.fr'; //
+
+        $head = '
+      <html>
+      <head>
+          <style type="text/css">
+
+              body
+              {
+	              padding-bottom: 1px;
+	              margin: 0px 0px 0px 0px;
+	              padding-top:0;
+	              height: 100%;
+	              vertical-align:middle;
+	              font-style:normal;
+   	            font-family:Verdana;
+   	              font-size:13px;
+   	              color:#000000;
+   	              overflow-x:hidden;
+              }
+
+              .biggerWidth
+              {
+                  width:90%;
+              }
+              .fullWidth
+              {
+                  width:100%;
+              }
+
+              .smallerMsg
+              {
+	              font-size:smaller;
+              }
+              .toLeft
+              {
+	                text-align:left;
+              }
+              .toRight
+              {
+	                text-align:right;
+              }
+
+              table.fullWidth {
+                  width: 100%;
+              }
+              .userCommentInnerTableNoBottom {
+                  background-color: #CCCFE4;
+                  border-color: #FFFFFF;
+                  border-style: solid;
+                  border-width: 1px 0 0 1px;
+                  margin: 0;
+                  width: 100%;
+              }
+              td.toLeft, th.toLeft {
+                  text-align: left;
+              }
+              .commentTextCol {
+                  word-wrap: break-word;
+              }
+              .toLeft {
+                  text-align: left;
+              }
+
+              .toCenter {
+                  text-align: center;
+              }
+
+              .userDisplayName {
+                  font-size: 13px;
+                  font-weight: bold;
+              }
+
+
+              .commentText {
+                  font-size: 12px;
+                  line-height: 1.5;
+                  margin-left: 3px;
+                  text-align: justify;
+              }
+
+              .commentDate {
+                  color: #333333;
+                  font-size: 10px;
+                  text-align: left;
+              }
+          </style>
+      </head>
+      <body>
+      ';
+
+        $footer = '
+            </body>
+        </html>';
+        $sentDate = date('d.m.Y H:i:s');
+        $senderFullName = "Administration KHeV";
+        $message = "La KHeV vous remercie de votre enregistrement. Veuillez confirmer cet enregistrement via le lein suivant: ";
+
+        $message .= '<a href="' . $pageLink . '" _target="blank" >Confirmer mon enregistrement</a>';
+
+        $content = '
+            <table cellspacing="0" cellpadding="2" class="fullWidth userCommentInnerTableNoBottom">
+				<tbody>
+                    <tr>
+							<td valign="top" class="toLeft fullWidth commentTextCol">
+								<table   class="fullWidth">
+									<tbody>
+                                        <tr>
+										    <td class="toLeft  commentTextCol">
+											     
+											    <span class="commentText">
+												    ' . $message  . '
+											    </span><br />
+										    </td>
+									    </tr>
+								    </tbody>
+                                </table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+            ';
+
+        $htmlMessage = $head . $content . $footer;
+
+        $webURL = Utils::getWebsiteRootURL();
+        $pos = strpos($webURL, "localhost");
+        
+        if ($pos > 0)
+            $sendMail = false;
+        else
+            $sendMail = true;
+
+        if (!$sendMail) {
+           // echo " Can not send mail on localhost!!</span>  ";
+            return;
+        }
+
+         
+        $sendStatus = false;
+        try {
+            $sendStatus = mail($to, $subject, $htmlMessage, $headers);
+            // Send
+            //$sendStatus = mail($to, 'My Subject', $message);
+        } catch (Exception $e) {
+            echo "" . $e->getMessage() . "";
+        }
+        if ($sendStatus) {
+            // mail has been successfully sent
+            echo "<br /> 
+                        <span class=''> $sentDate:  Mail has been sent with success!!</span>
+                       <br />
+              ";
+            return true;
+        } else {
+            echo "<br /><br />
+                        <span class='errorMsg'>Error1: Error when sending your email to Administrator</span>
+                       <br />
+              ";
+            return false;
+        }
+    }
+
+
+
 }

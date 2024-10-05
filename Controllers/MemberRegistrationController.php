@@ -59,6 +59,11 @@
             $resultObject = $this->memberRegistration->insertNewMemberRegistration($formJsonValues['memberId'], $formJsonValues['code'], $formJsonValues['sentDate'], $formJsonValues['confirmationDate']);
             if (is_bool($resultObject) || is_int($resultObject)) {
                 $postbackData = Utils::formatJsonMessage("insertedItemKey", $resultObject);
+                // send email
+                $registrationId = $resultObject;
+                $code = $formJsonValues["code"];
+                $receiverMail = $formJsonValues["receiverMail"];
+                $this->sendConfirmationRequestMail($receiverMail, $registrationId, $code);
             } else if (is_string($resultObject)) {
                 //error occured
                 $postbackData = Utils::formatJsonErrorMessage($resultObject);
@@ -159,6 +164,12 @@
             return $postbackData;
         }
 
+        private function sendConfirmationRequestMail($receiverMail, $registrationId, $code){
+            $rootURL = Utils::getWebsiteRootURL();
+            // http://localhost/KhevWeb/Controllers/MemberRegistrationController.php?userAction=confirmRegistrationFromEmail&registrationId=2&code=ZJ72y4vOOgzFY7LaoCtFYwQLIqbt8lmOdTAbLl9tocKGrkGcKF
+            $pageLink = $rootURL . "Controllers/MemberRegistrationController.php?userAction=confirmRegistrationFromEmail&registrationId=".$registrationId."&code=".$code;
+            Utils::sendConfirmRegistrationMail($receiverMail, $pageLink);      
+        }
 
 
        /**
@@ -231,21 +242,21 @@
                     $registrationId = $_GET['registrationId'];
                     $code = $_GET['code'];
                     $jsonDataRaw = '[{"confirmationDate": "'. $date->format('Y-m-d H:i:s').'", "fieldName": "confirmationDate",
-                        "$registrationId":"2" }]';
+                        "$registrationId":"'. $registrationId.'" }]';
 
                     $arrayData = json_decode($jsonDataRaw, true);
                     $jsonData = $arrayData[0];
-                    
-
                     $confirmationDate = $date->format('Y-m-d H:i:s'); 
-                    //date_format(date_create(), 'Y-m-d H:i:s'); // "2022-09-03 11:32:11";
-
                     $resultObject = $this->memberRegistration->updateMemberRegistrationConfirmationDateFromMail($registrationId, $confirmationDate, $code);
                     if (is_string($resultObject)) {
                         //error occured
                         $postbackData = Utils::formatJsonErrorMessage($resultObject);
                     } else if (is_bool($resultObject)) {
                         $postbackData = Utils::formatJsonResultMessage(Common::UPDATE_INLINE_SUCCESSFUL);
+                        // go to registration view
+                        $rootURL = Utils::getWebsiteRootURL();
+                        $pageLink = $rootURL . "Views/ViewMemberRegistration.php?status=registrationConfirmed&registrationId=" . $registrationId . "&code=" . $code;
+                        header("Location: $pageLink ");
                     }
 
                     break;

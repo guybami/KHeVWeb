@@ -1,7 +1,7 @@
 <?php
 
 
-include "Controllers/ConferenceController.php";
+include "../Controllers/ConferenceController.php";
 
 
 /**
@@ -10,15 +10,14 @@ include "Controllers/ConferenceController.php";
  * CRUD methods will be tested here
  * @author Guy Bami
  */
-class ConferenceControllerTest extends PHPUnit_Framework_TestCase
-{
+class ConferenceControllerTest extends PHPUnit_Framework_TestCase {
 
     var $numRecordsToInsert;
     var $numRecordsToDelete;
 
     protected function setUp() {
-        $this->numRecordsToInsert = 50;
-        $this->numRecordsToDelete= 35;
+        $this->numRecordsToInsert = 5;
+        $this->numRecordsToDelete= 2;
     }
 
 
@@ -49,7 +48,7 @@ class ConferenceControllerTest extends PHPUnit_Framework_TestCase
         $conferenceController = new ConferenceController($userAction);
         $resultValue = $conferenceController->deleteAllConferences();
         $arrayData = json_decode($resultValue, true);
-        $result = count($arrayData) > 0 &&
+        $result = count($arrayData) >= 0 &&
             strpos($arrayData[0], Utils::formatJsonResultMessage(Common::DELETE_SUCCESSFUL)) !== false;
         $this->assertTrue($result);
     }

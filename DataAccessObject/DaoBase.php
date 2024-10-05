@@ -49,7 +49,7 @@ class DaoBase {
         if (file_exists($configFileName)) {
             $settingsArray = parse_ini_file($configFileName, true);
         }
-
+         
         if (isset($settingsArray) && count($settingsArray) > 0) {
             //print_r($settingsArray);
             $this->dbHost = $settingsArray['database_settings']['dbHost'];
