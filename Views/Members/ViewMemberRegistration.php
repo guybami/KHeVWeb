@@ -70,77 +70,101 @@
                 <div id="successOverlayDiv"></div>
                 <div id="errorContentDiv"></div>
                 <div   id="memberRegistrationFormContentDiv" class="hideContent">
-                    <div class="container">
-                        <form id="memberRegistrationForm" class="form-horizontal needs-validation" data-dojo-id="memberRegistrationForm" encType="multipart/form-data">
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="gender">'.MemberRegistrationUIResource::genderColLabelText() . '</label>
-                                <div class="col-md-8 toLeft">
-                                    <select style="width:15em;"  id="gender" name="gender" class="selectpicker">  
+                     <form id="memberRegistrationForm" class="form-horizontal needs-validation" data-dojo-id="memberRegistrationForm" encType="multipart/form-data">
+                        <table class="fullWidth ">
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="gender">'.MemberRegistrationUIResource::genderColLabelText() . '</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <select   id="gender" name="gender" class="selectpicker">  
                                         <option value="Male">Mr.</option><option value="Female">Mme</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="lastName">'.MemberRegistrationUIResource::lastNameColLabelText().'*</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="lastName" name="lastName" class="form-control" required/>  
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="name">' . MemberRegistrationUIResource::nameColLabelText() . '*</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="name" name="name" class="form-control" required/>  
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="email">' . MemberRegistrationUIResource::emailColLabelText() . '*</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="email" name="email" class="form-control" required/>  
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label class="control-label col-md-4" for="phoneNumber">'.MemberRegistrationUIResource::phoneNumberColLabelText() . '</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="phoneNumber" name="phoneNumber" class=" form-control " />  
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="address">'.MemberRegistrationUIResource::addressColLabelText() . '</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="address" name="address" class="form-control" />  
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="zipCode">'.MemberRegistrationUIResource::zipCodeColLabelText() . '</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="zipCode" name="zipCode" class="form-control" />  
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-4" for="city">' . MemberRegistrationUIResource::cityColLabelText() . '</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="city" name="city" class="form-control" />  
-                                </div>
-                            </div>
-                            
-                            <div class="form-group hideContent">
-                                <label class="control-label col-md-4" for="position">'.MemberRegistrationUIResource::positionColLabelText() . '</label>
-                                <div class="col-md-8">
-                                    <input type="text"  id="position" name="position" class="form-control" />  
-                                </div>
-                            </div>
-                            <div class="form-group toLeft" id="agbDiv">
-                                <label class="control-label col-md-4" for="agbCheckbox" id="agbLabel">
-                                    J\'accepte les <a href="../Association/ViewStatus.php" class="link-primary"> Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V
-                                </label>
-                                <div class="col-md-8 form-check toLeft">
-                                    <br />
-                                    <input class="form-check-input" type="checkbox"   id="agbCheckbox" name="agbCheckbox" />  
-                                </div>
-                            </div>
-                           <div class="form-group"> &nbsp; </div>
-                  </form>
-                </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="lastName">' . MemberRegistrationUIResource::lastNameColLabelText() . '*</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="lastName" name="lastName" class="form-control" required/> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="name">' . MemberRegistrationUIResource::nameColLabelText() . '*</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="name" name="name" class="form-control" required/>  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="email">' . MemberRegistrationUIResource::emailColLabelText() . '*</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="email" name="email" class="form-control" required/>  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="phoneNumber">' . MemberRegistrationUIResource::phoneNumberColLabelText() . '</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="phoneNumber" name="phoneNumber" class=" form-control " />  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="address">' . MemberRegistrationUIResource::addressColLabelText() . '</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="address" name="address" class="form-control" />  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="zipCode">' . MemberRegistrationUIResource::zipCodeColLabelText() . '</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="zipCode" name="zipCode" class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="toLeft col-sm-4">
+                                    <label class="control-label col-sm-4" for="city">' . MemberRegistrationUIResource::cityColLabelText() . '</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="city" name="city" class="form-control" />  
+                                </td>
+                            </tr>
+                            <tr class="hideContent">
+                                <td class="toLeft col-sm-4 ">
+                                    <label class="control-label col-sm-4" for="position">' . MemberRegistrationUIResource::positionColLabelText() . '</label>
+                                </td>
+                                <td class="toLeft col-sm-8">
+                                     <input type="text"  id="position" name="position" class="form-control" />  
+                                </td>
+                            </tr>
+                            <tr id="agbDiv">
+                                <td class="toLeft col-sm-4 smallMsg">
+                                    <label class="control-label  " for="agbCheckbox" id="agbLabel">
+                                        J\'accepte les <a href="../Association/ViewStatus.php" class="link-primary"> Conditions G&eacute;n&eacute;rales d\'Adh&eacute;sion </a> &agrave; l\'Association K.H. e.V
+                                    </label>
+                                </td>
+                                <td class="col-sm-8 form-check toLeft">
+                                     <input class="form-check-input" type="checkbox"   id="agbCheckbox" name="agbCheckbox" />  
+                                </td>
+                            </tr>
+                            <tr class="">
+                                <td class="toLeft col-sm-4 " colspan="2">
+                                     <div > &nbsp; </div>
+                                </td>
+                            </tr>
+                        </table>
+                     </form>
+                    
                 <div class="toRight">
                     <table class="fullWidth topBorder">
                         <tr>

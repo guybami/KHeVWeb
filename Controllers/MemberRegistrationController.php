@@ -55,14 +55,16 @@
             $formJsonValues = json_decode($jsonData, true);
             $postbackData = "";
             $resultObject = null;
-            // insert entity using model object
-            $resultObject = $this->memberRegistration->insertNewMemberRegistration($formJsonValues['memberId'], $formJsonValues['code'], $formJsonValues['sentDate'], $formJsonValues['confirmationDate']);
+            // insert entity using model object // $formJsonValues['sentDate']
+            $resultObject = $this->memberRegistration->insertNewMemberRegistration($formJsonValues['memberId'], $formJsonValues['code'], 
+                 Utils::formatFullDateUS(''), $formJsonValues['confirmationDate']);
             if (is_bool($resultObject) || is_int($resultObject)) {
                 $postbackData = Utils::formatJsonMessage("insertedItemKey", $resultObject);
                 // send email
                 $registrationId = $resultObject;
                 $code = $formJsonValues["code"];
                 $receiverMail = $formJsonValues["receiverMail"];
+                
                 $this->sendConfirmationRequestMail($receiverMail, $registrationId, $code);
             } else if (is_string($resultObject)) {
                 //error occured
@@ -166,7 +168,7 @@
 
         private function sendConfirmationRequestMail($receiverMail, $registrationId, $code){
             $rootURL = Utils::getWebsiteRootURL();
-            // http://localhost/KhevWeb/Controllers/MemberRegistrationController.php?userAction=confirmRegistrationFromEmail&registrationId=2&code=ZJ72y4vOOgzFY7LaoCtFYwQLIqbt8lmOdTAbLl9tocKGrkGcKF
+            // test: http://localhost/KhevWeb/Controllers/MemberRegistrationController.php?userAction=confirmRegistrationFromEmail&registrationId=2&code=ZJ72y4vOOgzFY7LaoCtFYwQLIqbt8lmOdTAbLl9tocKGrkGcKF
             $pageLink = $rootURL . "Controllers/MemberRegistrationController.php?userAction=confirmRegistrationFromEmail&registrationId=".$registrationId."&code=".$code;
             Utils::sendConfirmRegistrationMail($receiverMail, $pageLink);      
         }
@@ -255,8 +257,8 @@
                         $postbackData = Utils::formatJsonResultMessage(Common::UPDATE_INLINE_SUCCESSFUL);
                         // go to registration view
                         $rootURL = Utils::getWebsiteRootURL();
-                        $pageLink = $rootURL . "Views/ViewMemberRegistration.php?status=registrationConfirmed&registrationId=" . $registrationId . "&code=" . $code;
-                        header("Location: $pageLink ");
+                        $pageLink = $rootURL . "Views/Members/ViewMemberRegistration.php?status=registrationConfirmed&registrationId=" . $registrationId . "&code=" . $code;
+                        echo "<script> window.location.href = '$pageLink'; </script>";
                     }
 
                     break;

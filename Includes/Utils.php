@@ -796,9 +796,9 @@ class Utils {
         </html>';
         $sentDate = date('d.m.Y H:i:s');
         $senderFullName = "Administration KHeV";
-        $message = "La KHeV vous remercie de votre enregistrement. Veuillez confirmer cet enregistrement via le lein suivant: ";
+        $message = "La KHeV vous remercie de votre enregistrement. Veuillez confirmer cet enregistrement via le lien suivant: ";
 
-        $message .= '<a href="' . $pageLink . '" _target="blank" >Confirmer mon enregistrement</a>';
+        $message .= '<a href="' . $pageLink . '" _target="blank" >Confirmer votre enregistrement</a>';
 
         $content = '
             <table cellspacing="0" cellpadding="2" class="fullWidth userCommentInnerTableNoBottom">
@@ -809,7 +809,6 @@ class Utils {
 									<tbody>
                                         <tr>
 										    <td class="toLeft  commentTextCol">
-											     
 											    <span class="commentText">
 												    ' . $message  . '
 											    </span><br />
@@ -849,10 +848,11 @@ class Utils {
         }
         if ($sendStatus) {
             // mail has been successfully sent
-            echo "<br /> 
+            /* log only on local
+             * echo "<br /> 
                         <span class=''> $sentDate:  Mail has been sent with success!!</span>
                        <br />
-              ";
+              ";*/
             return true;
         } else {
             echo "<br /><br />
