@@ -14,9 +14,9 @@
                     require_once '../../Models/EntityCommon.php';
                     require '../PageModel.php';
                     // load UI resource 
-                    Utils::loadUIResources('../../UIResources/memberfees.fr.res.php', 
-                                            '../../UIResources/memberfees.en.res.php',
-                                            '../../UIResources/memberfees.de.res.php');
+                    Utils::loadUIResources('../../UIResources/MemberFees.fr.res.php', 
+                                            '../../UIResources/MemberFees.en.res.php',
+                                            '../../UIResources/MemberFees.de.res.php');
 
                     $title = 'Module Generator - Test ContentPage';
                     $script = '

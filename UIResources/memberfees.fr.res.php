@@ -7,10 +7,10 @@
                */
                class MemberFeeUIResource {
                     // 
-                    public static function viewAllItemsBtnLabelText() { return "All MemberFees"; }
+                    public static function viewAllItemsBtnLabelText() { return "Tous les Frais De Membres"; }
                     public static function viewDetailsBtnLabelText(){ return "View details "; }
 
-                    public static function updateItemBtnLabelText() {  return  "Save";  } 
+                    public static function updateItemBtnLabelText() {  return  "Sauvegarder";  } 
                     public static function  viewPreviousItemBtnLabelText() {  return  "View previous MemberFee";  } 
                     public static function  viewNextItemBtnLabelText() {  return  "View next MemberFee";  } 
                     public static function  saveItemBtnLabelText() {  return  "Save";  } 

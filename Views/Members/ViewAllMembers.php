@@ -108,8 +108,8 @@
                                                                 <div class="input-group toLeft pull-left searchBarMargin">
                                                                     <div class="btn-group" role="group" aria-label="filter members">
                                                                       <button type="button" class="btn btn-primary" id="filterAllBtn">Tous</button>
-                                                                      <button type="button" class="btn btn-default" id="filterRegisteredMembersBtn">Enregistres</button>
-                                                                      <button type="button" class="btn btn-default" id="filterUnregisteredMembersBtn">Non enregistres</button>
+                                                                      <button type="button" class="btn btn-default" id="filterRegisteredMembersBtn">Enregistr&eacute;s</button>
+                                                                      <button type="button" class="btn btn-default" id="memberFeesPaidBtn">Frais de Membres pay&eacute;s</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6 pull-right searchBarMargin _top_search">

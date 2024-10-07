@@ -1,20 +1,24 @@
-
 /**
- * Script to manage a  Event model entity.
+ *This script was auto generated.
+ * Script to manage a  MemberFee model entity.
  * @author
  *     Guy Bami W.
- * Created changes: 08.04.2017 06:18:40
+ * Created changes: 08.04.2017 20:48:17
  */
 
+
+
+
 // global varaibles
-var eventsStore = null;
-var eventsGrid = null;
+var memberFeesStore = null;
+var memberFeesGrid = null;
 var currentItemIndex = -1;
 var itemsArrayIds = new Array();
-var currentEventId = -1;
+var currentMemberFeeId = -1;
 
-// some event actions commands
-var viewAllItemsCmd = "viewAllEvents";
+
+// some MemberFee actions commands
+var viewAllItemsCmd = "viewAllMemberFees";
 var editItemDetailsCmd = "editDetails";
 var viewItemDetailsCmd = "viewDetails";
 var addNewItemCmd = "addNewItem";
@@ -24,11 +28,11 @@ var saveChangesCmd = "saveChanges";
 
 // controls and page divs Ids
 var toolbarButtonsDivId = "toolbarButtonsDiv";
-var dataItemsGridId = "eventsGrid";
-var itemDetailsDivId = "eventDetailsDiv";
-var itemsGridDivId = "eventsGridDiv";
-var itemDetailsFormId = "eventDetailsForm";
-var eventDetailsFormId = "eventDetailsForm";
+var dataItemsGridId = "memberFeesGrid";
+var itemDetailsDivId = "memberFeeDetailsDiv";
+var itemsGridDivId = "memberFeesGridDiv";
+var itemDetailsFormId = "memberFeeDetailsForm";
+var MemberFeeDetailsFormId = "memberFeeDetailsForm";
 var dataViewDivId = "dataViewDiv";
 var dataEditDivId = "dataEditDiv";
 var confirmDialogDivId = "confirmDialogDiv";
@@ -44,6 +48,7 @@ var successOverlayDivId = "successOverlayDiv";
 // toolbar button spans holders
 var spanAddNewItemBtnId = "spanAddNewItemBtn";
 var spanDeleteItemsBtnId = "spanDeleteItemsBtn";
+
 
 // toolbar buttons id
 var addNewItemBtnId = "addNewItemBtn";
@@ -62,7 +67,7 @@ var moveDownBtnDialogId = "moveDownBtnDialog";
 
 // dialog divs Id
 var addNewItemDialogContentId = "addNewItemDialogContent";
-var eventDetailsDialogId = "eventDetailsDialog";
+var MemberFeeDetailsDialogId = "MemberFeeDetailsDialog";
 var viewItemDetailsDialogContentId = "viewItemDetailsDialogContent";
 var confirmDeletionDialogId = "confirmDeletionDialog";
 
@@ -88,9 +93,10 @@ var gridDefaultPageSize = 30;
 var gridDefaultStyle = "width:100%;height:60em;";
 var jsonErrorMsg = "An error occured with json returned data";
 var successImg = "../../Resources/Images/Buttons/success_icon.png";
-var controllerUrl = "../../Controllers/EventController.php";
+var controllerUrl = "../../Controllers/MemberFeeController.php";
 var postDataFormat = "text";
 var postMethod = "POST";
+
 
 // flags used to check user role
 var readItemRight = true;
@@ -98,11 +104,8 @@ var addNewItemRight = true;
 var deleteItemRight = true;
 var editItemRight = true;
 
- 
-
-var menuItemSectionTitleLabel = pageLangTexts.menuItemSectionTitleLabel == null ? "Administration" : pageLangTexts.menuItemSectionTitleLabel;
-var subMenuItemSectionTitleLabel = pageLangTexts.subMenuItemSectionTitleLabel == null ? "Events" : pageLangTexts.subMenuItemSectionTitleLabel;
-
+var menuItemSectionTitleLabel = "Administration";
+var subMenuItemSectionTitleLabel = "MemberFees";
 
 // load all dojo dependencies modules
 require(["dojo/parser",
@@ -137,6 +140,8 @@ require(["dojo/parser",
     "dijit/form/DropDownButton"
 ]);
 
+
+
 /**
  * load method
  * @param {type} parser
@@ -159,10 +164,9 @@ require(["dojo/parser", "dojo/ready"],
                     if (customUserRolesManagerObject != null && customUserRolesManagerObject.userRolesData.length > 0) {
                         var curmo = customUserRolesManagerObject; // short name
                         // load roles only once
-                        curmo.entityType = curmo.entityTypesObject.Event;
-                        readItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.Event, curmo.accessRightsObject.readRight);
+                        curmo.entityType = curmo.entityTypesObject.MemberFee;
+                        readItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.MemberFee, curmo.accessRightsObject.readRight);
                     }
-                    $("#mainDivContent").removeClass(hideContentClass);
                     if (readItemRight == true) {
                         // show and create toolbar buttons
                         $("#" + sectionTitleAndToolbarBtnDivId).removeClass(hideContentClass);
@@ -176,7 +180,7 @@ require(["dojo/parser", "dojo/ready"],
                         }
 
                         // display dojo data grid
-                        generateEventsDataGrid(itemsGridDivId);
+                        generateMemberFeesDataGrid(itemsGridDivId);
                     } else {
                         // redirect to access denied page
                         $(window).attr("location", webSiteRootURL + "/Views/AccessDenied.php");
@@ -186,7 +190,7 @@ require(["dojo/parser", "dojo/ready"],
                     initFormValidators();
                     // register event clicks
                     registerButtonClickEvents();
-                };
+                }
 
                 // parse main menu and display page
                 parseMainMenu(parsePageWidgets);
@@ -196,221 +200,112 @@ require(["dojo/parser", "dojo/ready"],
         });
     });
 
+
+
+
 function setLabelFields(jsonData) {
 
-    $("#dateLabel").html(dateToLocale(jsonData[0].date));
-    $("#titleLabel").html(jsonData[0].title);
-    $("#categoryLabel").html(jsonData[0].category);
-    $("#locationLabel").html(jsonData[0].location);
-    $("#summaryLabel").html(jsonData[0].summary);
+
+    $("#memberIdLabel").html(jsonData[0].memberId);
+    $("#amountLabel").html(jsonData[0].amount);
+    $("#billFileNameLabel").html(jsonData[0].billFileName);
+    $("#transactionDateLabel").html(jsonData[0].transactionDate);
 
 }
+
 
 function setTextFields(jsonData) {
 
-    initDateTimeFields("date");
-    setFormDateFieldValue("date", jsonData[0].date);
-    setFormFieldValue("title", jsonData[0].title);
-    setFormFieldValue("category", jsonData[0].category);
-    setFormFieldValue("location", jsonData[0].location);
-    setFormFieldValue("summary", jsonData[0].summary);
+
+    setFormFieldValue("memberId", jsonData[0].memberId);
+    setFormFieldValue("amount", jsonData[0].amount);
+    setFormFieldValue("billFileName", jsonData[0].billFileName);
+    setFormFieldValue("transactionDate", jsonData[0].transactionDate);
 
 }
+
 
 function settersMethodWithDefaultValues() {
 
-    initDateTimeFields("date");
-    //setFormDateFieldValue("date", "2017-04-08");
-    setFormFieldValue("title", "-");
-    setFormFieldValue("location", "-");
-    setFormFieldValue("summary", "");
-    setFormFieldValue("category", "CultureWeek");
+
+    setFormFieldValue("memberId", "70592");
+    setFormFieldValue("amount", "117342");
+    setFormFieldValue("billFileName", "billFileName-f5680c1");
+    setFormFieldValue("transactionDate", "2017-04-08");
+
 }
 
 /**
- * generate dynamic Events datagrid
+ * generate dynamic MemberFees datagrid
  * @param {string} targetDiv
  * @returns {none}
  */
-function generateEventsDataGrid(targetDiv) {
+function generateMemberFeesDataGrid(targetDiv) {
 
-    var windowWidth = $(window).width();
-    var dateColWidth = windowWidth * 0.10 + "px";
-    var titleColWidth = windowWidth * 0.20 + "px";
-    var locationColWidth = windowWidth * 0.10 + "px";
-    var categoryColWidth =  windowWidth * 0.20 + "px";
-    var summaryColWidth = "auto";
+    var windowWidth = $(window).width() - 200;
+    var memberIdColWidth = windowWidth * 0.25 + "px";
+    var amountColWidth = windowWidth * 0.25 + "px";
+    var billFileNameColWidth = windowWidth * 0.25 + "px";
+    var transactionDateColWidth = "auto";
 
-
-    function shortDateFieldFormatter(data, rowIndex) {
-        var strDate = strToShortDate(new String(data));
-        debugMessageToConsole("shortDateFieldFormatter strDate: " + strDate, lowLevel);
-        return dojo.date.locale.format(strDate, this.constraint);
-    }
-
-
-    function fullDateAndTimeFieldFormatter(data, rowIndex) {
-        debugMessageToConsole("data: " + data, hi);
-        var strDate = strToFullDate(data);
-        return dojo.date.locale.format(strDate, this.constraint);
-    }
-
-
-    function titleFormatter(data, rowIndex) {
-        var item = eventsGrid.getItem(rowIndex);
-        var formattedTtitle = $.trim(item.title);
-        if (formattedTtitle == null || formattedTtitle.length == 0)
-            formattedTtitle = "unknown";
-        if (item) {
-            var contains = false;
-            for (i = 0; i < itemsArrayIds.length; i++) {
-                if (itemsArrayIds[i].toString() == item.eventId.toString()) {
-                    contains = true;
-                    break;
-                }
-            }
-            if (!contains)
-                itemsArrayIds.push(item.eventId);
-            var html = '<label class="itemNameLabelDiv"><a href="javascript:viewEventDetails(\'' + item.eventId + '\');" class="linkItemNameRow">'
-                     + formattedTtitle + '</a></label>';
-            return html;
-        }
-        return data;
-    }
-
-
-    function summaryFormatter(data, rowIndex) {
-        var item = eventsGrid.getItem(rowIndex);
-        var formattedSummary = item.summary;
-        var maxLength = 50;
-        if (formattedSummary.toString().length >= maxLength) {
-            formattedSummary = item.summary.toString().substr(0, maxLength) + "...";
-        }
-        return formattedSummary;
-    }
-    
-    
-    function categoryFormatter(data, rowIndex) {
-        var item = eventsGrid.getItem(rowIndex);
-        var categoryValue = item.category.toString();
-        if(categoryValue.indexOf("CultureWeek") != -1){
-            return pageLangTexts.cultureWeekLabel == null ? "Semaine Culturelle" : pageLangTexts.cultureWeekLabel;
-        }
-        else if(categoryValue.indexOf("FirstSemesterParty") != -1){
-            return pageLangTexts.firstSemesterPartyLabel == null ? "1. Semester Party" : pageLangTexts.firstSemesterPartyLabel;
-        }
-        else if(categoryValue.indexOf("GalaNight") != -1){
-            return pageLangTexts.galaNightLabel == null ? "Soiree De Gala" : pageLangTexts.galaNightLabel;
-        }
-        else if(categoryValue.indexOf("Football") != -1){
-            return pageLangTexts.footballLabel == null ? "Football" : pageLangTexts.footballLabel;
-        }
-        else if(categoryValue.indexOf("Challenge") != -1){
-            return pageLangTexts.challengeLabel == null ? "Challenge" : pageLangTexts.challengeLabel;
-        }
-        else if(categoryValue.indexOf("Tournament") != -1){
-            return pageLangTexts.tournamentLabel == null ? "Tournament" : pageLangTexts.tournamentLabel;
-        }
-        else if(categoryValue.indexOf("Mourning") != -1){
-            return pageLangTexts.mourningLabel == null ? "Mourning" : pageLangTexts.mourningLabel;
-        }
-        return categoryValue;
-    }
 
 
     // manage user role
     var dataEditable = true;
     if (customUserRolesManagerObject != null && customUserRolesManagerObject.userRolesData.length > 0) {
         var curmo = customUserRolesManagerObject; // short name
-        curmo.entityType = curmo.entityTypesObject.Event;
-        dataEditable = curmo.getAccessRightByEntityType(curmo.entityTypesObject.Event, curmo.accessRightsObject.editRight);
+        curmo.entityType = curmo.entityTypesObject.MemberFee;
+        dataEditable = curmo.getAccessRightByEntityType(curmo.entityTypesObject.MemberFee, curmo.accessRightsObject.editRight);
     }
 
     var columsLayout = [
+
         {
-            name: pageLangTexts.dateColLabel == null ? "Date" : pageLangTexts.dateColLabel,
-            field: "date",
-            width: dateColWidth,
+            name: pageLangTexts.memberIdColLabel == null ? "MemberId" : pageLangTexts.memberIdColLabel,
+            field: "memberId",
+            dataType: "number",
             editable: dataEditable,
-            type: dojox.grid.cells.DateTextBox,
+            type: dojox.grid.cells._Widget,
+            width: memberIdColWidth,
+            widgetClass: dijit.form.NumberTextBox,
+            widgetProps: {}
+        }
+
+        , {
+            name: pageLangTexts.amountColLabel == null ? "Amount" : pageLangTexts.amountColLabel,
+            field: "amount",
+            dataType: "number",
+            editable: dataEditable,
+            type: dojox.grid.cells._Widget,
+            width: amountColWidth,
+            widgetClass: dijit.form.NumberTextBox,
+            widgetProps: {}
+        }
+
+        , {
+            name: pageLangTexts.billFileNameColLabel == null ? "BillFileName" : pageLangTexts.billFileNameColLabel,
+            field: "billFileName",
+            dataType: "string",
+            editable: dataEditable,
+            type: dojox.grid.cells._Widget,
+            width: billFileNameColWidth,
+            widgetClass: dijit.form.TextBox,
+            widgetProps: {}
+        }
+
+        , {
+            name: pageLangTexts.transactionDateColLabel == null ? "TransactionDate" : pageLangTexts.transactionDateColLabel,
+            field: "transactionDate",
             dataType: "date",
-            formatter: shortDateFieldFormatter,
-            constraint: { formatLength: "short", selector: "date", locale:"de" }
-        }
-        , {
-            name: pageLangTexts.titleColLabel == null ? "Title" : pageLangTexts.titleColLabel,
-            field: "title",
-            dataType: "string",
             editable: dataEditable,
             type: dojox.grid.cells._Widget,
-            width: titleColWidth,
-            widgetClass: dijit.form.TextBox,
-            formatter: titleFormatter
-        }
-        , {
-            name: pageLangTexts.locationColLabel == null ? "Location" : pageLangTexts.locationColLabel,
-            field: "location",
-            dataType: "string",
-            editable: dataEditable,
-            type: dojox.grid.cells._Widget,
-            width: locationColWidth,
-            widgetClass: dijit.form.TextBox,
-            widgetProps: { required: "true" }
-        }
-        , {
-            name: pageLangTexts.categoryColLabel == null ? "Category" : pageLangTexts.categoryColLabel,
-            field: "category",
-            dataType: "string",
-            editable: dataEditable,
-            type: dojox.grid.cells._Widget,
-            width: categoryColWidth,
-            widgetClass: dijit.form.Select,
-            formatter: categoryFormatter,
-            widgetProps: {
-                options: [{
-                        label: pageLangTexts.cultureWeekLabel == null ? "Semaine Culturelle" : pageLangTexts.cultureWeekLabel,
-                        value: "CultureWeek"
-                    }, {
-                        label: pageLangTexts.firstSemesterPartyLabel == null ? "1. Semester Party" : pageLangTexts.firstSemesterPartyLabel,
-                        value: "FirstSemesterParty"
-                    }, {
-                        label: pageLangTexts.galaNightLabel == null ? "Soiree De Gala" : pageLangTexts.galaNightLabel,
-                        value: "GalaNight"
-                    }, {
-                        label: pageLangTexts.gaduationLabel == null ? "Remise De Diplome" : pageLangTexts.gaduationLabel,
-                        value: "Gaduation"
-                    }, {
-                        label: pageLangTexts.grillPartyLabel == null ? "Grill Party" : pageLangTexts.grillPartyLabel,
-                        value: "GrillParty"
-                    }, {
-                        label: pageLangTexts.challengeLabel == null ? "Challenge" : pageLangTexts.challengeLabel,
-                        value: "Challenge"
-                    }, {
-                        label: pageLangTexts.mourningLabel == null ? "Deuil" : pageLangTexts.mourningLabel,
-                        value: "Mourning"
-                    }, {
-                        label: pageLangTexts.footballLabel == null ? "Football" : pageLangTexts.footballLabel,
-                        value: "Football"
-                    }, {
-                        label: pageLangTexts.tournamentLabel == null ? "Tournament" : pageLangTexts.tournamentLabel,
-                        value: "Tournament"
-                    }, {
-                        label: pageLangTexts.diversLabel == null ? "Projets & Divers" : pageLangTexts.diversLabel,
-                        value: "Divers"
-                    }]
-            }
-        }
-        , {
-            name: pageLangTexts.summaryColLabel == null ? "Summary" : pageLangTexts.summaryColLabel,
-            field: "summary",
-            dataType: "string",
-            editable: dataEditable,
-            type: dojox.grid.cells._Widget,
-            width: summaryColWidth,
-            widgetClass: dijit.form.TextBox,
-            formatter: summaryFormatter
+            width: transactionDateColWidth,
+            widgetClass: dijit.form.DateTextBox,
+            widgetProps: {}
         }
     ];
+
+
 
     var postParameters = {
         userAction: "getAllItems"
@@ -423,9 +318,9 @@ function generateEventsDataGrid(targetDiv) {
         error: function (errorMsg) {
             // hide loading img
             hideLoadingTask(targetDiv);
-            displayErrorContent("errorContentDiv", "Failed to get all events from server: " + errorMsg);
+            displayErrorContent("errorContentDiv", "Failed to get all MemberFees from server: " + errorMsg);
             logError({
-                message: "Failed to get all events from server: \n" + errorMsg
+                message: "Failed to get all MemberFees from server: \n" + errorMsg
             });
         }
     };
@@ -444,6 +339,7 @@ function generateEventsDataGrid(targetDiv) {
     // send async xhr request to server
     sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
         xhrArgs.error, fetchDataCompleted);
+
 
     //get postback result
     function fetchDataCompleted(data) {
@@ -471,16 +367,16 @@ function generateEventsDataGrid(targetDiv) {
             $("#" + targetDiv).attr("style", gridDefaultStyle);
         }
 
-        eventsStore = new dojo.data.ItemFileWriteStore({
+        memberFeesStore = new dojo.data.ItemFileWriteStore({
             data: {
-                identifier: "eventId",
+                identifier: "memberFeeId",
                 items: jsonData
             }
         });
 
-        if (eventsStore != null) {
+        if (memberFeesStore != null) {
             // save data store
-            eventsStore.save({
+            memberFeesStore.save({
                 onComplete: function () {
                     debugMessageToConsole("Done saving items store.", lowLevel);
                 },
@@ -491,18 +387,20 @@ function generateEventsDataGrid(targetDiv) {
                 }
             });
             // custom sorting fields
-            eventsStore.comparatorMap = {};
-            //eventsStore.comparatorMap["date"] = compareStringIgnoreCase;
-            eventsStore.comparatorMap["title"] = compareStringIgnoreCase;
-            eventsStore.comparatorMap["location"] = compareStringIgnoreCase;
-            eventsStore.comparatorMap["summary"] = compareStringIgnoreCase;
+            memberFeesStore.comparatorMap = {};
+            memberFeesStore.comparatorMap["memberId"] = compareStringIgnoreCase;
+            memberFeesStore.comparatorMap["amount"] = compareStringIgnoreCase;
+            memberFeesStore.comparatorMap["billFileName"] = compareStringIgnoreCase;
+            memberFeesStore.comparatorMap["transactionDate"] = compareStringIgnoreCase;
+
+
 
             //destroy old controls
             destroyWidget(dataItemsGridId);
             // create datagrid
-            eventsGrid = new dojox.grid.EnhancedGrid({
+            memberFeesGrid = new dojox.grid.EnhancedGrid({
                 id: dataItemsGridId,
-                store: eventsStore,
+                store: memberFeesStore,
                 structure: columsLayout,
                 rowSelector: false,
                 autoWidth: false, //getGridAutoWidth(jsonData.length),
@@ -534,20 +432,20 @@ function generateEventsDataGrid(targetDiv) {
                         // Set the maximum rule count to 10
                         ruleCount: 10,
                         // Set the name of the items
-                        itemsName: "Events"
+                        itemsName: "MemberFees"
                     }
                 }
             });
 
             // set sort index col
-            setSortColumnsIndexes(eventsGrid, 1, false);
+            setSortColumnsIndexes(memberFeesGrid, 2, true);
             // add events trigger
-            eventsGrid.on("SelectionChanged", reportSelection);
-            eventsGrid.on("StartEdit", gridStartEdit);
-            eventsGrid.on("ApplyCellEdit", gridApplyCellEdit);
-            eventsGrid.placeAt(targetDiv);
+            memberFeesGrid.on("SelectionChanged", reportSelection);
+            memberFeesGrid.on("StartEdit", gridStartEdit);
+            memberFeesGrid.on("ApplyCellEdit", gridApplyCellEdit);
+            memberFeesGrid.placeAt(targetDiv);
             // parse datagrid
-            eventsGrid.startup();
+            memberFeesGrid.startup();
         }
 
         // function to trigger grif row selection evt
@@ -577,12 +475,8 @@ function generateEventsDataGrid(targetDiv) {
                 var storeItem = rowItem;
                 obj["newFieldValue"] = inValue;
                 obj["fieldName"] = inFieldIndex;
-                obj["entityKeyId"] = storeItem["eventId"].toString();
-                var itemId = storeItem["eventId"].toString();
-                // check and format date field
-                if (obj["fieldName"].toString() == "date") {
-                    obj["newFieldValue"] = dateToYMD(obj["newFieldValue"]);
-                }
+                obj["entityKeyId"] = storeItem["memberFeeId"].toString();
+                var itemId = storeItem["memberFeeId"].toString();
                 var jsonValues = dojo.toJson(obj);
                 debugMessageToConsole("jsonValues: " + jsonValues, highLevel);
                 submitInlineGridChanges(itemId, jsonValues);
@@ -592,17 +486,19 @@ function generateEventsDataGrid(targetDiv) {
 
 }
 
-function displayEventView(userAction) {
 
-    var eventId = currentEventId;
-    debugMessageToConsole("eventId:" + eventId, highLevel);
+
+function displayMemberFeeView(userAction) {
+
+    var memberFeeId = currentMemberFeeId;
+    debugMessageToConsole("memberFeeId:" + memberFeeId, highLevel);
     debugMessageToConsole("userAction: " + userAction, highLevel);
 
     var windowHeight = $(window).height();
     var windowWidth = $(window).width();
 
     var postParameters = {
-        "eventId": eventId,
+        "memberFeeId": memberFeeId,
         "userAction": userAction
     };
     var xhrArgs = {
@@ -612,7 +508,7 @@ function displayEventView(userAction) {
         method: postMethod,
         error: function (errorMsg) {
             logError({
-                message: "Reponse failed to get event details with error: " + errorMsg
+                message: "Reponse failed to get MemberFee details with error: " + errorMsg
             });
         }
     };
@@ -634,7 +530,7 @@ function displayEventView(userAction) {
         $("#" + errorContentDivId).html("");
 
         if (jsonData == null) {
-            displayErrorContent(errorContentDivId, "displayEventView: " + jsonErrorMsg);
+            displayErrorContent(errorContentDivId, "displayMemberFeeView: " + jsonErrorMsg);
             return;
         } else if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent(errorContentDivId, jsonData[0].jsonErrorMessage);
@@ -698,16 +594,16 @@ function displayEventView(userAction) {
 
 
 
-function viewEventDetails(eventId) {
-    currentEventId = eventId;
-    currentItemIndex = getCurrentItemIndex(eventId);
-    displayEventView(viewItemDetailsCmd);
+
+function viewMemberFeeDetails(memberFeeId) {
+    currentMemberFeeId = memberFeeId;
+    currentItemIndex = getCurrentItemIndex(memberFeeId);
+    displayMemberFeeView(viewItemDetailsCmd);
 }
 
 
-/**
-* Create toobar buttons
-*/
+
+
 function createToolbarBtns(userAction) {
 
     // check user role
@@ -715,10 +611,10 @@ function createToolbarBtns(userAction) {
         var curmo = customUserRolesManagerObject; // short name
         if (!customUserRolesManagerObject.rolesLoaded) {
             // load roles only once
-            curmo.entityType = curmo.entityTypesObject.Event;
-            addNewItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.Event, curmo.accessRightsObject.createRight);
-            editItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.Event, curmo.accessRightsObject.editRight);
-            deleteItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.Event, curmo.accessRightsObject.deleteRight);
+            curmo.entityType = curmo.entityTypesObject.MemberFee;
+            addNewItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.MemberFee, curmo.accessRightsObject.createRight);
+            editItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.MemberFee, curmo.accessRightsObject.editRight);
+            deleteItemRight = curmo.getAccessRightByEntityType(curmo.entityTypesObject.MemberFee, curmo.accessRightsObject.deleteRight);
             customUserRolesManagerObject.rolesLoaded = true;
         }
     }
@@ -749,14 +645,15 @@ function createToolbarBtns(userAction) {
     }
 }
 
+
 /**
- * delete button event handler. Delete selected items
+ * delete button event handler
  * @returns void
  */
 function deleteItemsBtnClick() {
 
-    if (eventsGrid != null) {
-        var items = eventsGrid.selection.getSelected();
+    if (memberFeesGrid != null) {
+        var items = memberFeesGrid.selection.getSelected();
         if (items.length > 0) {
             confirmDeletionMessageBox();
         } else {
@@ -766,25 +663,26 @@ function deleteItemsBtnClick() {
     }
 }
 
+
 /**
  * event fire on confirmation delete
  * @return
  */
 function onConfirmItemsDeletion() {
 
-    if (eventsGrid != null) {
-        var items = eventsGrid.selection.getSelected();
+    if (memberFeesGrid != null) {
+        var items = memberFeesGrid.selection.getSelected();
         if (items.length > 0) {
             selectedIdsArray = new Array();
             for (var i = 0; i < items.length; i++) {
-                itemId = eventsGrid.store.getValue(items[i], "eventId");
+                itemId = memberFeesGrid.store.getValue(items[i], "memberFeeId");
                 itemId = $.trim(itemId);
                 selectedIdsArray.push(itemId);
             }
             // close dialog
             closeConfirmDeletionModalDialog();
             // now delete items
-            deleteSeletedEvents(selectedIdsArray);
+            deleteSeletedMemberFees(selectedIdsArray);
         }
     }
 
@@ -801,20 +699,20 @@ function registerButtonClickEvents() {
 
     // dialog buttons
     $("#" + addNewItemBtnDialogId).click(function () {
-        validateBeforeAddNewEvent();
+        validateBeforeAddNewMemberFee();
     });
     $("#" + editItemBtnDialogId).click(function () {
-        displayEventView(editItemDetailsCmd);
+        displayMemberFeeView(editItemDetailsCmd);
     });
 
     $("#" + closeEditBtnDialogId).click(function () {
         closeViewItemDetailsDialog();
     });
     $("#" + saveChangesBtnDialogId).click(function () {
-        saveEventChanges();
+        saveMemberFeeChanges();
     });
     $("#" + cancelChangesBtnDialogId).click(function () {
-        displayEventView(cancelChangesCmd);
+        displayMemberFeeView(cancelChangesCmd);
     });
     $("#" + cancelAddItemBtnDialogId).click(function () { });
     $("#" + confirmItemsDeletionBtnDialogId).click(function () {
@@ -834,7 +732,7 @@ function registerButtonClickEvents() {
 
 function initFormValidators() {
 
-    $("#" + eventDetailsFormId).validate({
+    $("#" + MemberFeeDetailsFormId).validate({
         rules: {
 
         },
@@ -859,32 +757,33 @@ function initFormValidators() {
 
 }
 
-function validateBeforeAddNewEvent() {
+function validateBeforeAddNewMemberFee() {
 
-    var isFormInputsValid = $("#" + eventDetailsFormId).valid();
+    var isFormInputsValid = $("#" + MemberFeeDetailsFormId).valid();
     if (isFormInputsValid) {
         // close dialog
         closeAddEditItemDialog();
         // add callback
-        addNewEvent();
+        addNewMemberFee();
     }
 }
+
 
 function showAddItemDialog() {
 
-    if ($("#" + eventDetailsDialogId) != null) {
+    if ($("#" + MemberFeeDetailsDialogId) != null) {
         // set content dialog
         $("#" + addNewItemDialogContentId).html(editItemDetailsFormContent);
         // set textfields values when Dojo parsing completed
-        initDateTimeFields("date");
         settersMethodWithDefaultValues();
-        $("#" + eventDetailsDialogId).modal("show");
+        $("#" + MemberFeeDetailsDialogId).modal("show");
     }
 }
 
+
 function closeAddEditItemDialog() {
-    if ($("#" + eventDetailsDialogId) != null) {
-        $("#" + eventDetailsDialogId).modal("hide");
+    if ($("#" + MemberFeeDetailsDialogId) != null) {
+        $("#" + MemberFeeDetailsDialogId).modal("hide");
     }
 }
 
@@ -894,19 +793,17 @@ function closeConfirmDeletionModalDialog() {
     }
 }
 
-function addNewEvent() {
 
-    var eventDetailsFormObject = $("#" + eventDetailsFormId).serializeObject();
+
+
+function addNewMemberFee() {
+
+    var MemberFeeDetailsFormObject = $("#" + MemberFeeDetailsFormId).serializeObject();
     // convert form to json object
-    var itemToAdd = eventDetailsFormObject;
-    // read datetime field value
-    eventDetailsFormObject.date = $("#date").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#date").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    eventDetailsFormObject.date = datePickerValue;
+    var itemToAdd = MemberFeeDetailsFormObject;
+    itemToAdd = MemberFeeDetailsFormObject;
     var postParameters = {
-        "formValues[]": dojo.toJson(eventDetailsFormObject, true),
+        "formValues[]": dojo.toJson(MemberFeeDetailsFormObject, true),
         "userAction": insertNewItemCmd
     };
     var xhrArgs = {
@@ -921,16 +818,17 @@ function addNewEvent() {
         }
     };
 
-    //get postback result
-    function addNewEventCompleted(data) {
 
-        debugMessageToConsole("addNewEventCompleted data : " + data, highLevel);
+    //get postback result
+    function addNewMemberFeeCompleted(data) {
+
+        debugMessageToConsole("addNewMemberFeeCompleted data : " + data, highLevel);
         // get json result
         var jsonData = data;
         // clear error message
         $("#" + errorContentDivId).html("");
         if (jsonData == null) {
-            displayErrorContent(errorContentDivId, "addNewEventCompleted: " + jsonErrorMsg);
+            displayErrorContent(errorContentDivId, "addNewMemberFeeCompleted: " + jsonErrorMsg);
             return;
         } else if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent(errorContentDivId, jsonData[0].jsonErrorMessage);
@@ -939,29 +837,27 @@ function addNewEvent() {
         // display overlay message
         showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationCreationLabel, successImg);
 
-        if (eventsStore != null && jsonData[0].insertedItemKey != null) {
-            itemToAdd.eventId = jsonData[0].insertedItemKey;
-            // remove 1 day to ajust display on grid
-            datePickerValue.setDate(datePickerValue.getDate() - 1);
-            itemToAdd.date = datePickerValue;
+        if (memberFeesStore != null && jsonData[0].insertedItemKey != null) {
+            itemToAdd.memberFeeId = jsonData[0].insertedItemKey;
             // redisplay data grid    
-            eventsStore.newItem(itemToAdd);
+            memberFeesStore.newItem(itemToAdd);
         }
     }
 
     // send async xhr request to server
     sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
-        xhrArgs.error, addNewEventCompleted);
+        xhrArgs.error, addNewMemberFeeCompleted);
 
 }
 
-function submitInlineGridChanges(eventId, jsonValues) {
+
+function submitInlineGridChanges(memberFeeId, jsonValues) {
 
     var postParameters = {
-        "eventId": eventId,
+        "memberFeeId": memberFeeId,
         "formValues[]": jsonValues,
         "updateMode": "inlineUpdate",
-        "userAction": "updateItem"
+        "userAction": "updateItem",
     };
     var xhrArgs = {
         url: controllerUrl,
@@ -971,7 +867,7 @@ function submitInlineGridChanges(eventId, jsonValues) {
         error: function (errorMsg) {
             logError("Failed to update item from server: \n\n" + errorMsg);
         }
-    };
+    }
 
     // send async xhr request to server
     sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
@@ -994,9 +890,9 @@ function submitInlineGridChanges(eventId, jsonValues) {
 }
 
 
-function deleteSeletedEvents(eventIdsList) {
+function deleteSeletedMemberFees(MemberFeeIdsList) {
     var postParameters = {
-        "selectedIds[]": eventIdsList,
+        "selectedIds[]": MemberFeeIdsList,
         "userAction": "deleteItem"
     };
     var xhrArgs = {
@@ -1013,28 +909,28 @@ function deleteSeletedEvents(eventIdsList) {
 
     // send async xhr request to server
     sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
-        xhrArgs.error, deleteSeletedEventsCompleted);
+        xhrArgs.error, deleteSeletedMemberFeesCompleted);
     //get postback result
-    function deleteSeletedEventsCompleted(data) {
+    function deleteSeletedMemberFeesCompleted(data) {
 
         var jsonData = data;
         $("#" + errorContentDivId).html("");
         if (jsonData == null) {
-            displayErrorContent("errorContentDiv", "deleteSeletedEventsCompleted: " + jsonErrorMsg);
+            displayErrorContent("errorContentDiv", "deleteSeletedMemberFeesCompleted: " + jsonErrorMsg);
             return;
         } else if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent(errorContentDivId, jsonData[0].jsonErrorMessage);
             return;
         }
         // delete items in store
-        var itemsToDelete = eventsGrid.selection.getSelected();
+        var itemsToDelete = memberFeesGrid.selection.getSelected();
         $.each(itemsToDelete, function (index, item) {
             if (item) {
-                eventsStore.deleteItem(item);
+                memberFeesStore.deleteItem(item);
             }
         });
         // save datastore
-        eventsStore.save();
+        memberFeesStore.save();
         // display overlay message
         showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationDeletionLabel, successImg);
 
@@ -1044,25 +940,19 @@ function deleteSeletedEvents(eventIdsList) {
 }
 
 
-
-function submitEventDetailsForm(eventId) {
-
-    //if (!eventDetailsForm.validate()) {
+function submitMemberFeeDetailsForm(memberFeeId) {
+    //check form validation
+    //if (!MemberFeeDetailsForm.validate()) {
     //    return;
     //}
     // convert form to json object
-    var eventDetailsFormObject = $("#" + eventDetailsFormId).serializeObject();
-    // format date type field
-    eventDetailsFormObject.date = $("#date").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#date").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    eventDetailsFormObject.date = datePickerValue;
+    var MemberFeeDetailsFormObject = $("#" + MemberFeeDetailsFormId).serializeObject();
+
     // convert to json arry
-    var jsonValues = dojo.toJson(eventDetailsFormObject);
+    var jsonValues = dojo.toJson(MemberFeeDetailsFormObject);
 
     var postParameters = {
-        "eventId": eventId,
+        "memberFeeId": memberFeeId,
         "formValues[]": jsonValues,
         "updateMode": "allFields",
         "userAction": "updateItem"
@@ -1077,18 +967,18 @@ function submitEventDetailsForm(eventId) {
                 message: "Failed to update item from server: \n\n" + errorMsg
             });
         }
-    };
+    }
 
     // send async xhr request to server
     sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
-        xhrArgs.error, submitEventDetailsCompleted);
+        xhrArgs.error, submitMemberFeeDetailsCompleted);
     //get postback result
-    function submitEventDetailsCompleted(data) {
-        //debugMessageToConsole(" EventDetailsForm-postback: " + $.trim(data), highLevel);
+    function submitMemberFeeDetailsCompleted(data) {
+        //debugMessageToConsole(" MemberFeeDetailsForm-postback: " + $.trim(data), highLevel);
         var jsonData = data;
         $("#" + errorContentDivId).html("");
         if (jsonData == null) {
-            displayErrorContent(errorContentDivId, "submitEventDetailsCompleted: " + jsonErrorMsg);
+            displayErrorContent(errorContentDivId, "submitMemberFeeDetailsCompleted: " + jsonErrorMsg);
             return;
         } else if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent(errorContentDivId, jsonData[0].jsonErrorMessage);
@@ -1096,23 +986,20 @@ function submitEventDetailsForm(eventId) {
         }
 
         // get item to update
-        var itemToUpdate = eventsGrid.getItem(currentItemIndex);
-        // remove 1 day to ajust display on grid
-        datePickerValue.setDate(datePickerValue.getDate() - 1);
-        eventDetailsFormObject.date = datePickerValue;
+        var itemToUpdate = memberFeesGrid.getItem(currentItemIndex);
 
-        eventsStore.setValue(itemToUpdate, "date", eventDetailsFormObject.date);
-        eventsStore.setValue(itemToUpdate, "title", eventDetailsFormObject.title);
-        eventsStore.setValue(itemToUpdate, "category", eventDetailsFormObject.category);
-        eventsStore.setValue(itemToUpdate, "location", eventDetailsFormObject.location);
-        eventsStore.setValue(itemToUpdate, "summary", eventDetailsFormObject.summary);
+        memberFeesStore.setValue(itemToUpdate, "memberId", MemberFeeDetailsFormObject.memberId);
+        memberFeesStore.setValue(itemToUpdate, "amount", MemberFeeDetailsFormObject.amount);
+        memberFeesStore.setValue(itemToUpdate, "billFileName", MemberFeeDetailsFormObject.billFileName);
+        memberFeesStore.setValue(itemToUpdate, "transactionDate", MemberFeeDetailsFormObject.transactionDate);
 
-        eventsStore.save();
+        memberFeesStore.save();
 
         // display overlay message
         showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationUpdateLabel, successImg);
     }
 }
+
 
 function confirmDeletionMessageBox() {
     if ($("#" + confirmDeletionDialogId) != null) {
@@ -1120,16 +1007,17 @@ function confirmDeletionMessageBox() {
     }
 }
 
+
 function viewNextItemDetails() {
     currentItemIndex = getNextItemIndex();
-    var eventId = itemsArrayIds[currentItemIndex];
-    viewEventDetails(eventId);
+    var memberFeeId = itemsArrayIds[currentItemIndex];
+    viewMemberFeeDetails(memberFeeId);
 }
 
 function viewPrevousItemDetails() {
     currentItemIndex = getPreviousItemIndex();
-    var eventId = itemsArrayIds[currentItemIndex];
-    viewEventDetails(eventId);
+    var memberFeeId = itemsArrayIds[currentItemIndex];
+    viewMemberFeeDetails(memberFeeId);
 }
 
 function getCurrentItemIndex(value) {
@@ -1139,6 +1027,7 @@ function getCurrentItemIndex(value) {
     }
     return 0;
 }
+
 
 function getNextItemIndex() {
     if (currentItemIndex >= 0 && currentItemIndex < itemsArrayIds.length) {
@@ -1154,6 +1043,7 @@ function getNextItemIndex() {
     return 0;
 }
 
+
 function getPreviousItemIndex() {
     if (currentItemIndex >= 0 && currentItemIndex < itemsArrayIds.length) {
         for (i = 0; i < itemsArrayIds.length; i++) {
@@ -1168,7 +1058,9 @@ function getPreviousItemIndex() {
     return 0;
 }
 
+
 function showAddNewItemDialog() {
+    alert("not implemented");
 }
 
 function showViewItemDetailsDialog() {
@@ -1177,23 +1069,35 @@ function showViewItemDetailsDialog() {
     }
 }
 
+
 function closeViewItemDetailsDialog() {
     if ($("#" + viewItemDetailsDialogId) != null) {
         $("#" + viewItemDetailsDialogId).modal("hide");
     }
 }
 
-function saveEventChanges() {
-    submitEventDetailsForm(currentEventId);
+function saveMemberFeeChanges() {
+    submitMemberFeeDetailsForm(currentMemberFeeId);
     if ($("#" + viewItemDetailsDialogId) != null) {
         $("#" + viewItemDetailsDialogId).modal("hide");
     }
+}
+
+function shortDateField(data) {
+    var strDate = strToShortDate(new String(data));
+    debugMessageToConsole("shortDateFieldFormatter strDate: " + strDate, lowLevel);
+    return dojo.date.locale.format(strDate, {
+        formatLength: "short",
+        selector: "date",
+        timePattern: "HH:mm:ss"
+    });
 }
 
 
 function printDataList() {
     alert("print data not yet implemented..");
 }
+
 
 function exportDataListToCsv() {
     alert("exportDataListToCsv not yet implemented..");

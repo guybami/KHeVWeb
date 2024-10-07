@@ -3992,7 +3992,7 @@ ALTER TABLE `khev_LogActivity`
 -- Constraints for table `khev_MemberFee`
 --
 ALTER TABLE `khev_MemberFee`
-  ADD CONSTRAINT `khev_memberfee_ibfk_1` FOREIGN KEY (`memberId`) REFERENCES `khev_Member` (`memberId`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `khev_MemberFee_ibfk_1` FOREIGN KEY (`memberId`) REFERENCES `khev_Member` (`memberId`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `khev_OfficeMember`

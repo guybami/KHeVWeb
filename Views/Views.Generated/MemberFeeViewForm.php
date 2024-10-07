@@ -15,9 +15,9 @@
                     require_once '../../Models/EntityCommon.php';
                     require '../PageModel.php';
                     // load UI resource 
-                    Utils::loadUIResources('../../UIResources/memberfees.fr.res.php', 
-                                            '../../UIResources/memberfees.en.res.php',
-                                            '../../UIResources/memberfees.de.res.php');
+                    Utils::loadUIResources('../../UIResources/MemberFees.fr.res.php', 
+                                            '../../UIResources/MemberFees.en.res.php',
+                                            '../../UIResources/MemberFees.de.res.php');
        
                     $title = 'Module Generator - Test ContentPage';
                     $script = '
@@ -30,34 +30,34 @@
  $content = ' <div class="_hideContent" id="viewItemDetailsFormContentDiv">
                     <div class="container">
                         <div class="form-horizontal" id="viewForm"> 
-            <div class="form-group ">
-                <label for="memberIdLabel" class="control-label col-md-4">'.MemberFeeUIResource::memberIdColLabelText().'</label>
-                <div class="col-md-8">
-                    <label class="form-control-static dataViewLabel" id="memberIdLabel"></label>
-                </div>
-            </div>
+                            <div class="form-group ">
+                                <label for="memberIdLabel" class="control-label col-md-4">'.MemberFeeUIResource::memberIdColLabelText().'</label>
+                                <div class="col-md-8">
+                                    <label class="form-control-static dataViewLabel" id="memberIdLabel"></label>
+                                </div>
+                            </div>
             
-            <div class="form-group ">
-                <label for="amountLabel" class="control-label col-md-4">'.MemberFeeUIResource::amountColLabelText().'</label>
-                <div class="col-md-8">
-                    <label class="form-control-static dataViewLabel" id="amountLabel"></label>
-                </div>
-            </div>
+                            <div class="form-group ">
+                                <label for="amountLabel" class="control-label col-md-4">'.MemberFeeUIResource::amountColLabelText().'</label>
+                                <div class="col-md-8">
+                                    <label class="form-control-static dataViewLabel" id="amountLabel"></label>
+                                </div>
+                            </div>
             
-            <div class="form-group ">
-                <label for="billFileNameLabel" class="control-label col-md-4">'.MemberFeeUIResource::billFileNameColLabelText().'</label>
-                <div class="col-md-8">
-                    <label class="form-control-static dataViewLabel" id="billFileNameLabel"></label>
-                </div>
-            </div>
+                            <div class="form-group ">
+                                <label for="billFileNameLabel" class="control-label col-md-4">'.MemberFeeUIResource::billFileNameColLabelText().'</label>
+                                <div class="col-md-8">
+                                    <label class="form-control-static dataViewLabel" id="billFileNameLabel"></label>
+                                </div>
+                            </div>
             
-            <div class="form-group ">
-                <label for="transactionDateLabel" class="control-label col-md-4">'.MemberFeeUIResource::transactionDateColLabelText().'</label>
-                <div class="col-md-8">
-                    <label class="form-control-static dataViewLabel" id="transactionDateLabel"></label>
-                </div>
-            </div>
-              </div>
+                            <div class="form-group ">
+                                <label for="transactionDateLabel" class="control-label col-md-4">'.MemberFeeUIResource::transactionDateColLabelText().'</label>
+                                <div class="col-md-8">
+                                    <label class="form-control-static dataViewLabel" id="transactionDateLabel"></label>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
              ' ;

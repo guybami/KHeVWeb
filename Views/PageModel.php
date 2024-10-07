@@ -27,9 +27,11 @@ class PageModel {
     //Variable contenant la strucure du template
     public $dataForTemplate = "";
     // admin menu
-    private $adminMenuCss = "display:none;";
+    private $adminMenuCss = ""; // "display:none;";
     private static $defaultDojoLibPath = "/Lib/dojo-release-1.11.2";
-     private static $defaultDojoTheme = "claro";
+    private static $defaultDojoTheme = "claro";
+
+    private static $defaultAdminName = "guybami";
 
     /**
      * Constructor of the PageModel class
@@ -319,6 +321,7 @@ class PageModel {
                                             <ul class="nav child_menu">
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ManageUserAccounts.php">Utilisateurs</a></li>
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ManageMembers.php">Membres</a></li>
+                                                <li><a href="' . $this->directoryLevel . '/Views/Administration/ManageMemberFees.php">Frais De Membres</a></li>
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ManageOfficeMembers.php">Membres Du Bureau</a></li>
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ManageEvents.php">Ev&egrave;nements</a></li>
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ManageExpenses.php">D&eacute;penses</a></li>
@@ -596,7 +599,7 @@ class PageModel {
         if ($_SESSION['userName'] != null && isset($_SESSION['userName'])) {
             $userName = $_SESSION['userName'];
             switch ($userName){
-                case "guybami":
+                case PageModel::$defaultAdminName:
                     // show admin
                     $this->adminMenuCss = "";
                     break;
@@ -611,7 +614,7 @@ class PageModel {
         if ($_SESSION['userName'] != null && isset($_SESSION['userName'])) {
             $userName = $_SESSION['userName'];
             switch ($userName){
-                case "guybami":
+                case PageModel::$defaultAdminName:
                     // show admin
                     $this->adminMenuCss = "";
                     break;

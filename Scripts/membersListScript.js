@@ -7,10 +7,11 @@ var errorContentDivId = "errorContentDiv";
 var successOverlayDivId = "successOverlayDiv";
 var menuItemSectionTitleLabel = pageLangTexts.menuItemSectionTitleLabel == null ? "Administration" : pageLangTexts.menuItemSectionTitleLabel;
 var subMenuItemSectionTitleLabel = pageLangTexts.subMenuItemSectionTitleLabel == null ? "Liste Des Membres" : pageLangTexts.subMenuItemSectionTitleLabel;
-
-
 var membersArray = new Array();
-
+var memberFeesPaidBtnId = "memberFeesPaidBtn";
+var filterRegisteredMembersBtnId = "filterRegisteredMembersBtn";
+var filterAllBtnId = "filterAllBtn";
+var itemKey = 1;
 $(document).ready(function () {
     // display sitemap path
     displayCurrentPath(sitePathDivId, 2, [menuItemSectionTitleLabel, subMenuItemSectionTitleLabel], $(location).attr("href"));
@@ -28,40 +29,32 @@ $(document).ready(function () {
     //register button click events
 
     $("#filterAllBtn").click(function () {
-        var itemKey = 1;
-        //alert('clicked; ' + itemKey);
         // displayMemberDetails(itemKey);
         $(this).addClass("btn-primary");
-        $("#filterUnregisteredMembersBtn").removeClass("btn-primary");
-        $("#filterRegisteredMembersBtn").removeClass("btn-primary");
-
-        $("#filterUnregisteredMembersBtn").addClass("btn-default");
-        $("#filterRegisteredMembersBtn").addClass("btn-default");
-
+        $("#" + memberFeesPaidBtnId).removeClass("btn-primary");
+        $("#" + filterRegisteredMembersBtnId).removeClass("btn-primary");
+        $("#" + memberFeesPaidBtnId).addClass("btn-default");
+        $("#" + filterRegisteredMembersBtnId).addClass("btn-default");
     });
 
-    $("#filterUnregisteredMembersBtn").click(function () {
-        var itemKey = 2;
+    $("#" + memberFeesPaidBtnId).click(function () {
+        itemKey = 2;
         //alert('clicked; ' + itemKey);
         $(this).addClass("btn-primary");
-        $("#filterAllBtn").removeClass("btn-primary");
-        $("#filterRegisteredMembersBtn").removeClass("btn-primary");
-
-        $("#filterRegisteredMembersBtn").addClass("btn-default");
-        $("#filterAllBtn").addClass("btn-default");
-        //$("#filterAllBtn").button("toggle");
+        $("#" + filterAllBtnId).removeClass("btn-primary");
+        $("#" + filterRegisteredMembersBtnId).removeClass("btn-primary");
+        $("#" + filterRegisteredMembersBtnId).addClass("btn-default");
+        $("#" + filterAllBtnId).addClass("btn-default");
     });
 
-    $("#filterRegisteredMembersBtn").click(function () {
-        var itemKey = 3;
+    $("#" + filterRegisteredMembersBtnId).click(function () {
+        itemKey = 3;
         //alert('clicked; ' + itemKey);
         $(this).addClass("btn-primary");
-        $("#filterAllBtn").removeClass("btn-primary");
-        $("#filterUnregisteredMembersBtn").removeClass("btn-primary");
-
-        $("#filterAllBtn").addClass("btn-default");
-        $("#filterUnregisteredMembersBtn").addClass("btn-default");
-        //$("#filterAllBtn").button("toggle");
+        $("#" + filterAllBtnId).removeClass("btn-primary");
+        $("#" + memberFeesPaidBtnId).removeClass("btn-primary");
+        $("#" + filterAllBtnId).addClass("btn-default");
+        $("#" + memberFeesPaidBtnId).addClass("btn-default");
     });
 
 });

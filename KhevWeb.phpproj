@@ -123,9 +123,9 @@
     <Compile Include="UIResources\logactivities.de.res.php" />
     <Compile Include="UIResources\logactivities.en.res.php" />
     <Compile Include="UIResources\logactivities.fr.res.php" />
-    <Compile Include="UIResources\memberfees.de.res.php" />
-    <Compile Include="UIResources\memberfees.en.res.php" />
-    <Compile Include="UIResources\memberfees.fr.res.php" />
+    <Compile Include="UIResources\MemberFees.de.res.php" />
+    <Compile Include="UIResources\MemberFees.en.res.php" />
+    <Compile Include="UIResources\MemberFees.fr.res.php" />
     <Compile Include="UIResources\members.de.res.php" />
     <Compile Include="UIResources\members.en.res - Copy.php" />
     <Compile Include="UIResources\members.en.res.php" />
