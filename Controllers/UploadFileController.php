@@ -18,7 +18,7 @@ class UploadFileController extends BaseController {
 
 
     /**
-     *Constructor of the UploadFile controller
+     * Constructor of the UploadFile controller
      * @param $userAction string the user action
      * @param $userRoles array the user roles
      */
@@ -126,18 +126,18 @@ class UploadFileController extends BaseController {
         $postbackData = json_encode($resultObject, true);
         
         return $postbackData;
-
     }
 
     public function uploadVideoFile($videoToUpload){
 
         $postbackData = "";
         $resultObject = null;
-        $this->customFileUploader = new CustomFileUploader();
+        $generateCopiedFileName = false;
+        $targetDirectory = "../UploadedFiles/Videos";
+        $this->customFileUploader = new CustomFileUploader($videoToUpload, $targetDirectory, $generateCopiedFileName);
         $resultObject = $this->customFileUploader->uploadVideoFile($videoToUpload);
         $postbackData = json_encode($resultObject, true);
         return $postbackData;
-
     }
 
     public static function rearrangeArrayFiles($filesToRearrange)
@@ -167,7 +167,6 @@ class UploadFileController extends BaseController {
     public function getDynamicPageContent() {
 
         $postbackData = Utils::formatJsonErrorMessage("Undefined Content");
-        $resultObject = null;
         switch ($this->getUserAction()) {
             case "uploadImage":
                 $filesToUpload = $_FILES['filesToUpload'];
@@ -187,7 +186,6 @@ class UploadFileController extends BaseController {
             case "uploadBillFiles":
                 $filesToUpload = $_FILES['filesToUpload'];
                 $filesToUpload = UploadFileController::rearrangeArrayFiles($_FILES["filesToUpload"]);
-                //print_r($filesToUpload);
                 $postbackData = $this->uploadAllBillFiles($filesToUpload);
                 break;
             case "uploadExpenseBill":
@@ -204,12 +202,10 @@ class UploadFileController extends BaseController {
                 break;
             case "uploadVideo":
                 $videoToUpload = $_FILES['videoToUpload'];
-                //print_r($videoToUpload);
                 $postbackData = $this->uploadVideoFile($videoToUpload);
                 break;
             case "testDelay":
                 sleep(3);
-                //print_r($videoToUpload);
                 $postbackData = Utils::formatJsonResultMessage("simultator");
                 break;
         }

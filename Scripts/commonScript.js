@@ -1503,7 +1503,6 @@ function showSelectFileDialog(controlId) {
 }
 
 function bindChangeEventForFileSelectDialog(uploadInputFieldId, targetInputFieldId, multiple, _callback) {
-    // $("input[id^='DiscountType']")
     //$("input[id^='" + uploadInputFieldId + "']")
     var selector = "";
     if (multiple == null || !multiple) {
@@ -1518,7 +1517,7 @@ function bindChangeEventForFileSelectDialog(uploadInputFieldId, targetInputField
             //selectedFileNameWithoutDir = selectedFileNameWithoutDir.toString().toLowerCase();
             // orignal file name
             selectedFileNameWithoutDir = selectedFileNameWithoutDir.toString();
-            //alert(selectedFileNameWithoutDir);
+            //console.log(selectedFileNameWithoutDir);
             // set fileName field
             $("#" + targetInputFieldId).val(selectedFileNameWithoutDir);
         });
@@ -1535,7 +1534,7 @@ function bindChangeEventForFileSelectDialog(uploadInputFieldId, targetInputField
                 var selectedFileName = selectedFile.name;
                 if (fileSize > 1024)
                     fileSize = fileSize / 1024.0; //size in kb
-                //alert('Name: ' + selectedFile.name + ' Size: ' + fileSize);
+                //console.log('Name: ' + selectedFile.name + ' Size: ' + fileSize);
                 // remove directory name
                 var selectedFileNameWithoutDir = selectedFileName;
                 if (selectedFileName.lastIndexOf('\\') != -1){
@@ -1548,7 +1547,7 @@ function bindChangeEventForFileSelectDialog(uploadInputFieldId, targetInputField
             
             });
 
-            //alert(selectedFileNameWithoutDir);
+            //console.log(selectedFileNameWithoutDir);
             // set fileName field
             $("#" + targetInputFieldId).val(selectedFileNamesList);
         });
@@ -1587,5 +1586,52 @@ function setCbFormFieldValue(fieldId, value) {
     }
     else {
         console.error("Error: field '" + fieldId + "' not found!");
+    }
+}
+
+function uploadIncomeBillFile(formId, callbackMethod, uploaderControllerUrl) {
+    var formData = null;
+    if (uploaderControllerUrl == null)
+        uploaderControllerUrl = "../../Controllers/UploadFileController.php";
+    if (window.FormData) {
+        formData = new FormData($("#" + formId)[0]);
+    }
+    else {
+        formData = $("#" + formId).serialize();
+    }
+    // ajax request
+    $.ajax({
+        url: uploaderControllerUrl, //Server script to process data
+        type: "POST",
+        xhr: function () {  // Custom XMLHttpRequest
+            var uploaderXhr = $.ajaxSettings.xhr();
+            if (uploaderXhr.upload) { // Check if upload property exists
+                // For handling the progress of the upload
+                uploaderXhr.upload.addEventListener("progress", progressHandlingCallback, false);
+            }
+            return uploaderXhr;
+        },
+        //Ajax events
+        beforeSend: null,
+        success: function (data) {
+            if (callbackMethod != null && typeof callbackMethod === 'function') {
+                callbackMethod(data);
+            }
+        },
+        error: function (err) {
+            logError({ message: 'Error occured while uploading file: ' + err });
+        },
+        // Form data to be sent
+        data: formData,
+        //Options to tell jQuery not to process data or worry about content-type.
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+
+    function progressHandlingCallback(e) {
+        if (e != null && e.lengthComputable && $('progress') != null) {
+            $('progress').attr({ value: e.loaded, max: e.total });
+        }
     }
 }

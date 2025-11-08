@@ -33,7 +33,12 @@
                 return Utils::formatJsonErrorMessage($resultObject);
             } else if (is_array($resultObject)) {
                 for ($i = 0; $i < count($resultObject); $i++) {
-                    $entitiesList .= '{"memberFeeId":"' . $resultObject[$i]["memberFeeId"] . '"' . ',"memberId":"' . $resultObject[$i]["memberId"] . '"' . ',"amount":"' . $resultObject[$i]["amount"] . '"' . ',"billFileName":"' . $resultObject[$i]["billFileName"] . '"' . ',"transactionDate":"' . $resultObject[$i]["transactionDate"] . '"' . '}';
+                    $entitiesList .= '{"memberFeeId":"' . $resultObject[$i]["memberFeeId"] . '"'  
+                        . ',"memberId":"' . $resultObject[$i]["memberId"] . '"' . ',"amount":"' . $resultObject[$i]["amount"] . '"' 
+                        . ',"billFileName":"' . $resultObject[$i]["billFileName"] . '"' 
+                        . ',"transactionDate":"' . $resultObject[$i]["transactionDate"] . '"'
+                        . ',"memberFullName":"' . $resultObject[$i]["lastName"] . ' ' . $resultObject[$i]["name"] . '"'
+                        . '}';
                     if ($i != count($resultObject) - 1) {
                         $entitiesList .= $itemSperator;
                     }

@@ -158,9 +158,8 @@ require(["dojo/parser", "dojo/ready"],
                 editItemDetailsFormContent = $("#editItemDetailsFormContentDiv").html();
                 viewItemDetailsFormContent = $("#viewItemDetailsFormContentDiv").html();
                 // now we can parse the postback content
-
                 var parsePageWidgets = function () {
-                    //alert("size: " + customUserRolesManagerObject.userRolesData.length);
+                    //console.log("size: " + customUserRolesManagerObject.userRolesData.length);
                     if (customUserRolesManagerObject != null && customUserRolesManagerObject.userRolesData.length > 0) {
                         var curmo = customUserRolesManagerObject; // short name
                         // load roles only once
@@ -179,7 +178,7 @@ require(["dojo/parser", "dojo/ready"],
                             setActiveMenuItem(customUserRolesManagerObject.mainMenuItemsObject.ADMINISTRATION.id);
                         }
 
-                        // display dojo data grid
+                        // display main data grid
                         generateMemberFeesDataGrid(itemsGridDivId);
                     } else {
                         // redirect to access denied page
@@ -190,10 +189,20 @@ require(["dojo/parser", "dojo/ready"],
                     initFormValidators();
                     // register event clicks
                     registerButtonClickEvents();
+                    // bind event
+                    bindChangeEventForFileSelectDialog("billFileNameToUpload", "billFileName", false);
+                    
+
                 }
 
                 // parse main menu and display page
                 parseMainMenu(parsePageWidgets);
+
+                // get all members for dialog
+                loadMembersList(function () {
+                });
+
+                
             } catch (err) {
                 logError(err);
             }
@@ -225,10 +234,8 @@ function setTextFields(jsonData) {
 
 function settersMethodWithDefaultValues() {
     initDateTimeFields("transactionDate");
-    setFormFieldValue("memberId", "70592");
     setFormFieldValue("amount", "0");
-    setFormFieldValue("billFileName", "billFileName-f5680c1");
-    setFormFieldValue("transactionDate", "2017-04-08");
+    setFormDateFieldValue("transactionDate", "");
 }
 
 /**
@@ -260,6 +267,14 @@ function generateMemberFeesDataGrid(targetDiv) {
         return dojo.date.locale.format(strDate, this.constraint);
     }
 
+    function memberNameFormatter(data, rowIndex) {
+        if (memberFeesGrid != null) {
+            var rowItem = memberFeesGrid.getItem(rowIndex);
+            return rowItem.memberFullName;
+        }
+        return data;
+    }
+
     var columsLayout = [
         {
             name: pageLangTexts.memberIdColLabel == null ? "MemberId" : pageLangTexts.memberIdColLabel,
@@ -269,6 +284,7 @@ function generateMemberFeesDataGrid(targetDiv) {
             type: dojox.grid.cells._Widget,
             width: memberIdColWidth,
             widgetClass: dijit.form.NumberTextBox,
+            formatter: memberNameFormatter,
             widgetProps: {}
         }
         , {
@@ -344,12 +360,10 @@ function generateMemberFeesDataGrid(targetDiv) {
     //get postback result
     function fetchDataCompleted(data) {
         var jsonData = null;
-
         debugMessageToConsole("items json data: " + data, lowLevel);
         // hide loading img
         hideLoadingTask(targetDiv);
         jsonData = data;
-
         // clear messages
         $("#" + resultsDivId).html("");
         $("#" + errorContentDivId).html("");
@@ -392,8 +406,6 @@ function generateMemberFeesDataGrid(targetDiv) {
             memberFeesStore.comparatorMap["amount"] = compareStringIgnoreCase;
             memberFeesStore.comparatorMap["billFileName"] = compareStringIgnoreCase;
             memberFeesStore.comparatorMap["transactionDate"] = compareStringIgnoreCase;
-
-
 
             //destroy old controls
             destroyWidget(dataItemsGridId);
@@ -438,7 +450,7 @@ function generateMemberFeesDataGrid(targetDiv) {
             });
 
             // set sort index col
-            setSortColumnsIndexes(memberFeesGrid, 2, true);
+            setSortColumnsIndexes(memberFeesGrid, 1, true);
             // add events trigger
             memberFeesGrid.on("SelectionChanged", reportSelection);
             memberFeesGrid.on("StartEdit", gridStartEdit);
@@ -801,6 +813,12 @@ function addNewMemberFee() {
     var memberFeeDetailsFormObject = $("#" + memberFeeDetailsFormId).serializeObject();
     // convert form to json object
     var itemToAdd = memberFeeDetailsFormObject;
+    // read datetime field value
+    memberFeeDetailsFormObject.transactionDate = $("#transactionDate").data("DateTimePicker").date();
+    // add 1 day to ajust
+    var datePickerValue = strToShortDate(new String($("#transactionDate").data("DateTimePicker").date()));
+    datePickerValue.setDate(datePickerValue.getDate() + 1);
+    memberFeeDetailsFormObject.transactionDate = datePickerValue;
     itemToAdd = memberFeeDetailsFormObject;
     var postParameters = {
         "formValues[]": dojo.toJson(memberFeeDetailsFormObject, true),
@@ -818,6 +836,8 @@ function addNewMemberFee() {
         }
     };
 
+    console.log('Values to post: ' + JSON.stringify(postParameters));
+    return;
 
     //get postback result
     function addNewMemberFeeCompleted(data) {
@@ -837,11 +857,41 @@ function addNewMemberFee() {
         // display overlay message
         showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationCreationLabel, successImg);
 
-        if (memberFeesStore != null && jsonData[0].insertedItemKey != null) {
-            itemToAdd.memberFeeId = jsonData[0].insertedItemKey;
-            // redisplay data grid    
-            memberFeesStore.newItem(itemToAdd);
+        function uploadIncomeBillFileCompleted(data) {
+            uploadJsonData = $.parseJSON(data);
+            if (uploadJsonData && uploadJsonData.status > 0) {
+                if (uploadJsonData.status.toString() == "true") {
+                    if (memberFeesStore != null && jsonData[0].insertedItemKey != null) {
+                        itemToAdd.memberFeeId = jsonData[0].insertedItemKey;
+                        //itemToAdd.eventTitle = $("#eventId").find("option:selected").text();
+                        // remove 1 day to ajust display on grid
+                        datePickerValue.setDate(datePickerValue.getDate() - 1);
+                        itemToAdd.transactionDate = datePickerValue;
+                        itemToAdd.memberFullName = $("#memberId").find("option:selected").text();
+                        if (uploadJsonData.entryKey != null)
+                            itemToAdd.billFileName = uploadJsonData.entryKey;
+                        // redisplay data grid    
+                        if (memberFeesStore != null && jsonData[0].insertedItemKey != null) {
+                            itemToAdd.memberFeeId = jsonData[0].insertedItemKey;
+                            // redisplay data grid    
+                            memberFeesStore.newItem(itemToAdd);
+                        }
+
+                        ///incomesStore.newItem(itemToAdd);
+                    }
+                    // display overlay message
+                    showSuccessOverlay(successOverlayDivId, pageLangTexts.confirmationCreationLabel, successImg);
+                    //update total incomes
+                    //updateTotalInline();
+                }
+                else {
+                    displayErrorContent(errorContentDivId, uploadJsonData.message);
+                }
+            }
+
         }
+        // upload bill file
+        uploadIncomeBillFile(memberFeeDetailsFormId, uploadIncomeBillFileCompleted);
     }
 
     // send async xhr request to server
@@ -987,9 +1037,6 @@ function submitMemberFeeDetailsForm(memberFeeId) {
 
         // get item to update
         var itemToUpdate = memberFeesGrid.getItem(currentItemIndex);
-
-
-
         memberFeesStore.setValue(itemToUpdate, "memberId", memberFeeDetailsFormObject.memberId);
         memberFeesStore.setValue(itemToUpdate, "amount", memberFeeDetailsFormObject.amount);
         memberFeesStore.setValue(itemToUpdate, "billFileName", memberFeeDetailsFormObject.billFileName);
@@ -1103,4 +1150,51 @@ function printDataList() {
 
 function exportDataListToCsv() {
     alert("exportDataListToCsv not yet implemented..");
+}
+
+function loadMembersList(callBackFunc) {
+
+    var postParameters = {
+        "userAction": "getAllItems"
+    };
+    var xhrArgs = {
+        url: "../../Controllers/MemberController.php",
+        postData: postParameters,
+        handleAs: postDataFormat,
+        method: postMethod,
+        error: function (errorMsg) {
+            logError({
+                message: "Failed to get all members: \n\n" + errorMsg
+            });
+        }
+    };
+
+    // send async xhr request to server
+    sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
+        xhrArgs.error, fetchDataCompleted);
+
+    //get postback result
+    function fetchDataCompleted(data) {
+        var jsonData = null;
+        debugMessageToConsole("items json data: " + data, lowLevel);
+        jsonData = data;
+        //$("#eventId").append($("<option>", { value: "0", text: "--", selected: "selected" }));
+        $.each(jsonData, function (index, item) {
+            if (item) {
+                if (index == 0) {
+                    $("#memberId").append($("<option>", {
+                        value: item.memberId, text: item.lastName + ' ' + item.name,
+                        selected: "selected" }));
+                } else {
+                    $("#memberId").append($("<option>", { value: item.memberId, text: item.lastName + ' ' + item.name }));
+                }
+            }
+        });
+        editItemDetailsFormContent = $("#editItemDetailsFormContentDiv").html();
+
+        if (typeof callBackFunc !== "undefined" && typeof callBackFunc == "function") {
+            callBackFunc();
+        }
+    }
+
 }

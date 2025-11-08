@@ -1353,7 +1353,7 @@ function uploadIncomeBillFile(formId, _callbackMethod) {
     else {
         formData = $("#" + formId).serialize();
     }
-
+    // ajax request
     $.ajax({
         url: uploaderControllerUrl, //Server script to process data
         type: "POST",

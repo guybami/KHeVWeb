@@ -55,9 +55,6 @@
           createNewItemTitleLabel : "'.MemberFeeUIResource::createNewItemTitleLabelText().'",
           viewItemDetailsTitleLabel : "'.MemberFeeUIResource::viewItemDetailsTitleLabelText().'",
           updateItemDetailsTitleLabel : "'.MemberFeeUIResource::updateItemDetailsTitleLabelText().'",
-
-           
-          
           noItemSelectedLabel : "'.html_entity_decode(MemberFeeUIResource::noItemSelectedLabelText()).'",
 
           editItemDetailsTitleLabel : "'.MemberFeeUIResource::editItemDetailsTitleLabelText().'",
@@ -337,6 +334,19 @@
                                 <div id="editItemDetailsFormContentDiv" class="hideContent">
                                     <div class="container">
                                         <form id="memberFeeDetailsForm" class="form-horizontal" data-dojo-id="memberFeeDetailsForm" encType="multipart/form-data">
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" for="transactionDate">' . MemberFeeUIResource::transactionDateColLabelText() . '</label>
+                                                <div class="col-md-8">
+                                                    <div class="input-group date">
+                                                        <input type="text" class="form-control" id="transactionDate" name="transactionDate" aria-required="true"  data-placement="top" aria-invalid="false" required  />
+                                                        <span class="input-group-addon">
+                                                            <span class="fa fa-calendar"></span>
+                                                        </span>
+                                                    </div> 
+                                                </div>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-4" for="memberId">' . MemberFeeUIResource::memberIdColLabelText() . '</label>
                                                 <div class="col-md-8">
@@ -353,24 +363,25 @@
                                                 </div>
                                             </div>
                 
+                                            
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-4" for="billFileName">' . MemberFeeUIResource::billFileNameColLabelText() . '</label>
-                                                <div class="col-md-8">
-                                                    <input type="text"  id="billFileName" name="billFileName" class="form-control" />  
+                                                <div class="col-md-8" nowrap="nowrap">
+                                                    <div class="input-group">
+                                                        <input type="text" id="billFileName" name="billFileName" readonly  class="form-control" />
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-secondary" type="button" onClick="showSelectFileDialog(\'billFileNameToUpload\');">Selectionez...</button>
+                                                        </span>
+                                                        <div class="hideContent">
+                                                            <input type="file"  id="billFileNameToUpload" name="billFileNameToUpload"   accept=".gif, .jpeg, .jpg, .pdf, .doc, .png"/>
+                                                            <input type="hidden"  name="userAction" id="userAction" value="uploadIncomeBill"/>
+                                                        </div> 
+                                                    </div>
                                                 </div>
                                             </div>
                 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-4" for="transactionDate">' . MemberFeeUIResource::transactionDateColLabelText() . '</label>
-                                                <div class="col-md-8">
-                                                    <div class="input-group date">
-                                                        <input type="text" class="form-control" id="transactionDate" name="transactionDate" aria-required="true"  data-placement="top" aria-invalid="false" required  />
-                                                        <span class="input-group-addon">
-                                                            <span class="fa fa-calendar"></span>
-                                                        </span>
-                                                    </div> 
-                                                </div>
-                                            </div>
+                                            
                                              
                                         </form>
                                     </div>
