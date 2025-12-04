@@ -2,7 +2,7 @@
  * Script to manage a  Expense model entity.
  * @author
  *     Guy Bami W.
- * Created changes: 31.03.2017 20:24:54
+ * Created changes: 04.12.2025 20:24:54
  */
 
 // global varaibles
@@ -17,16 +17,22 @@ var jsonErrorMsg = "An error occured with json returned data";
 var chartContainerId = "chartContainer";
 var expensesList = new Array();
 var chartCaption = "Statistique Des Dépenses";
-
+var emptyDataText = '<tr><td class="toCenter"><div>Aucune D&eacute;penses trouv&eacute;es</div></td></tr>';
 
 
 $(document).ready(function () {
                       
     var currentDate = new Date();
-    loadExpensesChart(null);
+    
+    loadExpensesChart(currentDate.getUTCFullYear()); 
+    $('#selectedYear').on('change', function() {
+        //alert('Selected: ' + $(this).val());
+        var selectedYearVal = $(this).val();
+        fetchAndDisplayExpenses(selectedYearVal);
+        loadExpensesChart(selectedYearVal); 
+    });
     
     $("#filterCurrentYearBtn").click(function () {
-        
         $(this).addClass("btn-primary");
         $("#filterPreviousYearBtn").removeClass("btn-primary");
         $("#filterPreviousPrevYearBtn").removeClass("btn-primary");
@@ -37,31 +43,6 @@ $(document).ready(function () {
         loadExpensesChart(currentDate.getUTCFullYear());  
         
     });
-
-    $("#filterPreviousYearBtn").click(function () {
-        
-        $(this).addClass("btn-primary");
-        $("#filterCurrentYearBtn").removeClass("btn-primary");
-        $("#filterPreviousPrevYearBtn").removeClass("btn-primary");
-
-        $("#filterPreviousPrevYearBtn").addClass("btn-default");
-        $("#filterCurrentYearBtn").addClass("btn-default");
-        fetchAndDisplayExpenses(currentDate.getUTCFullYear() - 1);
-        loadExpensesChart(currentDate.getUTCFullYear() - 1);  
-    });
-
-    $("#filterPreviousPrevYearBtn").click(function () {
-         
-        $(this).addClass("btn-primary");
-        $("#filterCurrentYearBtn").removeClass("btn-primary");
-        $("#filterPreviousYearBtn").removeClass("btn-primary");
-
-        $("#filterCurrentYearBtn").addClass("btn-default");
-        $("#filterPreviousYearBtn").addClass("btn-default");
-        fetchAndDisplayExpenses(null);
-        loadExpensesChart(null);
-    });
-
 });
 
 
@@ -88,13 +69,12 @@ function loadExpensesChart(year){
     ////showSearchingOverlay(holderContentDivId);
     // reset list
     expensesList = new Array();
-    
     sendAjaxRequest(xhrArgs, fetchDataCompleted);
     
     function fetchDataCompleted(data){
         
         var jsonData = data;
-        debugMessageToConsole('items json data: ' + data, lowLevel);
+        debugMessageToConsole('items json data: ' + data, highLevel);
         // hide loading img
         //hidePostbackOverlay();
          
@@ -108,13 +88,21 @@ function loadExpensesChart(year){
                     "label": getFrenchMonthName(jsonData[i].currentMonth) + " " + jsonData[i].currentYear,
                     "value": jsonData[i].sumExpenses
                 };
-            if(year != null && jsonData[i].currentYear == year){
+            if(year != null && String(year) === String(jsonData[i].currentYear)){
                 expensesList.push(expense);
             }
             else if(year == null){
                 expensesList.push(expense);
             }
         }
+
+        if(expensesList.length == 0) {
+            
+            $("#expensesListTable tbody").html(emptyDataText);
+            $("#chartContainer").html(emptyDataText);
+            return;
+        }
+
         //$(".row").removeClass("hideContent");
         // gantt data
         var chartJsonData = {
@@ -138,7 +126,7 @@ function loadExpensesChart(year){
                 "showPercentValues": "1",
                 "showPercentInToolTip": "0",
                 "legendPosition": "bottom",
-                "legendCaption": "Dépenses session mandant ",
+                "legendCaption": "Dépenses Anuelles ",
                 "legendScrollBgColor": "#cccccc",
                 "legendScrollBarColor": "#999999"
             },

@@ -182,7 +182,7 @@
                                                                  <span id="emailLabel">-</span>    
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="hideContent">
                                                             <td class="toLeft fieldDetailsTitle halfWidth">
                                                                  <span>T&eacute;lephone</span>
                                                             </td>

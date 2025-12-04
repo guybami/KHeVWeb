@@ -131,7 +131,7 @@
                                                                  <span id="emailLabel">-</span>    
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="hideContent">
                                                             <td class="toLeft fieldDetailsTitle halfWidth">
                                                                  <span>Numero T&eacute;l&eacute;phone</span>
                                                             </td>

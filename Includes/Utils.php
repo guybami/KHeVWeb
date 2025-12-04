@@ -863,6 +863,12 @@ class Utils {
         }
     }
 
+    public static function currentTimeMillis() {
+        return (int) round(microtime(true) * 1000);
+    }
 
+    public static function jsVersion() {
+        return "?v=" . Utils::currentTimeMillis();
+    }
 
 }

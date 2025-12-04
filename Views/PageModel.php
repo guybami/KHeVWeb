@@ -525,17 +525,17 @@ class PageModel {
                                 </tr>
                                 <tr>
                                     <td class="fullWidth toLeft">
-                                        <span class="">Vorstand: </span><label class="toBold">Guy Bami Watcho; Busta Alex Nkongo Essobo; Claude Mouko Bidias;  Hermann Tuognou Kadji; Yannick Tsakou Manfouo </label>  
+                                        <span class="">Vorstand: </span><label class="toBold">Arnold Marie, Dassie Kouobou; Hervey Miriam Noubissi; Dieudonné Franklin Nguimfack; Ben Girodou Foaleng; Carnot; Ngafi Sadi</label>  
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="fullWidth toLeft">
-                                        <span class="">Adresse: </span><label class="toBold">c/o Guy Bami Watcho, Sebastian-Bach-Weg 16, 74172 Neckarsulm</label>  
+                                        <span class="">Adresse: </span><label class="toBold">c/o Arnold Marie  Dassie Kouobou, Am Wasserturm 60, 74081 Heilbronn</label>  
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="fullWidth toLeft">
-                                        <span class="">Kontakt: </span><label class="toBold">guybami@yahoo.fr Tel: 0176 2786 1055</label>  
+                                        <span class="">Kontakt: </span><label class="toBold">arnoldmar@hotmail.de, Tel: +49 176 55339914 |  guybami@yahoo.fr Tel: 0176 2786 1055</label>  
                                     </td>
                                 </tr>
                             </table>

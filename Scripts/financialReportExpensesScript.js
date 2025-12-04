@@ -6,8 +6,8 @@ var resultsDivId = "resultsDiv";
 var errorContentDivId = "errorContentDiv";
 var successOverlayDivId = "successOverlayDiv";
 var menuItemSectionTitleLabel = pageLangTexts.menuItemSectionTitleLabel == null ? "Finances" : pageLangTexts.menuItemSectionTitleLabel;
-//var menuItemSectionTitleLevel1Label = pageLangTexts.menuItemSectionTitleLabel == null ? "Activites Sportives" : pageLangTexts.menuItemSectionTitleLabel;
 var subMenuItemSectionTitleLabel = pageLangTexts.subMenuItemSectionTitleLabel == null ? "Bilan Des D&eacute;penses" : pageLangTexts.subMenuItemSectionTitleLabel;
+var periodTitleLabel = pageLangTexts.periodTitleLabel == null ? "P&eacute;riode: " : pageLangTexts.periodTitleLabel;
 
 
 var expensesArray = new Array();
@@ -19,10 +19,12 @@ $(document).ready(function () {
     // display sitemap path
     displayCurrentPath(sitePathDivId, 2, [menuItemSectionTitleLabel, 
         subMenuItemSectionTitleLabel], $(location).attr("href"));
-    // fetch data for all years
-    fetchAndDisplayExpenses(null);
+    // fetch data for current year
+    var currentYear = new Date().getFullYear();
+    loadControlsContent();
+    fetchAndDisplayExpenses(currentYear);
     $(window).bind("resize", rescaleWindow);
-
+    
 });
 
 
@@ -56,13 +58,17 @@ function fetchAndDisplayExpenses(yearToFilter) {
             });
         }
     };
+    if(yearToFilter != null){
+        loadPeriodTextContent(yearToFilter);
+    }
+    
     expensesArray = new Array();
     sendAjaxRequest(xhrArgs, fetchDataCompleted);
 
     //get postback result
     function fetchDataCompleted(data) {
         var jsonData = data;
-        debugMessageToConsole("items json data: " + data, lowLevel);
+        debugMessageToConsole("items json data: " + data, highLevel);
         for (var i = 0; i < jsonData.length; i++) {
             var transactionDate = stringToDate(jsonData[i].transactionDate, "yyyy-mm-dd", "-");
             var eventTitle = jsonData[i].eventTitle;
@@ -80,7 +86,7 @@ function fetchAndDisplayExpenses(yearToFilter) {
                 BillFileName: billFileName,
                 Year: year
             };
-            if(yearToFilter != null && year == yearToFilter){
+            if(yearToFilter != null && String(year) === String(yearToFilter)){
                 expensesArray.push(expense);
             }
             else if(yearToFilter == null){
@@ -89,26 +95,19 @@ function fetchAndDisplayExpenses(yearToFilter) {
             
         }
 
-        // display first expense per default
-        if (expensesArray.length > 0) {
-            var currentDate = new Date();
-            displayExpensesList(expensesArray, currentDate.getUTCFullYear());
-        }
-        else{
-            
-        }
+        displayExpensesList(expensesArray, yearToFilter);
+         
     }
-
 }
 
 
 function displayExpensesList(expensesDataArray, year) {
-    var divContent = "";
     var count = 0;
     var rowClass = "";
     var totalExpenses = 0;
-    
+    // clear old content
     $("#expensesListTable tbody").html("");
+     
     // add header
     var rowData = '<tr   class="' + rowClass + '">'
                     + '<td class="toCenter memberNumberCol"></td>'
@@ -119,7 +118,7 @@ function displayExpensesList(expensesDataArray, year) {
                     + '<td class="toLeft fieldDetailsTitle">Facture</td>'
                 + '</tr>';
         $("#expensesListTable tbody").append(rowData);
-    $.each(expensesArray, function (index, expense) {
+    $.each(expensesDataArray, function (index, expense) {
         index % 2 == 0 ? rowClass = "even rowPointer" : rowClass = "odd rowPointer";
         var rowData = '<tr data-role="' + expense.ItemKey + '" class="' + rowClass + '">'
                     + '<td class="toCenter memberNumberCol">' + expense.ItemKey + '.' + '</td>'
@@ -135,7 +134,7 @@ function displayExpensesList(expensesDataArray, year) {
         $("#expensesListTable tbody").append(rowData);
         count++;
         var formattedAmount = expense.Amount.toString().replace(",", ".");
-        //alert(parseFloat(formattedAmount));
+        //console.log(parseFloat(formattedAmount));
         totalExpenses += parseFloat(formattedAmount);
     });
     // display amount and replace '.' german locale
@@ -144,12 +143,6 @@ function displayExpensesList(expensesDataArray, year) {
     
     // display all
     $(".row").removeClass("hideContent");
-    
-    if(count == 0){
-        $("#expensesListTable tbody").html("");
-        $("#expensesDiv").html("<div>Aucune factures</div>");
-    }
-
 }
 
 
@@ -180,8 +173,44 @@ function viewBillDialog(billFileName, title){
     }
     
 }
- 
 
+function loadPeriodTextContent(selectedYear){
+    // load period text
+    var peridoText = "";
+    var currentYear = new Date().getFullYear();
+    if(selectedYear == currentYear){
+        peridoText = periodTitleLabel  + "01.01." + selectedYear + " - " + dateToGermanStr(new Date());
+    } else {
+        peridoText = periodTitleLabel  + "01.01." + selectedYear + " - " + "31.12." + selectedYear;
+    }
+    $("#periodLabel").html(peridoText);
+}
+
+/**
+ * Load period text content and dropdown list once
+ */
+function loadControlsContent(){
+    var currentYear = new Date().getFullYear();
+    loadPeriodTextContent(currentYear);
+    // fill dropdown list of years
+    var optText = currentYear;
+    var optValue = currentYear;
+    console.log("123" + " - loadControlsContent");
+    for(var i = 0; i < 3; i++){ // get 3 last years
+        if(i == 0){
+            optText = currentYear;
+            optValue = currentYear;
+            $('#selectedYear').append(`<option selected value="${optValue}">${optText}</option>`);
+        } else {
+            optText = currentYear - i;
+            optValue = currentYear - i;
+            $('#selectedYear').append(`<option value="${optValue}">${optText}</option>`);
+        } 
+        
+    }
+    
+
+}
 
 
 

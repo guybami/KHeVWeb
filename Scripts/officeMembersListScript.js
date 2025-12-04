@@ -1,7 +1,7 @@
 ﻿
 /*
  * Author: Guy Bami 
- * Last changes: 05.04.17
+ * Last changes: 02.12.25
  * Description: Office members List script
 */
 
@@ -29,7 +29,6 @@ $(document).ready(function () {
 function fetchOfficeMembersDataJson() {
     var memberPhotos = ["president.jpg", "chiefCulture.jpg", "secretary.jpg", "chiefSport.jpg", "treasure.jpg"];
         memberPhotos = ["president.jpg", "chiefCulture.png", "secretary.png", "chiefSport.png", "treasure.png"];
-    //var positions = ["President", "Secretaire", "Responsable Sportif", "Responsable Culturel", "Tresoriere"];
 
     var controllerUrl = "../../Controllers/OfficeMemberController.php";
     var postDataFormat = "json";
@@ -82,10 +81,6 @@ function fetchOfficeMembersDataJson() {
             displayMemberDetails(membersArray[0].ItemKey);
         }
     }
-     
-
-
-    
 }
 
 
@@ -99,16 +94,16 @@ function displayMembersList(membersDataArray) {
     $.each(membersDataArray, function (index, member) {
         i % 2 == 0 ? rowClass = "even rowPointer" : rowClass = "odd rowPointer";
         rowData = '<tr data-role="' + member.ItemKey + '" class="' + rowClass + '"><td class="toLeft">' + member.Name + '</td>'
-            + '<td class="toLeft">' + member.LastName + '</td>'
-            + '<td class="toLeft toBold">' + member.Position + '</td>'
-            + '</tr>';
+                    + '<td class="toLeft">' + member.LastName + '</td>'
+                    + '<td class="toLeft toBold">' + member.Position + '</td>'
+                + '</tr>';
         $("#membersListTable tbody").append(rowData);
     });
 
     // register event
     $(".rowPointer").click(function () {
         var itemKey = $(this).attr("data-role");
-        //alert('clicked; ' + itemKey);
+        //console.log('clicked; ' + itemKey);
         displayMemberDetails(itemKey);
     });
 

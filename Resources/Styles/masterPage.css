@@ -2186,3 +2186,10 @@ div.winzardStepDisplay span.disabled
     color: #DDD;
 }
 
+.no-padding-left{
+    padding-left: 0;
+}
+
+.no-padding-right{
+    padding-right: 0;
+}

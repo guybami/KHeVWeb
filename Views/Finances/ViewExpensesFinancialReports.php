@@ -23,8 +23,8 @@
         </script>
         <script  src="../../Lib/fusioncharts/fusioncharts.js" type="text/javascript"></script>
         <script src="../../Lib/fusioncharts/themes/fusioncharts.theme.fint.js" type="text/javascript"></script>
-        <script   src="../../Scripts/financialReportExpensesScript.js"  type="text/javascript"> </script> 
-        <script  defer src="../../Scripts/expensesChartScript.js"  type="text/javascript"> </script> 
+        <script   src="../../Scripts/financialReportExpensesScript.js'.Utils::jsVersion().'"   type="text/javascript"> </script> 
+        <script  defer src="../../Scripts/expensesChartScript.js'.Utils::jsVersion().'"   type="text/javascript"> </script> 
 
         ';
     // page content
@@ -62,30 +62,42 @@
                                         <tr>
                                             <td class="fullWidth toLeft">
                                                 <div class="input-group toRight pull-leftt">
-                                                     <h4 id="periodLabel">Periode: 01.08.2016 - 31.07.2017</h4>
+                                                     <h4 id="periodLabel">-</h4>
                                                 </div>
                                             </td>
+                                        </tr>    
                                     </table>
                                     <table class="fullWidth cellspacing3 cellpadding3">
                                         <tr>
-                                            <td class="fullWidth">
-                                                <div class="col-md-6 pull-left searchBarMargin ">
+                                            <td class="fullWidth toLeft">
+                                                <div class="pull-left searchBarMargin no-padding-left">
                                                     <div class="fieldDetailsTitle">
                                                         <span class="">Total: </span><span id="totalExpenses"> - </span>
                                                     </div>
                                                 </div>
-                                                <div class="input-group toRight pull-right searchBarMargin">
+                                                <!--
+                                                <div class="input-group toRight pull-right searchBarMargin hideContent">
                                                     <div class="btn-group" role="group" aria-label="filter members">
                                                       <button type="button" class="btn btn-default" id="filterPreviousPrevYearBtn">Tous</button>
                                                       <button type="button" class="btn btn-primary" id="filterPreviousYearBtn">2016</button>
                                                       <button type="button" class="btn btn-primary" id="filterCurrentYearBtn">2017</button>
+                                                    </div>
+                                                </div>  -->
+                                                <div class="col-md-4 input-group toRight pull-right searchBarMargin_">
+                                                    <div class="btn-group1" role="group">
+                                                       <span class="control-label col-md-4 fieldDetailsTitle" for="selectedYear">Annee:</span>
+                                                        <div class="col-md-8">
+                                                            <select  id="selectedYear" name="selectedYear" class="form-control">
+                                                                 <option value="2016">2016</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
                                     
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" id="expensesListDiv">
                                         <table class="table table-striped jambo_table cellspacing0 cellpadding0" id="expensesListTable" >
                                           <tbody>
                                           </tbody>

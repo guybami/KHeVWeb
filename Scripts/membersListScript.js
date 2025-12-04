@@ -27,7 +27,6 @@ $(document).ready(function () {
     }
 
     //register button click events
-
     $("#filterAllBtn").click(function () {
         // displayMemberDetails(itemKey);
         $(this).addClass("btn-primary");
@@ -64,16 +63,17 @@ function filterData() {
 
 function filterMembers() {
     var filter = $("#searchMemberField").val().toString().toUpperCase();
-    var filteredMembersArray = new Array();
+    var filteredMembersArray = [];
     if (filter.length == 0) {
         displayMembersList(membersArray);
         return;
     }
     //$("#filter").html(filter);
     $.each(membersArray, function (index, member) {
-        var rowClass = "";
-        if (member.Name.toString().toUpperCase().toString().startsWith(filter)) {
+        if (member.Name.toString().toUpperCase().toString().startsWith(filter) 
+           ||  member.LastName.toString().toUpperCase().toString().startsWith(filter)) {
             filteredMembersArray.push(member);
+            console.log("filter is: " + filter);
         }
     });
     displayMembersList(filteredMembersArray);
@@ -114,7 +114,8 @@ function fetchMembersData() {
             var profilePhotoUrl = "../../Resources/Images/UserProfiles/" + memberPhotos[i % memberPhotos.length];
              
             if(memberName.toString().indexOf("Bami") != -1){
-                photo = memberPhotos[0];
+                //photo = memberPhotos[0];
+                // use actual photos
             }
             profilePhotoUrl = "../../Resources/Images/UserProfiles/" + photo;
 
