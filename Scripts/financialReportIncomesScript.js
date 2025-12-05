@@ -6,41 +6,25 @@ var resultsDivId = "resultsDiv";
 var errorContentDivId = "errorContentDiv";
 var successOverlayDivId = "successOverlayDiv";
 var menuItemSectionTitleLabel = pageLangTexts.menuItemSectionTitleLabel == null ? "Finances" : pageLangTexts.menuItemSectionTitleLabel;
-//var menuItemSectionTitleLevel1Label = pageLangTexts.menuItemSectionTitleLabel == null ? "Activites Sportives" : pageLangTexts.menuItemSectionTitleLabel;
 var subMenuItemSectionTitleLabel = pageLangTexts.subMenuItemSectionTitleLabel == null ? "Bilan Des Entr&eacute;es" : pageLangTexts.subMenuItemSectionTitleLabel;
-
-
+var periodTitleLabel = pageLangTexts.periodTitleLabel == null ? "P&eacute;riode: " : pageLangTexts.periodTitleLabel;
+// number of year to display
+var numbYearsToDisplay = 3; 
 var incomesArray = new Array();
-var loaded = false;
-var currentSlideIndex = 0;
-var eventPhotosSlideList = new Array();
+
+ 
+ 
 
 $(document).ready(function () {
     // display sitemap path
     displayCurrentPath(sitePathDivId, 2, [menuItemSectionTitleLabel, 
         subMenuItemSectionTitleLabel], $(location).attr("href"));
-    var currentDate = new Date();
-    fetchAndDisplayIncomes(null);
-     
-     
+    // fetch data for current year
+    var currentYear = new Date().getFullYear();
+    loadControlsContent();
+    fetchAndDisplayIncomes(currentYear);
     $(window).bind("resize", rescaleWindow);
-
 });
-
-
- 
-
-function rescaleWindow() {
-    var size = { width: $(window).width(), height: $(window).height() };
-    // calculate size
-    var offset = 20;
-    var offsetBody = 80;
-    $('#billModalDialog').css('height', size.height - offset);
-    $('#billModalDialog .modal-body').css('height', size.height - (offset + offsetBody));
-    $('#billModalDialog').css('top', 0);
-
-
-}
 
 
 function fetchAndDisplayIncomes(yearToFilter) {
@@ -60,6 +44,10 @@ function fetchAndDisplayIncomes(yearToFilter) {
             });
         }
     };
+    if(yearToFilter != null){
+        loadPeriodTextContent(yearToFilter);
+    }
+
     incomesArray = new Array();
     sendAjaxRequest(xhrArgs, fetchDataCompleted);
 
@@ -84,34 +72,25 @@ function fetchAndDisplayIncomes(yearToFilter) {
                 BillFileName: billFileName,
                 Year: year
             };
-            if(yearToFilter != null && year == yearToFilter){
+            if(yearToFilter != null && String(year) === String(yearToFilter)){
                 incomesArray.push(income);
             }
             else if(yearToFilter == null){
                 incomesArray.push(income);
             }
-            
         }
 
-        // display first income per default
-        if (incomesArray.length > 0) {
-            var currentDate = new Date();
-            displayIncomesList(incomesArray, currentDate.getUTCFullYear());
-        }
-        else{
-            
-        }
+        // display  
+        displayIncomesList(incomesArray, yearToFilter);
     }
-
 }
 
 
 function displayIncomesList(incomesDataArray, year) {
-    var divContent = "";
     var count = 0;
     var rowClass = "";
     var totalIncomes = 0;
-    
+    // clear old content
     $("#incomesListTable tbody").html("");
     // add header
     var rowData = '<tr   class="' + rowClass + '">'
@@ -123,7 +102,7 @@ function displayIncomesList(incomesDataArray, year) {
                     + '<td class="toLeft fieldDetailsTitle">Facture</td>'
                 + '</tr>';
         $("#incomesListTable tbody").append(rowData);
-    $.each(incomesArray, function (index, income) {
+    $.each(incomesDataArray, function (index, income) {
         index % 2 == 0 ? rowClass = "even rowPointer" : rowClass = "odd rowPointer";
         var rowData = '<tr data-role="' + income.ItemKey + '" class="' + rowClass + '">'
                     + '<td class="toCenter memberNumberCol">' + income.ItemKey + '.' + '</td>'
@@ -139,21 +118,16 @@ function displayIncomesList(incomesDataArray, year) {
         $("#incomesListTable tbody").append(rowData);
         count++;
         var formattedAmount = income.Amount.toString().replace(",", ".");
-        //alert(parseFloat(formattedAmount));
+        //console.log(parseFloat(formattedAmount));
         totalIncomes += parseFloat(formattedAmount);
     });
     // display amount and replace '.' german locale
+    totalIncomes = totalIncomes.toFixed(2);
     totalIncomes = totalIncomes.toString().replace(".", ",");
     $("#totalIncomes").html(totalIncomes + "&#8364;");
     
-    // display all
+    // display all data
     $(".row").removeClass("hideContent");
-    
-    if(count == 0){
-        $("#incomesListTable tbody").html("");
-        $("#incomesDiv").html("<div>Aucune factures</div>");
-    }
-
 }
 
 
@@ -169,10 +143,10 @@ function viewBillDialog(billFileName, title){
             if(billFileName.toString().endsWith("pdf")){
                 // for .pdf or .doc files
                 content = '<object data="../../UploadedFiles/Images/Bills/Incomes/'+ billFileName +'" type="application/pdf" width="800" height="700"> '
-                + ' <a href="../../UploadedFiles/Images/Bills/Incomes/'+ billFileName +'">Voir nos Status</a> </object>  ';
+                + ' <a href="../../UploadedFiles/Images/Bills/Incomes/'+ billFileName +'">Voir Facture</a> </object>  ';
             }
             else{
-                content = '<img src="../../UploadedFiles/Images/Bills/Incomes/'+ billFileName +'"   alt="facture..." /> ';
+                content = '<img src="../../UploadedFiles/Images/Bills/Incomes/'+ billFileName +'"   alt="Facture..." /> ';
             }
         }
         // set dialog title
@@ -184,8 +158,6 @@ function viewBillDialog(billFileName, title){
     }
     
 }
- 
-
 
 
 

@@ -21,13 +21,8 @@
 		    totalTextLabel : "'.ExpenseUIResource::viewAllItemsBtnLabelText().'",
               };
         </script>
-        <!--
-        <script  src="../../Lib/fusioncharts/fusioncharts.js" type="text/javascript"></script>
-        <script src="../../Lib/fusioncharts/themes/fusioncharts.theme.fint.js" type="text/javascript"></script>
-        <script  defer src="../../Scripts/expensesChartScript.js"  type="text/javascript"> </script> 
-        -->
-        <script   src="../../Scripts/actualFinancialReportScript.js"  type="text/javascript"> </script> 
-
+        <script   src="../../Scripts/financialReportCommonScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script>
+        <script   src="../../Scripts/actualFinancialReportScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script> 
         ';
     // page content
     $content = ' 
@@ -64,7 +59,7 @@
                                         <tr>
                                             <td class="fullWidth toLeft">
                                                 <div class="input-group toRight pull-left">
-                                                     <h4 id="periodLabel">Periode: 01.08.2016 - 31.07.2017</h4>
+                                                     <h4 id="periodLabel"> - </h4>
                                                 </div>
                                             </td>
                                         </tr>
@@ -72,16 +67,16 @@
                                     <table class="fullWidth cellspacing3 cellpadding3">
                                         <tr>
                                             <td class="halfWidth">
-                                                <div class="col-md-21 pull-left searchBarMargin ">
+                                                <div class="pull-left searchBarMargin ">
                                                     <div class="fieldDetailsTitle">
                                                         <span class="">&Eacute;tat actuel des Caisses: </span><span id="totalActual"> - </span>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="halfWidth">
-                                                <div class="col-md-61 pull-right searchBarMargin ">
+                                                <div class=" pull-right searchBarMargin ">
                                                     <div class="fieldDetailsTitle">
-                                                        <span class="">Derni&egrave;re Actualisation: </span><span id="lastUpdateStatus">10.07.2017</span>
+                                                        <span class="">Derni&egrave;re Actualisation: </span><span id="lastUpdateStatus">24.11.2025</span>
                                                     </div>
                                                 </div>
                                             </td>

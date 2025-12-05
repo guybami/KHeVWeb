@@ -23,8 +23,9 @@
         </script>
         <script  src="../../Lib/fusioncharts/fusioncharts.js" type="text/javascript"></script>
         <script src="../../Lib/fusioncharts/themes/fusioncharts.theme.fint.js" type="text/javascript"></script>
-        <script   src="../../Scripts/financialReportIncomesScript.js"  type="text/javascript"> </script> 
-        <script  defer src="../../Scripts/incomesChartScript.js"  type="text/javascript"> </script> 
+        <script  defer src="../../Scripts/financialReportCommonScript.js'.Utils::jsVersion().'"   type="text/javascript"> </script> 
+        <script   src="../../Scripts/financialReportIncomesScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script> 
+        <script  defer src="../../Scripts/incomesChartScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script> 
 
         ';
     // page content
@@ -74,11 +75,13 @@
                                                         <span class="">Total: </span><span id="totalIncomes"> - </span>
                                                     </div>
                                                 </div>
-                                                <div class="input-group toRight pull-right searchBarMargin">
-                                                    <div class="btn-group" role="group" aria-label="filter members">
-                                                      <button type="button" class="btn btn-default" id="filterPreviousPrevYearBtn">Tous</button>
-                                                      <button type="button" class="btn btn-primary" id="filterPreviousYearBtn">2016</button>
-                                                      <button type="button" class="btn btn-primary" id="filterCurrentYearBtn">2017</button>
+                                                <div class="col-md-4 input-group toRight pull-right ">
+                                                    <div class="" role="group">
+                                                       <span class="control-label col-md-4 fieldDetailsTitle" for="selectedYear">Ann&eacute;e:</span>
+                                                        <div class="col-md-8">
+                                                            <select  id="selectedYear" name="selectedYear" class="form-control">
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -129,38 +132,40 @@
                 </div>
 
                 <!-- chart content --> 
-                    <div class="col-md-12">
-                        <div class="x_panel">
-                          <div class="x_title">
-                              <h2>Statistique Des Entr&eacute;es</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                  </li>
-                                  <li class="dropdown">
-                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                          <i class="fa fa-wrench"></i></a>
-                                      <ul class="dropdown-menu" role="menu">
-                                          <li><a href="#">Exporter en JPG</a></li>
-                                      </ul>
-                                  </li>
-                                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                  </li>
-                              </ul>
-                              <div class="clearfix"></div>
-                        </div> <!-- close x_title -->
-                        <div class="x_content">
-                              <div class="container">
-                                    <table class="fullWidth normalBorder">
-                                        <tr>
-                                            <td align="center" class="toCenter">
-                                                 <div id="chartContainer">Chart diagramm will load here...Please wait</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                              </div>
-                         </div> 
-                        <!-- end x_content -->       
-                    </div>
+                    <div id="chartStatDiv">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Statistique Des Entr&eacute;es</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                            <i class="fa fa-wrench"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Exporter en JPG</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div> <!-- close x_title -->
+                            <div class="x_content">
+                                <div class="container">
+                                        <table class="fullWidth normalBorder">
+                                            <tr>
+                                                <td align="center" class="toCenter">
+                                                    <div id="chartContainer">Chart diagramm will load here...Please wait</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                </div>
+                            </div> 
+                            <!-- end x_content -->       
+                        </div>
+                    </div>    
                 </div>        
             </div> 
             <!-- end div container -->

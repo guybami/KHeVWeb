@@ -141,9 +141,9 @@ END$$
 DROP PROCEDURE IF EXISTS selectActualFinancesStatus  $$
 CREATE  DEFINER=`root`@`localhost` PROCEDURE `selectActualFinancesStatus`()
 BEGIN
-    SELECT (SELECT SUM(amount) FROM khev_Income) As sumIncomes, 
-    (SELECT SUM(amount) FROM khev_Expense) As sumExpenses, 
-    (SELECT SUM(amount) FROM khev_Income) - (SELECT SUM(amount) FROM khev_Expense)  AS actualAmount
+    SELECT (SELECT ROUND(SUM(amount), 2) FROM khev_Income) As sumIncomes, 
+    (SELECT ROUND(SUM(amount), 2) FROM khev_Expense) As sumExpenses, 
+    (SELECT ROUND(SUM(amount), 2) FROM khev_Income) - (SELECT SUM(amount) FROM khev_Expense)  AS actualAmount
 	
 END$$
 

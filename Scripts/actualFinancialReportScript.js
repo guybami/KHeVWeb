@@ -6,31 +6,23 @@ var resultsDivId = "resultsDiv";
 var errorContentDivId = "errorContentDiv";
 var successOverlayDivId = "successOverlayDiv";
 var menuItemSectionTitleLabel = pageLangTexts.menuItemSectionTitleLabel == null ? "Finances" : pageLangTexts.menuItemSectionTitleLabel;
-//var menuItemSectionTitleLevel1Label = pageLangTexts.menuItemSectionTitleLabel == null ? "Activites Sportives" : pageLangTexts.menuItemSectionTitleLabel;
 var subMenuItemSectionTitleLabel = pageLangTexts.subMenuItemSectionTitleLabel == null ? "&Eacute;tat actuel" : pageLangTexts.subMenuItemSectionTitleLabel;
-subMenuItemSectionTitleLabel =   "&Eacute;tat actuel";
-
-
-var expensesArray = new Array();
-var loaded = false;
-var currentSlideIndex = 0;
-var eventPhotosSlideList = new Array();
+var subMenuItemSectionTitleLabel =   "&Eacute;tat actuel";
+var  euroSign = "&#8364;";
+var periodTitleLabel = pageLangTexts.periodTitleLabel == null ? "P&eacute;riode: " : pageLangTexts.periodTitleLabel;
 
 $(document).ready(function () {
     // display sitemap path
     displayCurrentPath(sitePathDivId, 2, [menuItemSectionTitleLabel, 
         subMenuItemSectionTitleLabel], $(location).attr("href"));
+    var currentYear = new Date().getFullYear();
+    loadPeriodTextContent(currentYear)
     fetchAndDisplayActualStatus();
-     
-
 });
 
 
   
-
-
 function fetchAndDisplayActualStatus() {
-
     var controllerUrl = "../../Controllers/CommonController.php";
     var postDataFormat = "json";
     var postMethod = "POST";
@@ -46,13 +38,15 @@ function fetchAndDisplayActualStatus() {
             });
         }
     };
+    
      
     sendAjaxRequest(xhrArgs, fetchDataCompleted);
 
     //get postback result
     function fetchDataCompleted(data) {
         var jsonData = data;
-        debugMessageToConsole("items json data: " + data, lowLevel);
+        debugMessageToConsole("items json data: " + data, highLevel);
+         
         // display all
         $(".row").removeClass("hideContent");
         // clear error message
@@ -91,15 +85,15 @@ function fetchAndDisplayActualStatus() {
                 actualCss = "toRed";
             }
             var rowData = '<tr  class="' + rowClass + '">'
-                                + '<td class="toLeft">' + sumIncomes + ' &#8364;</td>'
-                                + '<td class="toLeft">' + sumExpenses + ' &#8364;</td>'
-                                + '<td class="toRight ' + actualCss + '">' + actualAmount + ' &#8364;</td>'
+                                + '<td class="toLeft">' + sumIncomes + ' ' + euroSign + '</td>'
+                                + '<td class="toLeft">' + sumExpenses + ' ' + euroSign + '</td>'
+                                + '<td class="toRight ' + actualCss + '">' + actualAmount + ' ' + euroSign + '</td>'
                     + '</tr>';
             $("#actualFinancialStatusTable tbody").append(rowData);
             // display actual
             
             $("#totalActual").attr("class", actualCss);
-            $("#totalActual").html(actualAmount + "&#8364;");
+            $("#totalActual").html(actualAmount + euroSign);
         }
     }
 

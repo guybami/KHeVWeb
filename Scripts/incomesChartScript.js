@@ -2,7 +2,7 @@
  * Script to manage a  Income model entity.
  * @author
  *     Guy Bami W.
- * Created changes: 31.03.2017 20:24:54
+ * Created changes: 04.12.25  
  */
 
 // global varaibles
@@ -16,52 +16,19 @@ var currentIncomeId = -1;
 var jsonErrorMsg = "An error occured with json returned data";
 var chartContainerId = "chartContainer";
 var incomesList = new Array();
-var chartCaption = "Statistique Des Dépenses";
-
+var chartCaption = "Statistique Des Entr&eacute;es";
+var emptyDataText = '<tr><td class="toCenter"><div>Aucune  Entr&eacute;e  trouv&eacute;e</div></td></tr>';
 
 
 $(document).ready(function () {
-                      
     var currentDate = new Date();
-    loadIncomesChart(null);
-    
-    $("#filterCurrentYearBtn").click(function () {
-        
-        $(this).addClass("btn-primary");
-        $("#filterPreviousYearBtn").removeClass("btn-primary");
-        $("#filterPreviousPrevYearBtn").removeClass("btn-primary");
-
-        $("#filterPreviousYearBtn").addClass("btn-default");
-        $("#filterPreviousPrevYearBtn").addClass("btn-default");
-        fetchAndDisplayIncomes(currentDate.getUTCFullYear());
-        loadIncomesChart(currentDate.getUTCFullYear());  
-        
+    loadIncomesChart(currentDate.getUTCFullYear());
+    $('#selectedYear').on('change', function() {
+        //console.log('Selected: ' + $(this).val());
+        var selectedYearVal = $(this).val();
+        fetchAndDisplayIncomes(selectedYearVal);
+        loadIncomesChart(selectedYearVal); 
     });
-
-    $("#filterPreviousYearBtn").click(function () {
-        
-        $(this).addClass("btn-primary");
-        $("#filterCurrentYearBtn").removeClass("btn-primary");
-        $("#filterPreviousPrevYearBtn").removeClass("btn-primary");
-
-        $("#filterPreviousPrevYearBtn").addClass("btn-default");
-        $("#filterCurrentYearBtn").addClass("btn-default");
-        fetchAndDisplayIncomes(currentDate.getUTCFullYear() - 1);
-        loadIncomesChart(currentDate.getUTCFullYear() - 1);  
-    });
-
-    $("#filterPreviousPrevYearBtn").click(function () {
-         
-        $(this).addClass("btn-primary");
-        $("#filterCurrentYearBtn").removeClass("btn-primary");
-        $("#filterPreviousYearBtn").removeClass("btn-primary");
-
-        $("#filterCurrentYearBtn").addClass("btn-default");
-        $("#filterPreviousYearBtn").addClass("btn-default");
-        fetchAndDisplayIncomes(null);
-        loadIncomesChart(null);
-    });
-
 });
 
 
@@ -81,13 +48,11 @@ function loadIncomesChart(year){
             });
         }
     };
-    
-    // show overlay
-    //$(".row").addClass("hideContent");
+     
     clearContentDivs();
     // reset list
     incomesList = new Array();
-    
+    // send request
     sendAjaxRequest(xhrArgs, fetchDataCompleted);
     
     function fetchDataCompleted(data){
@@ -95,8 +60,6 @@ function loadIncomesChart(year){
         var jsonData = data;
         debugMessageToConsole('items json data: ' + data, lowLevel);
         // hide loading img
-        //hidePostbackOverlay();
-         
         if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent('errorContentDiv', jsonData[0].jsonErrorMessage);
             return;
@@ -107,14 +70,21 @@ function loadIncomesChart(year){
                     "label": getFrenchMonthName(jsonData[i].currentMonth) + " " + jsonData[i].currentYear,
                     "value": jsonData[i].sumIncomes
                 };
-            if(year != null && jsonData[i].currentYear == year){
+            if(year != null && String(year) === String(jsonData[i].currentYear)){
                 incomesList.push(income);
             }
             else if(year == null){
                 incomesList.push(income);
             }
         }
-        $(".row").removeClass("hideContent");
+        if(incomesList.length == 0) {
+            $("#incomesListTable tbody").html(emptyDataText);
+            $("#chartContainer").html(emptyDataText);
+            $("#chartStatDiv").addClass("hideContent");
+            return;
+        }
+
+        //$(".row").removeClass("hideContent");
         // gantt data
         var chartJsonData = {
             "chart": {
@@ -164,8 +134,6 @@ function loadIncomesChart(year){
 
 function clearContentDivs(){
     $("#incomesListTable tbody").html("");
-    //$('#incomesListTable tbody').slideUp("slow", function() { $('#expensesListTable tbody').remove();});
-    $("#tournamentsDiv").html("");
 }
 
 

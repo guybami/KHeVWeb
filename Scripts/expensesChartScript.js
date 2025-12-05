@@ -17,11 +17,10 @@ var jsonErrorMsg = "An error occured with json returned data";
 var chartContainerId = "chartContainer";
 var expensesList = new Array();
 var chartCaption = "Statistique Des Dépenses";
-var emptyDataText = '<tr><td class="toCenter"><div>Aucune D&eacute;penses trouv&eacute;es</div></td></tr>';
+var emptyDataText = '<tr><td class="toCenter"><div>Aucune D&eacute;pense trouv&eacute;e</div></td></tr>';
 
 
 $(document).ready(function () {
-                      
     var currentDate = new Date();
     loadExpensesChart(currentDate.getUTCFullYear()); 
     $('#selectedYear').on('change', function() {
@@ -29,18 +28,6 @@ $(document).ready(function () {
         var selectedYearVal = $(this).val();
         fetchAndDisplayExpenses(selectedYearVal);
         loadExpensesChart(selectedYearVal); 
-    });
-    
-    $("#filterCurrentYearBtn").click(function () {
-        $(this).addClass("btn-primary");
-        $("#filterPreviousYearBtn").removeClass("btn-primary");
-        $("#filterPreviousPrevYearBtn").removeClass("btn-primary");
-
-        $("#filterPreviousYearBtn").addClass("btn-default");
-        $("#filterPreviousPrevYearBtn").addClass("btn-default");
-        fetchAndDisplayExpenses(currentDate.getUTCFullYear());
-        loadExpensesChart(currentDate.getUTCFullYear());  
-        
     });
 });
 
@@ -65,7 +52,7 @@ function loadExpensesChart(year){
     // clear old content
     clearContentDivs();
     //$(".row").addClass("hideContent");
-    ////showSearchingOverlay(holderContentDivId);
+    
     // reset list
     expensesList = new Array();
     sendAjaxRequest(xhrArgs, fetchDataCompleted);
@@ -74,7 +61,7 @@ function loadExpensesChart(year){
         
         var jsonData = data;
         debugMessageToConsole('items json data: ' + data, highLevel);
-        // hide loading img
+        // some animations
         //hidePostbackOverlay();
         $("#chartStatDiv").removeClass("hideContent");
         if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
@@ -96,11 +83,9 @@ function loadExpensesChart(year){
         }
 
         if(expensesList.length == 0) {
-            
             $("#expensesListTable tbody").html(emptyDataText);
             $("#chartContainer").html(emptyDataText);
             $("#chartStatDiv").addClass("hideContent");
-            
             return;
         }
 
@@ -154,6 +139,7 @@ function loadExpensesChart(year){
 
 function clearContentDivs(){
     $("#expensesListTable tbody").html("");
+    // some animations
     //$('#expensesListTable tbody').slideUp("slow", function() { $('#expensesListTable tbody').remove();});
 }
 

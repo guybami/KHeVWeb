@@ -39,10 +39,10 @@ class DaoBase {
             // Level = 2 for Controllers classes
             $configFileName = "../config.ini";
         } else if (count($scriptNames) == 3) {
-            // livel = 1. eg home page
+            // level = 1. eg home page on local host
             $configFileName = "../config.ini";
         } else if (count($scriptNames) == 2) {
-            // Live server
+            // prod server, level = 1
             $configFileName = "config.ini";
         }
         $settingsArray = NULL;

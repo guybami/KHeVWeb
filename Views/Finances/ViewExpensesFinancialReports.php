@@ -23,6 +23,7 @@
         </script>
         <script  src="../../Lib/fusioncharts/fusioncharts.js" type="text/javascript"></script>
         <script src="../../Lib/fusioncharts/themes/fusioncharts.theme.fint.js" type="text/javascript"></script>
+        <script  defer src="../../Scripts/financialReportCommonScript.js'.Utils::jsVersion().'"   type="text/javascript"> </script> 
         <script   src="../../Scripts/financialReportExpensesScript.js'.Utils::jsVersion().'"   type="text/javascript"> </script> 
         <script  defer src="../../Scripts/expensesChartScript.js'.Utils::jsVersion().'"   type="text/javascript"> </script> 
 
@@ -85,7 +86,6 @@
                                                        <span class="control-label col-md-4 fieldDetailsTitle" for="selectedYear">Ann&eacute;e:</span>
                                                         <div class="col-md-8">
                                                             <select  id="selectedYear" name="selectedYear" class="form-control">
-                                                                 <option value="2016">2016</option>
                                                             </select>
                                                         </div>
                                                     </div>
