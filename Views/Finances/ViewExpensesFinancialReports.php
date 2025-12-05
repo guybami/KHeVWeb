@@ -29,8 +29,6 @@
         ';
     // page content
     $content = ' 
-        
-         
           <!-- page content -->
            
           <div class="row hideContent">
@@ -79,13 +77,12 @@
                                                 <div class="input-group toRight pull-right searchBarMargin hideContent">
                                                     <div class="btn-group" role="group" aria-label="filter members">
                                                       <button type="button" class="btn btn-default" id="filterPreviousPrevYearBtn">Tous</button>
-                                                      <button type="button" class="btn btn-primary" id="filterPreviousYearBtn">2016</button>
                                                       <button type="button" class="btn btn-primary" id="filterCurrentYearBtn">2017</button>
                                                     </div>
                                                 </div>  -->
-                                                <div class="col-md-4 input-group toRight pull-right searchBarMargin_">
-                                                    <div class="btn-group1" role="group">
-                                                       <span class="control-label col-md-4 fieldDetailsTitle" for="selectedYear">Annee:</span>
+                                                <div class="col-md-4 input-group toRight pull-right ">
+                                                    <div class="" role="group">
+                                                       <span class="control-label col-md-4 fieldDetailsTitle" for="selectedYear">Ann&eacute;e:</span>
                                                         <div class="col-md-8">
                                                             <select  id="selectedYear" name="selectedYear" class="form-control">
                                                                  <option value="2016">2016</option>
@@ -97,15 +94,13 @@
                                         </tr>
                                     </table>
                                     
-                                    <div class="table-responsive" id="expensesListDiv">
+                                    <div class="table-responsive">
                                         <table class="table table-striped jambo_table cellspacing0 cellpadding0" id="expensesListTable" >
                                           <tbody>
                                           </tbody>
                                         </table>
                                     </div>    
-                                    <div id="tournamentsDiv" class="marginBotton">
-                                    </div>
-                                    
+                                     
                                     <!-- modal content -->
                                     <!-- View bill modal dialog form -->
                                     <div id="billModalDialog" class="modal fade" role="dialog">
@@ -138,39 +133,41 @@
                     </div>
                 </div>
 
-                <!-- chart content --> 
-                    <div class="col-md-12">
-                        <div class="x_panel">
-                          <div class="x_title">
-                              <h2>Statistique Des Dépenses</h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                  </li>
-                                  <li class="dropdown">
-                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                          <i class="fa fa-wrench"></i></a>
-                                      <ul class="dropdown-menu" role="menu">
-                                          <li><a href="#">Fermer</a></li>
-                                      </ul>
-                                  </li>
-                                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                  </li>
-                              </ul>
-                              <div class="clearfix"></div>
-                        </div> <!-- close x_title -->
-                        <div class="x_content">
-                              <div class="container">
-                                    <table class="fullWidth normalBorder">
-                                        <tr>
-                                            <td align="center" class="toCenter">
-                                                 <div id="chartContainer">Chart diagramm will load here...Please wait</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                              </div>
-                         </div> 
-                        <!-- end x_content -->       
-                    </div>
+                    <!-- chart content --> 
+                    <div id="chartStatDiv">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Statistique Des Dépenses</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                            <i class="fa fa-wrench"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Fermer</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div> <!-- close x_title -->
+                            <div class="x_content">
+                                <div class="container">
+                                        <table class="fullWidth normalBorder">
+                                            <tr>
+                                                <td align="center" class="toCenter">
+                                                    <div id="chartContainer">Chart diagramm will load here...Please wait</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                </div>
+                            </div> 
+                            <!-- end x_content -->       
+                        </div>
+                    </div>    
                 </div>        
             </div> 
             <!-- end div container -->

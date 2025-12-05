@@ -307,7 +307,7 @@ class PageModel {
                                                 <li><a href="'.$this->directoryLevel.'/Views/Anouncements/ViewAllAnoucments.php">Nos Annonces</a></li>
                                             </ul>
                                         </li>
-                                        <li><a><i class="fa fa-users"></i>REFUGIES<span class="fa fa-chevron-down"></span></a>
+                                        <li class="hideContent"><a><i class="fa fa-users"></i>REFUGIES<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="'.$this->directoryLevel.'/Views/Refugies/ViewRefugiesCommnunity.php">Nos R&eacute;fugies</a></li>
                                             </ul>
@@ -337,7 +337,7 @@ class PageModel {
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ManageVideos.php">Videos</a></li>
                                             </ul>
                                         </li>
-                                        <li class="hideContent"><a><i class="fa fa-bar-chart-o"></i> STATISTICS <span class="fa fa-chevron-down"></span></a>
+                                        <li style="display:none;"><a><i class="fa fa-bar-chart-o"></i> STATISTICS <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ViewFinancialStatistics.php">Statistiques Finances</a></li>
                                                 <li><a href="'.$this->directoryLevel.'/Views/Administration/ViewChartReports.php">Diagrammes</a></li>

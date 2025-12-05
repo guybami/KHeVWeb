@@ -23,10 +23,9 @@ var emptyDataText = '<tr><td class="toCenter"><div>Aucune D&eacute;penses trouv&
 $(document).ready(function () {
                       
     var currentDate = new Date();
-    
     loadExpensesChart(currentDate.getUTCFullYear()); 
     $('#selectedYear').on('change', function() {
-        //alert('Selected: ' + $(this).val());
+        //console.log('Selected: ' + $(this).val());
         var selectedYearVal = $(this).val();
         fetchAndDisplayExpenses(selectedYearVal);
         loadExpensesChart(selectedYearVal); 
@@ -77,7 +76,7 @@ function loadExpensesChart(year){
         debugMessageToConsole('items json data: ' + data, highLevel);
         // hide loading img
         //hidePostbackOverlay();
-         
+        $("#chartStatDiv").removeClass("hideContent");
         if (jsonData.length == 1 && jsonData[0].jsonErrorMessage != null) {
             displayErrorContent('errorContentDiv', jsonData[0].jsonErrorMessage);
             return;
@@ -100,11 +99,13 @@ function loadExpensesChart(year){
             
             $("#expensesListTable tbody").html(emptyDataText);
             $("#chartContainer").html(emptyDataText);
+            $("#chartStatDiv").addClass("hideContent");
+            
             return;
         }
 
         //$(".row").removeClass("hideContent");
-        // gantt data
+        // gantt chart data
         var chartJsonData = {
             "chart": {
                 "caption": chartCaption,
@@ -154,7 +155,6 @@ function loadExpensesChart(year){
 function clearContentDivs(){
     $("#expensesListTable tbody").html("");
     //$('#expensesListTable tbody').slideUp("slow", function() { $('#expensesListTable tbody').remove();});
-    $("#tournamentsDiv").html("");
 }
 
 
