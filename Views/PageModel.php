@@ -307,7 +307,7 @@ class PageModel {
                                                 <li><a href="'.$this->directoryLevel.'/Views/Anouncements/ViewAllAnoucments.php">Nos Annonces</a></li>
                                             </ul>
                                         </li>
-                                        <li class="hideContent"><a><i class="fa fa-users"></i>REFUGIES<span class="fa fa-chevron-down"></span></a>
+                                        <li style="display:none;"><a><i class="fa fa-users"></i>REFUGIES<span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="'.$this->directoryLevel.'/Views/Refugies/ViewRefugiesCommnunity.php">Nos R&eacute;fugies</a></li>
                                             </ul>
