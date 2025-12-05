@@ -901,10 +901,9 @@ function addNewEvent() {
     var itemToAdd = eventDetailsFormObject;
     // read datetime field value
     eventDetailsFormObject.date = $("#date").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#date").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    eventDetailsFormObject.date = datePickerValue;
+    var datePickerValue = new Date(eventDetailsFormObject.date);
+    var datePickerValueStr = strToSqlDateTime(new String(eventDetailsFormObject.date));
+    eventDetailsFormObject.date = datePickerValueStr;
     var postParameters = {
         "formValues[]": dojo.toJson(eventDetailsFormObject, true),
         "userAction": insertNewItemCmd
@@ -920,7 +919,8 @@ function addNewEvent() {
             });
         }
     };
-
+    console.log("data to send: " + JSON.stringify(postParameters));
+    
     //get postback result
     function addNewEventCompleted(data) {
 
@@ -941,8 +941,8 @@ function addNewEvent() {
 
         if (eventsStore != null && jsonData[0].insertedItemKey != null) {
             itemToAdd.eventId = jsonData[0].insertedItemKey;
-            // remove 1 day to ajust display on grid
-            datePickerValue.setDate(datePickerValue.getDate() - 1);
+            // ajust display on grid
+            datePickerValue.setDate(datePickerValue.getDate());
             itemToAdd.date = datePickerValue;
             // redisplay data grid    
             eventsStore.newItem(itemToAdd);
@@ -1054,10 +1054,9 @@ function submitEventDetailsForm(eventId) {
     var eventDetailsFormObject = $("#" + eventDetailsFormId).serializeObject();
     // format date type field
     eventDetailsFormObject.date = $("#date").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#date").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    eventDetailsFormObject.date = datePickerValue;
+    var datePickerValue = new Date(eventDetailsFormObject.date);
+    var datePickerValueStr = strToSqlDateTime(new String(eventDetailsFormObject.date));
+    eventDetailsFormObject.date = datePickerValueStr;
     // convert to json arry
     var jsonValues = dojo.toJson(eventDetailsFormObject);
 
@@ -1079,6 +1078,9 @@ function submitEventDetailsForm(eventId) {
         }
     };
 
+    console.log("data postParameters sent: " + JSON.stringify(postParameters));
+    
+
     // send async xhr request to server
     sendAsyncRequest(xhrArgs.url, xhrArgs.postData, xhrArgs.handleAs, xhrArgs.method,
         xhrArgs.error, submitEventDetailsCompleted);
@@ -1097,8 +1099,8 @@ function submitEventDetailsForm(eventId) {
 
         // get item to update
         var itemToUpdate = eventsGrid.getItem(currentItemIndex);
-        // remove 1 day to ajust display on grid
-        datePickerValue.setDate(datePickerValue.getDate() - 1);
+        // ajust display on grid
+        datePickerValue.setDate(datePickerValue.getDate());
         eventDetailsFormObject.date = datePickerValue;
 
         eventsStore.setValue(itemToUpdate, "date", eventDetailsFormObject.date);

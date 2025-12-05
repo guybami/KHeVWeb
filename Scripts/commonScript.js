@@ -301,6 +301,20 @@ function strToShortDate(dateStr) {
     return shortDate;
 }
 
+/* converts a  string into SQL format 'yyyy-MM-dd HH:mm:ss' date  
+ *  dateStr: The  date string
+    output yyyy-MM-dd HH:mm:ss
+ */
+function strToSqlDateTime(dateTimeStr){
+    const pad = n => String(n).padStart(2, '0');
+    var date = new Date(dateTimeStr);
+    return date.getFullYear() + '-' +
+           pad(date.getMonth() + 1) + '-' +
+           pad(date.getDate()) + ' ' +
+           pad(date.getHours()) + ':' +
+           pad(date.getMinutes()) + ':' +
+           pad(date.getSeconds());
+}
 
 /* converts a asp.net sting into date /Date(value_ms)/
  *  dateStr in format /Date(value_ms)/ and output yyyy-MM-dd HH:mm:ss

@@ -84,7 +84,7 @@
 		  };
 
         </script>
-        <script defer src="../../Scripts/eventsScript.js"  type="text/javascript"> </script> 
+        <script defer src="../../Scripts/eventsScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script> 
 
          
         ';

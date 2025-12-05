@@ -164,8 +164,8 @@ class PageModel {
                         <script src="' . $this->directoryLevel . '/Scripts/bootstrap-select.js" type="text/javascript"></script> 
 
 
-                        <script src="' . $this->directoryLevel . '/Scripts/commonScript.js" type="text/javascript"></script>
-                        <script src="' . $this->directoryLevel . '/Scripts/extendedJqueryFuncScript.js" type="text/javascript"></script> 
+                        <script src="' . $this->directoryLevel . '/Scripts/commonScript.js'.Utils::jsVersion().'" type="text/javascript"></script>
+                        <script src="' . $this->directoryLevel . '/Scripts/extendedJqueryFuncScript.js'.Utils::jsVersion().'" type="text/javascript"></script> 
                         ';
 
         $masterScript = '
@@ -176,12 +176,12 @@ class PageModel {
                       var currentUserName = "'.$this->getCurrentUserName().'";
                       var currentUserRolesData = [];
                  </script>
-                 <script src="'.$this->directoryLevel.'/Scripts/customUserRolesManager.js" type="text/javascript" ></script>
-                 <script src="' . $this->directoryLevel . '/Scripts/customAnimationsScript.js" type="text/javascript" ></script>
+                 <script src="'.$this->directoryLevel.'/Scripts/customUserRolesManager.js'.Utils::jsVersion().'" type="text/javascript" ></script>
+                 <script src="' . $this->directoryLevel . '/Scripts/customAnimationsScript.js'.Utils::jsVersion().'" type="text/javascript" ></script>
 
-                 <script src="' . $this->directoryLevel . '/Scripts/customDialogDataGridControl.js" type="text/javascript" ></script>
-                 <script src="' . $this->directoryLevel . '/Scripts/customMembershipDataGridControl.js" type="text/javascript" ></script>
-                 <script src="' . $this->directoryLevel . '/Scripts/masterScript.js" type="text/javascript" ></script>';
+                 <script src="' . $this->directoryLevel . '/Scripts/customDialogDataGridControl.js'.Utils::jsVersion().'" type="text/javascript" ></script>
+                 <script src="' . $this->directoryLevel . '/Scripts/customMembershipDataGridControl.js'.Utils::jsVersion().'" type="text/javascript" ></script>
+                 <script src="' . $this->directoryLevel . '/Scripts/masterScript.js'.Utils::jsVersion().'" type="text/javascript" ></script>';
 
        
 

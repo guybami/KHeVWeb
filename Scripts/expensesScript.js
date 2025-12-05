@@ -889,10 +889,10 @@ function addNewExpense() {
     var itemToAdd = expenseDetailsFormObject;
     // read datetime field value
     expenseDetailsFormObject.transactionDate = $("#transactionDate").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#transactionDate").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    expenseDetailsFormObject.transactionDate = datePickerValue;
+    // ajust
+    var datePickerValue = new Date(expenseDetailsFormObject.transactionDate);
+    var datePickerValueStr = strToSqlDateTime(expenseDetailsFormObject.transactionDate);
+    expenseDetailsFormObject.transactionDate = datePickerValueStr;
     itemToAdd = expenseDetailsFormObject;
     var postParameters = {
         "formValues[]": dojo.toJson(expenseDetailsFormObject, true),
@@ -1073,10 +1073,9 @@ function submitExpenseDetailsForm(expenseId) {
     var expenseDetailsFormObject = $("#" + expenseDetailsFormId).serializeObject();
     // format date type field
     expenseDetailsFormObject.transactionDate = $("#transactionDate").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#transactionDate").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    expenseDetailsFormObject.transactionDate = datePickerValue;
+    var datePickerValue = new Date(expenseDetailsFormObject.transactionDate);
+    var datePickerValueStr = strToSqlDateTime(new String(expenseDetailsFormObject.transactionDate));
+    expenseDetailsFormObject.transactionDate = datePickerValueStr;
     // convert to json arry
     var jsonValues = dojo.toJson(expenseDetailsFormObject);
 
@@ -1116,8 +1115,8 @@ function submitExpenseDetailsForm(expenseId) {
 
         // get item to update
         var itemToUpdate = expensesGrid.getItem(currentItemIndex);
-        // remove 1 day to ajust display on grid
-        datePickerValue.setDate(datePickerValue.getDate() - 1);
+        // ajust display on grid
+        datePickerValue.setDate(datePickerValue.getDate());
         conferenceDetailsFormObject.transactionDate = datePickerValue;
 
         expensesStore.setValue(itemToUpdate, "eventId", expenseDetailsFormObject.eventId);

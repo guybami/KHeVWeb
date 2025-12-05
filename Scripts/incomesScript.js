@@ -889,10 +889,9 @@ function addNewIncome() {
     var itemToAdd = incomeDetailsFormObject;
     // read datetime field value
     incomeDetailsFormObject.transactionDate = $("#transactionDate").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#transactionDate").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    incomeDetailsFormObject.transactionDate = datePickerValue;
+    var datePickerValue = new Date(incomeDetailsFormObject.transactionDate);
+    var datePickerValueStr = strToSqlDateTime(incomeDetailsFormObject.transactionDate);
+    incomeDetailsFormObject.transactionDate = datePickerValueStr;
     itemToAdd = incomeDetailsFormObject;
     var postParameters = {
         "formValues[]": dojo.toJson(incomeDetailsFormObject, true),
@@ -1073,10 +1072,9 @@ function submitIncomeDetailsForm(incomeId) {
     var incomeDetailsFormObject = $("#" + incomeDetailsFormId).serializeObject();
     // format date type field
     incomeDetailsFormObject.transactionDate = $("#transactionDate").data("DateTimePicker").date();
-    // add 1 day to ajust
-    var datePickerValue = strToShortDate(new String($("#transactionDate").data("DateTimePicker").date()));
-    datePickerValue.setDate(datePickerValue.getDate() + 1);
-    incomeDetailsFormObject.transactionDate = datePickerValue;
+    var datePickerValue = new Date(incomeDetailsFormObject.transactionDate);
+    var datePickerValueStr = strToSqlDateTime(new String(incomeDetailsFormObject.transactionDate));
+    incomeDetailsFormObject.transactionDate = datePickerValueStr;
     // convert to json arry
     var jsonValues = dojo.toJson(incomeDetailsFormObject);
 
