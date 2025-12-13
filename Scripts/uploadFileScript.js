@@ -1,9 +1,6 @@
 ﻿
 // Author: Guy Bami 
-// home script
-
-// Author: Guy Bami 
-// home script
+// Script used to upload files and videos  
 
 var uploadedPercent = 0;
 var refershRateMs = 10;  // refreh per Mb

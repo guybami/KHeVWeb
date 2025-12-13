@@ -83,7 +83,7 @@
 	};
 
         </script>
-        <script defer src="../../Scripts/expensesScript.js"  type="text/javascript"> </script> 
+        <script defer src="../../Scripts/expensesScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script> 
 
          
         ';
@@ -149,6 +149,9 @@
                                 <!-- success and error overlay content -->
                                 <div id="successOverlayDiv"></div>
                                 <div id="errorContentDiv"></div>
+                                <div class="hideContent">
+                                    <input type="file"  id="fileNameSelectPopup"     accept=".gif, .jpeg, .jpg, .pdf, .doc, .png"/>
+                                </div> 
                                 <!-- data items view div -->
                                 <div id="gridDataViewDiv">
                                     <span id="resultsDiv" class="selectedItemsDiv toLeft"></span>
@@ -314,7 +317,7 @@
                                         </div>
                                     </div>
                                 </div>
-				<!-- end Confirm deletion modal dialog form -->    
+				                <!-- end Confirm deletion modal dialog form -->    
          
                                 <!-- view Item details div content-->
                                 <div class="hideContent" id="viewItemDetailsFormContentDiv">
@@ -431,7 +434,7 @@
                                                     <div class="input-group">
                                                         <input type="text" id="billFileName" name="billFileName" readonly  class="form-control" />
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-secondary" type="button" onClick="showSelectFileDialog(\'billFileNameToUpload\');">Selectionez...</button>
+                                                            <button class="btn btn-secondary" type="button" onClick="showSelectFileDialog(\'fileNameSelectPopup\');">Selectionez...</button>
                                                         </span>
                                                         <div class="hideContent">
                                                             <input type="file"  id="billFileNameToUpload" name="billFileNameToUpload"   accept=".gif, .jpeg, .jpg, .pdf, .doc, .png"/>
@@ -471,7 +474,7 @@
                                         </div>
                                     </div>
                                 </div>
-				<!-- end View bill modal dialog form -->
+				                <!-- end View bill modal dialog form -->
 
                           </div> 
                           <!-- end x_content -->       

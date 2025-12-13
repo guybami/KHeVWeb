@@ -1511,9 +1511,9 @@ function dateToYMD(dateVal) {
 
 function showSelectFileDialog(controlId) {
     //trigger event click of file control
-    //alert(controlId);
-    $("input[type=file][id='" + controlId + "']").trigger("click");
-    //$("input[type=file]").trigger("click");
+    //console.log(controlId);
+    //$("input[type=file][id='" + controlId + "']").trigger("click");
+    $("input[type=file][id='" + controlId + "']").click();
 }
 
 function bindChangeEventForFileSelectDialog(uploadInputFieldId, targetInputFieldId, multiple, _callback) {
@@ -1531,7 +1531,7 @@ function bindChangeEventForFileSelectDialog(uploadInputFieldId, targetInputField
             //selectedFileNameWithoutDir = selectedFileNameWithoutDir.toString().toLowerCase();
             // orignal file name
             selectedFileNameWithoutDir = selectedFileNameWithoutDir.toString();
-            //console.log(selectedFileNameWithoutDir);
+            console.log("selectedFileNameWithoutDir: " + selectedFileNameWithoutDir);
             // set fileName field
             $("#" + targetInputFieldId).val(selectedFileNameWithoutDir);
         });

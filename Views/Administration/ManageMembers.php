@@ -74,7 +74,7 @@
 		  };
 
         </script>
-        <script defer src="../../Scripts/membersScript.js"  type="text/javascript"> </script> 
+        <script defer src="../../Scripts/membersScript.js'.Utils::jsVersion().'"  type="text/javascript"> </script> 
 
          
         ';

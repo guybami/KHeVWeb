@@ -10,7 +10,7 @@
     $userLang = $_SESSION['userLang'];
     $title = "Kameruner Heilbronn eV - Dashboard";
     // load UI resource 
-    //Utils::loadUIResources("../../UIResources/conferences.fr.res.php", "../../UIResources/conferences.en.res.php");
+    //Utils::loadUIResources("../../UIResources/dashboard.fr.res.php", "../../UIResources/dashboard.en.res.php");
 
 
     // custon page script, if needed
@@ -18,8 +18,6 @@
         <!--language texts for page -->
         <script  type="text/javascript">
         </script>
-         
-
         ';
     // page content
     $content = ' 

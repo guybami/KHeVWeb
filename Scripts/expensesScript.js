@@ -186,8 +186,7 @@ require(["dojo/parser", "dojo/ready"],
                         // register event clicks
                         registerButtonClickEvents();
                         // bind event
-                        bindChangeEventForFileSelectDialog("billFileNameToUpload", "billFileName", false);
-                        //bindChangeEvent();
+                        bindChangeEventForFileSelectDialog("fileNameSelectPopup", "billFileName", false);
                     };
 
                     // parse main menu and display page
@@ -933,8 +932,7 @@ function addNewExpense() {
                      if (expensesStore != null && jsonData[0].insertedItemKey != null) {
                         itemToAdd.expenseId = jsonData[0].insertedItemKey;
                         itemToAdd.eventTitle = $("#eventId").find("option:selected").text();
-                        // remove 1 day to ajust display on grid
-                        datePickerValue.setDate(datePickerValue.getDate() - 1);
+                        datePickerValue.setDate(datePickerValue.getDate());
                         itemToAdd.transactionDate = datePickerValue;
                         itemToAdd.category = $("#category").find("option:selected").text();
                         if(uploadJsonData.entryKey != null)
@@ -1288,18 +1286,17 @@ function viewBillDetails(billFileName) {
     var content = "";
     if ($("#" + expenseBillDialogId) != null) {
         // set content dialog
-        
         if(billFileName && billFileName.length > 0){
-            //alert("name:" + billFileName);
+            //console.log("billFileName: " + billFileName);
             if(billFileName.toString().endsWith("pdf")){
                 // for .pdf or .doc files
                 content = '<object data="../../UploadedFiles/Images/Bills/Expenses/'+ billFileName +'" type="application/pdf" width="800" height="700"> '
-                + ' <a href="../../UploadedFiles/Images/Bills/Expenses/'+ billFileName +'">Voir nos Status</a> </object>  ';
+                + ' <a href="../../UploadedFiles/Images/Bills/Expenses/'+ billFileName +'">Facutre introuv&eacute;e</a> </object>  ';
             }
             else{
                 content = '<img src="../../UploadedFiles/Images/Bills/Expenses/'+ billFileName +'"   alt="facture..." /> ';
             }
-            //alert("aa:" + content);
+            //console.log("bill content: " + content);
         }
         
         $("#billDialogContent").html(content);
@@ -1338,9 +1335,9 @@ function updateTotalInline(){
         });
     }
     // display amount and replace '.' german locale
+    totalExpenses = totalExpenses.toFixed(2);
     totalExpenses = totalExpenses.toString().replace(".", ",");
     $("#totalExpenses").html(totalExpenses);
-    //alert('end..');
 }
 
 

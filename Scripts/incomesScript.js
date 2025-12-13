@@ -186,7 +186,7 @@ require(["dojo/parser", "dojo/ready"],
                         // register event clicks
                         registerButtonClickEvents();
                         // bind event
-                        bindChangeEventForFileSelectDialog("billFileNameToUpload", "billFileName", false);
+                        bindChangeEventForFileSelectDialog("fileNameSelectPopup", "billFileName", false);
                     };
 
                     // parse main menu and display page
@@ -932,8 +932,7 @@ function addNewIncome() {
                      if (incomesStore != null && jsonData[0].insertedItemKey != null) {
                         itemToAdd.incomeId = jsonData[0].insertedItemKey;
                         itemToAdd.eventTitle = $("#eventId").find("option:selected").text();
-                        // remove 1 day to ajust display on grid
-                        datePickerValue.setDate(datePickerValue.getDate() - 1);
+                        datePickerValue.setDate(datePickerValue.getDate());
                         itemToAdd.transactionDate = datePickerValue;
                         itemToAdd.category = $("#category").find("option:selected").text();
                         if(uploadJsonData.entryKey != null)
@@ -1335,6 +1334,7 @@ function updateTotalInline(){
         });
     }
     // display amount and replace '.' german locale
+    totalExpenses = totalExpenses.toFixed(2);
     totalIncomes = totalIncomes.toString().replace(".", ",");
     $("#totalIncomes").html(totalIncomes);
     //alert('end..');

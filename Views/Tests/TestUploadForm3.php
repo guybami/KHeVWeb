@@ -1,8 +1,8 @@
 
 <?php
 /**
- * ViewMembers page content
- * Display all members items
+ * Unit Tests
+ * Test upload files
  * @author Guy Watcho
  */
 
