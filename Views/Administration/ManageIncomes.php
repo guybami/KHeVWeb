@@ -434,7 +434,7 @@
                                                     <div class="input-group">
                                                         <input type="text" id="billFileName" name="billFileName" readonly  class="form-control" />
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-secondary" type="button" onClick="showSelectFileDialog(\'fileNameSelectPopup\');">Selectionez...</button>
+                                                            <button class="btn btn-secondary" type="button" onClick="showSelectFileDialog(\'billFileNameToUpload\');">Selectionez...</button>
                                                         </span>
                                                         <div class="hideContent">
                                                             <input type="file"  id="billFileNameToUpload" name="billFileNameToUpload"   accept=".gif, .jpeg, .jpg, .pdf, .doc, .png"/>

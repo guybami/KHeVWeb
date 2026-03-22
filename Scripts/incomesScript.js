@@ -186,7 +186,7 @@ require(["dojo/parser", "dojo/ready"],
                         // register event clicks
                         registerButtonClickEvents();
                         // bind event
-                        bindChangeEventForFileSelectDialog("fileNameSelectPopup", "billFileName", false);
+                        bindChangeEventForFileSelectDialog("billFileNameToUpload", "billFileName", false);
                     };
 
                     // parse main menu and display page
