@@ -14,6 +14,7 @@ var tournamentsArray = new Array();
 var loaded = false;
 var currentSlideIndex = 0;
 var eventPhotosSlideList = new Array();
+var pageDisplayYear = 2026;
 
 $(document).ready(function () {
     // display sitemap path
@@ -37,9 +38,10 @@ $(document).ready(function () {
     */
     //register button click events
     var currentDate = new Date();
-    $("#filterCurrentYearBtn").html(currentDate.getUTCFullYear().toString());
-    $("#filterPreviousYearBtn").html((currentDate.getUTCFullYear() - 1).toString());
-    $("#filterPreviousPrevYearBtn").html((currentDate.getUTCFullYear() - 2).toString());
+    $("#filterCurrentYearBtn").html(pageDisplayYear.toString());
+    $("#filterPreviousYearBtn").html((pageDisplayYear - 1).toString());
+    $("#filterPreviousPrevYearBtn").html((pageDisplayYear - 2).toString());
+    $("#filterCurrentYearBtn").addClass("btn-primary");
     
     $("#filterCurrentYearBtn").click(function () {
         
@@ -62,7 +64,7 @@ $(document).ready(function () {
 
         $("#filterPreviousPrevYearBtn").addClass("btn-default");
         $("#filterCurrentYearBtn").addClass("btn-default");
-        displayTournamentsList(tournamentsArray, currentDate.getUTCFullYear() - 1);
+        displayTournamentsList(tournamentsArray, pageDisplayYear - 1);
     });
 
     $("#filterPreviousPrevYearBtn").click(function () {
@@ -73,7 +75,7 @@ $(document).ready(function () {
 
         $("#filterCurrentYearBtn").addClass("btn-default");
         $("#filterPreviousYearBtn").addClass("btn-default");
-        displayTournamentsList(tournamentsArray, currentDate.getUTCFullYear() - 2);
+        displayTournamentsList(tournamentsArray, pageDisplayYear - 2);
     });
     
     if (!loaded) {
@@ -106,8 +108,8 @@ function rescaleWindow() {
 
 
 function fetchAndDisplayTournaments() {
-
-    var controllerUrl = "../../Controllers/EventController.php";
+    /*
+      var controllerUrl = "../../Controllers/EventController.php";
     var postDataFormat = "json";
     var postMethod = "POST";
     var postParameters = { "userAction": "getAllTournaments" };
@@ -162,6 +164,43 @@ function fetchAndDisplayTournaments() {
         }
     }
 
+}
+
+    */
+
+    // Static tournaments for site display
+    tournamentsArray = [
+        {
+            ItemKey: 1,
+            Date: "13.06.2026",
+            Location: "Brackenheim Wiesental Stadion",
+            Title: "Tournoi Vétérans Ü35",
+            EventId: "VET2026",
+            Summary: "Tournoi vétérans spécial du 13 juin avec repas familial et animations.",
+            PhotosCount: 0,
+            Year: 2026,
+            Flyers: [
+                { url: "../../UploadedFiles/Images/Events/Tournoi_Veterants.jpeg", label: "Flyer Tournoi Vétérans" }
+            ]
+        },
+        {
+            ItemKey: 2,
+            Date: "27.06.2026",
+            Location: "Brackenheim Wiesental Stadion",
+            Title: "Tournoi KulturTag",
+            EventId: "KULT2026",
+            Summary: "Tournoi du 27 juin avec deux flyers KulturTag.",
+            PhotosCount: 0,
+            Year: 2026,
+            Flyers: [
+                { url: "../../UploadedFiles/Images/Events/KulturTag_flyer_2.jpeg", label: "Flyer KulturTag 2" },
+                { url: "../../UploadedFiles/Images/Events/KulturTag_flyer_1.jpeg", label: "Flyer KulturTag 1" }
+            ]
+        }
+    ];
+
+    displayTournamentsList(tournamentsArray, pageDisplayYear);
+    $(".row").removeClass("hideContent");
 }
 
 
@@ -223,6 +262,21 @@ function displayTournamentsList(tournamentsDataArray, year) {
                                         + '<td class="toLeft fullWith normalBorder ">' 
                                                 + '<div class="dialogViewSummaryFieldDiv  fullWith" id="summaryDiv">' + tournament.Summary + '</div>' 
                                         + '</td>'
+                                    + '</tr>'
+                                    + '<tr>'
+                                        + '<td class="toLeft fieldDetailsTitle">'
+                                            + '<span>Flyers</span>'
+                                        + '</td>'
+                                        + '<td class="toLeft">'
+                                            + '<div class="flyersContainer">';
+
+        if (tournament.Flyers && tournament.Flyers.length > 0) {
+            for (var f = 0; f < tournament.Flyers.length; f++) {
+                divContent += '<a href="' + tournament.Flyers[f].url + '" target="_blank" class="flyerLink"><img src="' + tournament.Flyers[f].url + '" alt="' + tournament.Flyers[f].label + '" class="flyerThumb" /></a>';
+            }
+        }
+        divContent += '</div>';
+        divContent += '                </td>'
                                     + '</tr>'
                                 + '</table>'
                             + '</td>'
