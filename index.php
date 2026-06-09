@@ -178,8 +178,8 @@
                                         <p class="day">13</p>
                                     </a>
                                     <div class="media-body">
-                                        <a class="title" href="./Views/SportActivities/ViewAllGames.php">Tournoi Vétérans Ü35</a>
-                                        <p>Brackenheim Wiesental Stadion - Tournoi spécial avec repas familial et animations</p>
+                                        <a class="title" href="./Views/SportActivities/ViewAllGames.php">Tournoi Vétérans Ü35 2026</a>
+                                        <p>Brackenheim Wiesental Stadion - Tournoi spécial organisé par les mamans de la communauté de Heilbronn</p>
                                         <div style="margin-top: 10px;">
                                             <a href="./UploadedFiles/Images/Events/Tournoi_Veterants.jpeg" target="_blank" title="Télécharger le flyer">
                                                 <img src="./UploadedFiles/Images/Events/Tournoi_Veterants.jpeg" alt="Flyer Tournoi Vétérans" style="max-width: 150px; max-height: 100px; border: 1px solid #ddd; padding: 2px;">
@@ -194,7 +194,7 @@
                                         <p class="day">27</p>
                                     </a>
                                     <div class="media-body">
-                                        <a class="title" href="./Views/SportActivities/ViewAllGames.php">Tournoi KulturTag</a>
+                                        <a class="title" href="./Views/SportActivities/ViewAllGames.php">Tournoi Kamerunischer Kulturtag 2026</a>
                                         <p>Brackenheim Wiesental Stadion - Un événement culturel et sportif unique</p>
                                         <div style="margin-top: 10px;">
                                             <a href="./UploadedFiles/Images/Events/KulturTag_flyer_1.jpeg" target="_blank" title="Télécharger le flyer 1">
