@@ -149,6 +149,68 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Activités à venir</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="./Views/SportActivities/ViewAllGames.php">Voir tous les Tournois</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                
+                                <article class="media event">
+                                    <a class="pull-left date">
+                                        <p class="month">Juin</p>
+                                        <p class="day">13</p>
+                                    </a>
+                                    <div class="media-body">
+                                        <a class="title" href="./Views/SportActivities/ViewAllGames.php">Tournoi Vétérans Ü35</a>
+                                        <p>Brackenheim Wiesental Stadion - Tournoi spécial avec repas familial et animations</p>
+                                        <div style="margin-top: 10px;">
+                                            <a href="./UploadedFiles/Images/Events/Tournoi_Veterants.jpeg" target="_blank" title="Télécharger le flyer">
+                                                <img src="./UploadedFiles/Images/Events/Tournoi_Veterants.jpeg" alt="Flyer Tournoi Vétérans" style="max-width: 150px; max-height: 100px; border: 1px solid #ddd; padding: 2px;">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="media event">
+                                    <a class="pull-left date">
+                                        <p class="month">Juin</p>
+                                        <p class="day">27</p>
+                                    </a>
+                                    <div class="media-body">
+                                        <a class="title" href="./Views/SportActivities/ViewAllGames.php">Tournoi KulturTag</a>
+                                        <p>Brackenheim Wiesental Stadion - Un événement culturel et sportif unique</p>
+                                        <div style="margin-top: 10px;">
+                                            <a href="./UploadedFiles/Images/Events/KulturTag_flyer_1.jpeg" target="_blank" title="Télécharger le flyer 1">
+                                                <img src="./UploadedFiles/Images/Events/KulturTag_flyer_1.jpeg" alt="Flyer KulturTag 1" style="max-width: 150px; max-height: 100px; border: 1px solid #ddd; padding: 2px; margin-right: 5px;">
+                                            </a>
+                                            <a href="./UploadedFiles/Images/Events/KulturTag_flyer_2.jpeg" target="_blank" title="Télécharger le flyer 2">
+                                                <img src="./UploadedFiles/Images/Events/KulturTag_flyer_2.jpeg" alt="Flyer KulturTag 2" style="max-width: 150px; max-height: 100px; border: 1px solid #ddd; padding: 2px;">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
              
         <!-- /page content -->
       ';
