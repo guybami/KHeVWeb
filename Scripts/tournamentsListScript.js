@@ -108,6 +108,62 @@ function rescaleWindow() {
 
 
 function fetchAndDisplayTournaments() {
+    /*   var controllerUrl = "../../Controllers/EventController.php";
+    var postDataFormat = "json";
+    var postMethod = "POST";
+    var postParameters = { "userAction": "getAllTournaments" };
+    var xhrArgs = {
+        url: controllerUrl,
+        postData: postParameters,
+        handleAs: postDataFormat,
+        method: postMethod,
+        error: function (errorMsg) {
+            logError({
+                message: "Reponse failed to get data with error: " + errorMsg
+            });
+        }
+    };
+
+    sendAjaxRequest(xhrArgs, fetchDataCompleted); */
+
+    //get postback result
+    /*     function fetchDataCompleted(data) {
+        var jsonData = data;
+        debugMessageToConsole("items json data: " + data, lowLevel);
+        for (var i = 0; i < jsonData.length; i++) {
+            var eventDate = stringToDate(jsonData[i].date, "yyyy-mm-dd", "-");
+            var eventId = jsonData[i].eventId;
+            var tournamentDate = dateToGermanStr(eventDate);  
+            var title = jsonData[i].title;
+            var location = jsonData[i].location;
+            var summary = jsonData[i].summary;
+            var photosCount = jsonData[i].numPhotos;
+            var year = eventDate.getUTCFullYear();
+            var tournament = {
+                ItemKey: i + 1,
+                Date: tournamentDate,
+                Location: location,
+                Title: title,
+                EventId: eventId,
+                Summary: summary,
+                PhotosCount: photosCount,
+                Year: year
+            };
+            tournamentsArray.push(tournament);
+        }
+
+        // display first tournament per default
+        if (tournamentsArray.length > 0) {
+            var currentDate = new Date();
+            displayTournamentsList(tournamentsArray, currentDate.getUTCFullYear());
+            $(".row").removeClass("hideContent");
+        }
+        else{
+            
+        }
+    } */
+
+
     // Static tournaments for site display
     tournamentsArray = [
         {
@@ -126,10 +182,10 @@ function fetchAndDisplayTournaments() {
         {
             ItemKey: 2,
             Date: "27.06.2026",
-            Location: "Brackenheim Wiesental Stadion",
+            Location: "TSG Sportzentrum Heilbronn",
             Title: "Tournoi KulturTag",
             EventId: "KULT2026",
-            Summary: "Tournoi du 27 juin avec deux flyers KulturTag.",
+            Summary: "Tournoi du 27 juin KulturTag.",
             PhotosCount: 0,
             Year: 2026,
             Flyers: [
