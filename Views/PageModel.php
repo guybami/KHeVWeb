@@ -128,7 +128,9 @@ class PageModel {
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                    <title>'.$this->pageTitle.'</title>  
+                    <title>'.$this->pageTitle.'</title>
+                    <!-- Favicon -->
+                    <link rel="icon" type="image/png" href="' . $this->directoryLevel . '/Resources/Images/Logos/khevLogo.png">
                         <!--include all CSS files-->  
                         <link rel="stylesheet" type="text/css" href="' . $this->directoryLevel . '/Resources/Styles/masterPage.css" />
                         <link rel="stylesheet" type="text/css" href="' . $this->directoryLevel . '/Resources/Styles/common.css" />
