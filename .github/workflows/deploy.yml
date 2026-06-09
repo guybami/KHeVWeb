@@ -4,10 +4,59 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
+  test:
+    name: Test website changes locally
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP and extensions
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y php-cli php-curl php-mbstring php-xml php-zip php-gd
+
+      - name: Validate PHP syntax
+        run: |
+          find . -name '*.php' -not -path './.git/*' -not -path './vendor/*' -print0 | xargs -0 php -l
+
+      - name: Start PHP built-in server
+        run: |
+          nohup php -S 127.0.0.1:8000 > server.log 2>&1 &
+          echo $! > /tmp/php-server.pid
+          sleep 5
+
+      - name: Wait for local site
+        run: |
+          for i in $(seq 1 10); do
+            if curl --silent --show-error --fail http://127.0.0.1:8000/index.php >/dev/null; then
+              echo "Local server is up"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Local server did not start"
+          cat server.log
+          exit 1
+
+      - name: Smoke test homepage and tournament page
+        run: |
+          curl --silent --show-error --fail http://127.0.0.1:8000/index.php | grep -q "Activites recentes"
+          curl --silent --show-error --fail http://127.0.0.1:8000/Views/SportActivities/ViewAllGames.php | grep -q "Nos Tournois"
+
+      - name: Stop PHP built-in server
+        if: always()
+        run: |
+          kill $(cat /tmp/php-server.pid) || true
+
   deploy:
     name: Deploy to production server
+    needs: test
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
