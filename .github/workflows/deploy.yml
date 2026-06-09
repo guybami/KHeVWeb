@@ -50,5 +50,21 @@ jobs:
           target: ${{ secrets.DEPLOY_PATH }}
           rm: false
 
+      - name: Delete Staging Environment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          port: 22
+          script: |
+            if [ -n "${{ secrets.DEPLOY_PATH }}" ]; then
+              echo "Removing staging directory..."
+              rm -rf "${{ secrets.DEPLOY_PATH }}/staging"
+              echo "Staging environment cleaned up."
+            else
+              echo "DEPLOY_PATH is empty, skipping deletion to be safe."
+            fi
+
       - name: Deployment complete
-        run: echo "Production deployment finished."
+        run: echo "Production deployment finished and staging cleaned up."
