@@ -215,8 +215,8 @@ function displayTournamentsList(tournamentsDataArray, year) {
                 divContent += '<a href="' + tournament.Flyers[f].url + '" target="_blank" class="flyerLink"><img src="' + tournament.Flyers[f].url + '" alt="' + tournament.Flyers[f].label + '" class="flyerThumb" /></a>';
             }
         }
-        divContent += '</div>';
-        divContent += '                </td>'
+        divContent += '</div>'
+                                        + '</td>'
                                     + '</tr>'
                                 + '</table>'
                             + '</td>'
