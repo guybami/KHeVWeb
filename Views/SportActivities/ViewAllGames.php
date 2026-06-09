@@ -51,6 +51,11 @@
                                             <i class="fa fa-wrench"></i></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="#">Imprimer</a></li>
+                                            <li class="divider"></li>
+                                            <!-- Pour changer le dossier des flyers, modifie le chemin ci-dessous -->
+                                            <li><a href="../../UploadedFiles/Images/Events/KulturTag_flyer_1.jpeg" target="_blank">Flyer Tournoi 1</a></li>
+                                            <li><a href="../../UploadedFiles/Images/Events/KulturTag_flyer_2.jpeg" target="_blank">Flyer Tournoi 2</a></li>
+                                            <li><a href="../../UploadedFiles/Images/Events/Tournoi_Veterants.jpeg" target="_blank">Flyer Tournoi Vétérans</a></li>
                                         </ul>
                                     </li>
                                     <li><a class="close-link"><i class="fa fa-close"></i></a>
